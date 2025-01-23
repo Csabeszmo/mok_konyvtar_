@@ -16,7 +16,7 @@
                             <!-- Űrlap -->
                             <div class="col-md-7 text-black p-4 rounded-end">
                                 <!-- Cím -->
-                                <h3 class="card-title text-center fw-bold">Bejelentkezés</h3>
+                                <h3 class="card-title text-center fw-bold titlelogin">Bejelentkezés</h3>
     
                                 <form name="loginForm" novalidate>
     
@@ -82,9 +82,9 @@
                                                 &check;
                                             </span>
                                             <span data-bs-toggle="tooltip"
-                                                  data-bs-custom-class="custom-tooltip"
                                                   data-bs-html="true"
-                                                  data-bs-title="&lt;p class='my-1'>6-20 characters&lt;/br>&lt;small>(contains uppercase, lowercase letters and numbers)&lt;/small>&lt;/p>">
+                                                  data-bs-title="&lt;p class='my-1'>6-20 characters&lt;/br>&lt;small>
+                                                                (contains uppercase, lowercase letters and numbers)&lt;/small>&lt;/p>">
                                                 <i class="fa-solid fa-circle-info text-primary ms-2"></i>
                                             </span>
                                         </div>
@@ -109,7 +109,7 @@
                                     <!-- Bejelentkezés gomb -->
                                     <div class="row justify-content-end">
                                         <button type="button"
-                                                class="btn btn-primary w-auto px-5 me-3 text-capitalize"
+                                                class="btn btn-brown w-auto px-5 me-3 text-capitalize"
                                                 ng-disabled="loginForm.$invalid"
                                                 ng-click="login()">
                                             login

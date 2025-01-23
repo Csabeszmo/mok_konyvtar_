@@ -14,26 +14,13 @@ $db = new Database();
 // SQL parancs beállítása
 $query= "INSERT INTO `users` 
                     (`first_name`,
-                     `middle_name`,
                      `last_name`, 
-                     `registration_date`,
-                     `phone`,
-                     `city`,
-                     `postalcode`,
-                     `address`, 
                      `email`,
-                     `password`,
-                     `is_active`) 
+                     `password`) 
          VALUES (:first_name,
-                 :middle_name,
                  :last_name,
-                 :registration,
-                 :phone,
-                 :city,:postalcode,
-                 :address,
                  :email,
-                 :password,
-                 :valid)";
+                 :password)";
 
 // SQL parancs végrehajtása
 $result = $db->execute($query, $args);

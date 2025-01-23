@@ -75,27 +75,15 @@
     }
   ])
 
-  // appTooltip
-  .directive('appTooltip', function() {
-    return {
-      restrict: 'A',
-      link: function(element){
-          element.hover(function(){
-              // on mouseenter
-              element.tooltip('show');
-          }, function(){
-              // on mouseleave
-              element.tooltip('hide');
-          });
-      }
-    }
-  })
-
 	// Application run
   .run([
     '$rootScope',
     function($rootScope) {
 			console.log('Run...');
+      let tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+      if (tooltips.length) {
+        [...tooltips].map(e => new bootstrap.Tooltip(e));
+      }
     }
   ])
 
@@ -197,25 +185,25 @@
 
         // HTTP POST kérés küldése a bejelentkezési API-nak
         $http.get('./php/login.php', $scope.model)
-            .then(function(response) {
-              $scope.model = response;
-                // API válasz kezelése
-                if (response.data.success) {
-                    // Sikeres bejelentkezés
-                    alert('Sikeres bejelentkezés!');
-                    console.log(response);
-                    // Átirányítás a főoldalra
-                    $state.go('home');
-                } else {
-                    // Hiba az API-tól
-                    alert('Hibás email vagy jelszó.');
-                }
-            })
-            .catch(function(error) {
-                // Hálózati vagy egyéb hiba
-                console.error('Bejelentkezési hiba:', error);
-                alert('Hálózati hiba történt. Próbáld újra később.');
-            });
+        .then(function(response) {
+          $scope.model = response;
+            // API válasz kezelése
+            if (response.data.success) {
+                // Sikeres bejelentkezés
+                alert('Sikeres bejelentkezés!');
+                console.log(response);
+                // Átirányítás a főoldalra
+                $state.go('home');
+            } else {
+                // Hiba az API-tól
+                alert('Hibás email vagy jelszó.');
+            }
+        })
+        .catch(function(error) {
+            // Hálózati vagy egyéb hiba
+            console.error('Bejelentkezési hiba:', error);
+            alert('Hálózati hiba történt. Próbáld újra később.');
+        });
       };
 
       $scope.cancel = function() {
