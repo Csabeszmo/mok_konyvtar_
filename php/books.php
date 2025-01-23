@@ -6,8 +6,9 @@ declare(strict_types=1); // Szigorú típusellenőrzés bekapcsolása a PHP fáj
 require_once("./environment.php");
 
 // Az SQL lekérdezés, amely a könyvek és azok szerzőinek adatait, 
-// illetve a könyvek borítójának képét kérdezi le az adatbázisból
-$query= "SELECT `books`.title, 
+// illetve a könyvek borítójának képét kérdezi le az adatbázisból, beleértve a könyv ID-t
+$query= "SELECT `books`.`book_id`,
+                `books`.`title`, 
                 `authors`.`first_name`,
                 `authors`.`last_name`,
                 `books`.`cover_image_url`
@@ -24,4 +25,5 @@ $result = $db->execute($query);
 // Az adatbázis kapcsolat lezárása, hogy felszabadítsuk az erőforrásokat
 $db = null;
 
+// Válasz megadása JSON formátumban
 echo json_encode($result);

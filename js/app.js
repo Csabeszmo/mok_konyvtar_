@@ -41,7 +41,7 @@
 				controller: 'booksController'
 			})
       .state('book', {
-				url: '/book',
+				url: '/book/:bookId',
         parent: 'root',
 				templateUrl: './html/book.html',
 				controller: 'bookController'
@@ -147,17 +147,29 @@
 
   // bookController
   .controller('bookController', [
-    '$scope',
-    '$http',
-    function($scope){
-      console.log('Book Controller')
+    '$scope', '$stateParams', '$http',
+    function ($scope, $stateParams, $http) {
+        console.log('Book Controller loaded');
 
-      $scope.book = () => {
-        $http.request({
-          url: './book.php',
-          data: $scope.model
-        })
-      }
+        // Az URL-ből kapott bookId
+        let bookId = $stateParams.bookId;
+
+        // A szerver kérés a könyv adataihoz bookId alapján
+        $http.get(`./php/book.php?book_id=${bookId}`)
+            .then(function (response) {
+                console.log(response); // Ellenőrizzük, hogy a válasz megérkezett
+                if (response.data.error) {
+                    console.error('Hiba:', response.data.error);
+                    return; // Ha hibaüzenet érkezik, ne folytassuk
+                }
+                
+                // A könyv adatait az első elemre állítjuk
+                $scope.book = response.data[0];
+                console.log('Book data:', $scope.book);
+            })
+            .catch(function (error) {
+                console.error('Hiba a könyv betöltésekor:', error);
+            });
     }
   ])
 

@@ -1,0 +1,9 @@
+<div ng-controller="bookController">
+    <h1>{{ book.title }}</h1>
+    <p><strong>Szerző:</strong> {{ book.first_name }} {{ book.last_name }}</p>
+    <p><strong>Fordító:</strong> {{ book.translator }}</p>
+    <p><strong>Kiadó:</strong> {{ book.publisher }}</p>
+    <p><strong>Oldalszám:</strong> {{ book.pages }}</p>
+    <p><strong>Kategória:</strong> {{ book.categories_name }}</p>
+    <img ng-src="./media/image/books/{{ book.cover_image_url }}" alt="{{ book.title }}" />
+</div>
