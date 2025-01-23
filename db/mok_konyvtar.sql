@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 10. 09:21
+-- Létrehozás ideje: 2025. Jan 23. 12:03
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.1.17
 
@@ -162,6 +162,31 @@ INSERT INTO `categories` (`categories_id`, `categories_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `date` datetime NOT NULL,
+  `description` text NOT NULL,
+  `img` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `events_items`
+--
+
+CREATE TABLE `events_items` (
+  `user_id` int(11) NOT NULL,
+  `events_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `expired_books`
 --
 
@@ -252,6 +277,18 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`categories_id`);
 
 --
+-- A tábla indexei `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `events_items`
+--
+ALTER TABLE `events_items`
+  ADD PRIMARY KEY (`user_id`,`events_id`);
+
+--
 -- A tábla indexei `expired_books`
 --
 ALTER TABLE `expired_books`
@@ -298,6 +335,12 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `categories`
   MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT a táblához `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT a táblához `reviews`
