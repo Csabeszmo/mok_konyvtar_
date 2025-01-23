@@ -12,11 +12,28 @@ $args = Util::getArgs();
 $db = new Database();
 
 // SQL parancs beállítása
-$query = "INSERT INTO `users` (`first_name`, `middle_name`, `last_name`, 
-                      `registration_date`, `phone`, `city`, `postalcode`, `address`, 
-                      `email`, `password`, `is_active`) 
-          VALUES (':first_name',':middle_name',':last_name',':registration',':phone',
-                  ':city',':postalcode',':address',':email',':password',':valid')";
+$query= "INSERT INTO `users` 
+                    (`first_name`,
+                     `middle_name`,
+                     `last_name`, 
+                     `registration_date`,
+                     `phone`,
+                     `city`,
+                     `postalcode`,
+                     `address`, 
+                     `email`,
+                     `password`,
+                     `is_active`) 
+         VALUES (:first_name,
+                 :middle_name,
+                 :last_name,
+                 :registration,
+                 :phone,
+                 :city,:postalcode,
+                 :address,
+                 :email,
+                 :password,
+                 :valid)";
 
 // SQL parancs végrehajtása
 $result = $db->execute($query, $args);
