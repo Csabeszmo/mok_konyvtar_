@@ -1,0 +1,107 @@
+*:not(input):not(textarea) {
+  -webkit-touch-callout:none !important;
+	  -webkit-user-select:none !important;
+						user-select:none !important;
+					outline-style:none !important;
+}
+header nav a.active{
+	text-decoration: underline;
+}
+
+/* Alapszínek */
+body {
+	background-color: #F5E6DF;
+	color: #4B5E4B;
+}
+  
+/* Címek és kiemelések */
+h1, h2, h3 {
+	color: #4B5E4B;
+}
+  
+.p {
+	color: #4B5E4B;
+}
+  
+a {
+	color: #8AAC9B;
+}
+
+a:hover {
+	color: #4B5E4B;
+}
+
+#login {
+	background-color: #8AAC9B;
+}
+
+#register {
+	background-color: #8AAC9B;
+}
+  
+/* Gombok */
+.btn-brown {
+	--bs-btn-color: #fff !important;
+	--bs-btn-bg: #94614C !important;
+	--bs-btn-border-color: #a87661 !important;
+	--bs-btn-hover-color: #fff !important;
+	--bs-btn-hover-bg: #a87661 !important;
+	--bs-btn-hover-border-color: #a87661 !important;
+	--bs-btn-focus-shadow-rgb: 49, 132, 253 !important;
+	--bs-btn-active-color: #fff !important;
+	--bs-btn-active-bg: #a77f6e !important;
+	--bs-btn-active-border-color: #a77f6e !important;
+	--bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+	--bs-btn-disabled-color: #fff !important;
+	--bs-btn-disabled-bg: #a87661 !important;
+	--bs-btn-disabled-border-color: #a87661 !important;
+  }
+
+/* Kereső mező és lista */
+input, select, .list-group-item {
+	background-color: #F5E6DF;
+	border: 1px solid #94614C;
+	color: #4B5E4B;
+}
+
+.input::placeholder {
+	color: #8AAC9B;
+}
+  
+/* Képgaléria */
+.img-thumbnail {
+	border: 2px solid #AE8069;
+	border-radius: 8px;
+}
+
+/* Header és footer színének beállítása */
+.custom-header {
+	background-color: #4B5E4B;
+}
+  
+.custom-footer {
+	background-color: #4B5E4B;
+}
+
+.logincontainer {
+	background-image: url(../media/image/libraryinterior/bookshelveslogin.jpg);
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.loginborder{
+	border-color: #4B5E4B;
+}
+
+.bglogin {
+	background-color: #F5E6DF;
+}
+
+.img-hover-zoom img {
+    transition: transform 0.3s ease; /* Simán animálja a méretváltozást */
+}
+
+.img-hover-zoom:hover img {
+    transform: scale(1.1); /* Növeli a képet 10%-kal, ha az egér fölötte van */
+}

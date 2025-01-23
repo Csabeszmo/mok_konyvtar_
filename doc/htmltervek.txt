@@ -1,0 +1,9 @@
+Login: a háttér töltse ki az egész container-t.
+frontendben csillogó elemek, mozgó interaktív elemek, 
+
+események (carousel), blog/hírek, képzések, kosár mint kölcsönzés, eddig kölcsönzések megnézése a profilban, gyik (accordion), kölcsönzés szabályai (pdf file-ban)
+
+rólunk-nál hosszabb szöveg (1 bekezdésnyi)
+
+képek mérete a carousel-nél 1920x600
+Cascadia Code SemiBold

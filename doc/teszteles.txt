@@ -1,0 +1,14 @@
+TESZT:
+
+- id: 00011 
+  dátum: 2025-01-23
+  címe: login
+  megjegyzés: 
+  végezte: Csaba
+  leírás:
+    - email adat a 
+    - login buttomn activ maradt
+
+    - password üres maradt
+    - login buttomn activ maradt
+  
