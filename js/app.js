@@ -120,7 +120,8 @@
                 // A szerver által visszaküldött adatokat hozzárendeljük a $scope.books tömbhöz
                 $scope.books = data;
 
-                // AngularJS értesítése arról, hogy az adatok megváltoztak. Ez szükséges, mert a Fetch API aszinkron működik
+                // AngularJS értesítése arról, hogy az adatok megváltoztak. 
+                // Ez szükséges, mert a Fetch API aszinkron működik
                 $scope.$apply();
             })
             .catch(error => {
@@ -128,7 +129,6 @@
                 console.error('Hiba történt a könyvek betöltése során:', error);
             });
     }
-
     // A könyvek betöltésének meghívása a kontroller inicializálásakor
     loadBooks();
   }])
@@ -187,13 +187,6 @@
 
       // Bejelentkezési függvény
       $scope.login = function() {
-        // Egyszerű validáció (üres mezők ellenőrzése)
-        /*
-        if (!$scope.credentials.email || !$scope.credentials.password) {
-            alert('Az email és a jelszó kitöltése kötelező!');
-            return;
-        }
-        */
 
         // HTTP POST kérés küldése a bejelentkezési API-nak
         $http.get('./php/login.php', $scope.model)
@@ -234,13 +227,7 @@
 
       // Regisztrációs függvény
       $scope.register = function() {
-        /*
-          // Egyszerű validáció (pl. üres mezők ellenőrzése)
-          if (!$scope.user.name || !$scope.user.email || !$scope.user.password) {
-              alert('Minden mezőt ki kell tölteni!');
-              return;
-          }
-        */
+
           // HTTP POST kérés küldése az API-nak
           $http.set('./php/register.php', $scope.model)
               .then(function(response) {
@@ -266,5 +253,4 @@
       };
     }
   ])
-	
 })(window, angular);
