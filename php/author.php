@@ -13,7 +13,8 @@ $query= "SELECT `first_name`,
                 `last_name`, 
                 `biography`, 
                 `author_image_url`,
-                `birth_date`, `death_date` 
+                `birth_date`, 
+                `death_date` 
           FROM  `authors` 
           ORDER BY `first_name`";
 

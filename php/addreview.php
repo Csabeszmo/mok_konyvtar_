@@ -18,11 +18,11 @@ $query= "INSERT INTO `reviews`
                      `rating`,
                      `review_text`,
                      `review_date`) 
-          VALUES (:user_id,
-                  :book_id,
-                  :rating,
-                  :review_text,
-                  :review_date)";
+         VALUES (:user_id,
+                 :book_id,
+                 :rating,
+                 :review_text,
+                 :review_date)";
 
 // SQL parancs beállítása
 $result = $db->execute($query, $args);

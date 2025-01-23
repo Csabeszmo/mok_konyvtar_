@@ -75,7 +75,7 @@
     }
   ])
 
-  //
+  // appTooltip
   .directive('appTooltip', function() {
     return {
       restrict: 'A',
@@ -99,7 +99,7 @@
     }
   ])
 
-  // Home controller
+  // homeController
   .controller('homeController', [
     '$scope',
     function($scope) {
@@ -107,7 +107,7 @@
     }
   ])
 
-  //
+  // booksController
   .controller('booksController', ['$scope', function($scope) {
     // A booksController inicializálása és logolása a konzolba
     console.log('booksController...');
@@ -145,7 +145,7 @@
     loadBooks();
   }])
 
-  //
+  // bookController
   .controller('bookController', [
     '$scope',
     '$http',
@@ -161,7 +161,7 @@
     }
   ])
 
-  //
+  // eventsController
   .controller('eventsController', [
     '$scope',
     function($scope) {
@@ -169,7 +169,7 @@
     }
   ])
 
-  //
+  // page3Controller
   .controller('page3Controller', [
     '$scope',
     function($scope) {
@@ -177,7 +177,7 @@
     }
   ])
 
-  //
+  // loginController
   .controller('loginController', [
     '$scope',
     '$http',
@@ -224,7 +224,7 @@
     }
   ])
 
-  //
+  // registerController
   .controller('registerController', [
     '$scope',
     '$http',
