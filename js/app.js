@@ -4,7 +4,8 @@
 
   // Application module
 	angular.module('app', [
-		'ui.router'
+		'ui.router',
+    'app.common'
 	])
 
 	// Application config
@@ -84,6 +85,8 @@
       if (tooltips.length) {
         [...tooltips].map(e => new bootstrap.Tooltip(e));
       }
+
+      $rootScope.user = {id: null}
     }
   ])
 
@@ -180,17 +183,20 @@
   // loginController
   .controller('loginController', [
     '$scope',
-    '$http',
     '$state',
-    function($scope, $http, $state) {
+    'http',
+    function($scope, $state, http) {
       console.log('Login controller...');
 
       // Bejelentkezési függvény
       $scope.login = function() {
 
         // HTTP POST kérés küldése a bejelentkezési API-nak
-        $http.get('./php/login.php', $scope.model)
-        .then(function(response) {
+        // Set request
+        http.request({
+          url: "./php/login.php",
+          data: $scope.model
+        }).then(response => {
           $scope.model = response;
             // API válasz kezelése
             if (response.data.success) {
@@ -205,9 +211,7 @@
             }
         })
         .catch(function(error) {
-            // Hálózati vagy egyéb hiba
-            console.error('Bejelentkezési hiba:', error);
-            alert('Hálózati hiba történt. Próbáld újra később.');
+            alert(error);
         });
       };
 

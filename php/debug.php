@@ -1,10 +1,8 @@
 <?php
 declare(strict_types=1);
 
-$_POST['data'] = '{"first_name" : "Lajos"
-                   "last_name" : "Kovács"
-                   "email" : "kovacs.lajos@gmail.com"
-                   "password" : "1234Aa"';
+$_POST['data'] = '{"email": "jernei.akos-2020@keri.mako.hu",
+                   "password": "1234Aa","showPassword": false}';
 
 
-require_once('./register.php');
+require_once('./login.php');
