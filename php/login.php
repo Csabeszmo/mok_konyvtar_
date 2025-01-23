@@ -12,12 +12,13 @@ $args = Util::getArgs();
 $db = new Database();
 
 // SQL parancs beállítása
-$query = "SELECT `email`,`password` 
-		  FROM `users` 
-		  WHERE `email` = :email
-		  AND `password` = :password 
-          AND `is_active` = 1
-		  LIMIT 1";
+$query= "SELECT `email`,
+                `password` 
+		     FROM `users` 
+		     WHERE `email` = :email
+		     AND `password` = :password 
+         AND `is_active` = 1
+		     LIMIT 1";
 
 // SQL parancs végrehajtása
 $result = $db->execute($query, $args);

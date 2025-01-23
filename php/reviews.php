@@ -9,9 +9,12 @@ require_once('./environment.php');
 $db = new Database();
 
 // SQL parancs beállítása
-$query = "SELECT `users`.`first_name`,`users`.`last_name`,
-                 `books`.`title`,`rating`,`reviews`.`review_text`, 
-                 `reviews`.`review_date` 
+$query= "SELECT `users`.`first_name`,
+                `users`.`last_name`,
+                `books`.`title`,
+                `rating`,
+                `reviews`.`review_text`, 
+                `reviews`.`review_date` 
           FROM `reviews` 
           INNER JOIN `users` 
           ON `reviews`.`user_id` = `users`.`user_id` 

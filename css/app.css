@@ -83,11 +83,26 @@ input, select, .list-group-item {
 	background-color: #4B5E4B;
 }
 
-.logincontainer {
-	background-image: url(../media/image/libraryinterior/bookshelveslogin.jpg);
-	background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+.loginpic {
+	display: flex; 
+	flex-direction: column; 
+  justify-content: center; align-items: center; 
+  min-height: 100vh; 
+  background-image: url('../media/image/libraryinterior/bookshelveslogin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.registerpic{
+	display: flex; 
+	flex-direction: column; 
+  justify-content: center; align-items: center; 
+  min-height: 100vh; 
+  background-image: url('../media/image/libraryinterior/bookshelvesregister.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .loginborder{
