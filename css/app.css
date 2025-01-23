@@ -112,6 +112,9 @@ input, select, .list-group-item {
 .bglogin {
 	background-color: #F5E6DF;
 }
+.titlelogin{
+	color: #4B5E4B;
+}
 
 .img-hover-zoom img {
     transition: transform 0.3s ease;
