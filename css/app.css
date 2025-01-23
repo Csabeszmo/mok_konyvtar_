@@ -9,7 +9,7 @@ header nav a.active{
 }
 
 /* Alapszínek */
-body {
+.custom-body {
 	background-color: #F5E6DF;
 	color: #4B5E4B;
 }
@@ -114,9 +114,9 @@ input, select, .list-group-item {
 }
 
 .img-hover-zoom img {
-    transition: transform 0.3s ease; /* Simán animálja a méretváltozást */
+    transition: transform 0.3s ease;
 }
 
 .img-hover-zoom:hover img {
-    transform: scale(1.1); /* Növeli a képet 10%-kal, ha az egér fölötte van */
+    transform: scale(1.1);
 }
