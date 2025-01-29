@@ -20,7 +20,7 @@ $query= "INSERT INTO `users`
          VALUES (:first_name,
                  :last_name,
                  :email,
-                 :password)";
+                 BINARY :password)";
 
 // SQL parancs végrehajtása
 $result = $db->execute($query, $args);
