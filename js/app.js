@@ -70,6 +70,12 @@
         parent: 'root',
 				templateUrl: './html/register.html',
 				controller: 'registerController'
+			})
+      .state('cart', {
+				url: '/cart',
+        parent: 'root',
+				templateUrl: './html/cart.html',
+				controller: 'cartController'
 			});
       
       $urlRouterProvider.otherwise('/');
@@ -245,4 +251,6 @@
         };
     }
   ])
+
+  .controller('cartController', [])
 })(window, angular);
