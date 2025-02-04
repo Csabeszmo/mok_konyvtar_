@@ -53,11 +53,11 @@
 				templateUrl: './html/events.html',
 				controller: 'eventsController'
 			})
-      .state('page3', {
-				url: '/page3',
+      .state('blogmenu', {
+				url: '/blogmenu',
         parent: 'root',
-				templateUrl: './html/page3.html',
-				controller: 'page3Controller'
+				templateUrl: './html/blogmenu.html',
+				controller: 'blogmenuController'
 			})
       .state('login', {
 				url: '/login',
