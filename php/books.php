@@ -1,8 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
-require_once("./environment.php");
+require_once("../../common/php/environment.php");
 
 $query= "SELECT `books`.`book_id`,
                 `books`.`title`, 
@@ -19,4 +18,4 @@ $result = $db->execute($query);
 
 $db = null;
 
-echo json_encode($result);
+Util::setResponse($result);

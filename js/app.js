@@ -5,7 +5,8 @@
   // Application module
 	angular.module('app', [
 		'ui.router',
-    'app.common'
+    'app.common',
+    'app.form'
 	])
 
 	// Application config
@@ -16,7 +17,6 @@
 
       $stateProvider
       .state('root', {
-        abstract: true,
         views: {
           '@': {
             templateUrl: './html/root.html'
@@ -42,10 +42,13 @@
 				controller: 'booksController'
 			})
       .state('book', {
-				url: '/book/:bookId',
+				url: '/book',
         parent: 'root',
 				templateUrl: './html/book.html',
-				controller: 'bookController'
+				controller: 'bookController',
+        params: {
+          book_id: null
+        }
 			})
       .state('events', {
 				url: '/events',
@@ -85,20 +88,24 @@
 	// Application run
   .run([
     '$rootScope',
-    function($rootScope) {
+    '$state',
+    function($rootScope, $state) {
 			console.log('Run...');
 
-      $rootScope.user = { id: null };
+      $rootScope.user = { user_id: null };
 
       document.addEventListener("DOMContentLoaded", function() {
         let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
       });
 
-      $rootScope.$on('$viewContentLoaded', function() {
-        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
-      });
+      $rootScope.logout = () => {
+        if (confirm('Kijelenkezik?')) {
+          $rootScope.user = null;
+          $rootScope.$applyAsync();
+          $state.go('login');
+        }
+      }
     }
   ])
 
@@ -111,55 +118,41 @@
   ])
 
   // booksController
-  .controller('booksController', ['$scope', function($scope) {
-    console.log('booksController...');
-
-    $scope.books = [];
-
-    fetch('./php/books.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Hálózati hiba: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            $scope.$applyAsync(() => {  // Ez az Angular natív módja
-                $scope.books = data;
-                console.log('Könyvek betöltve:', $scope.books);
-            });
-        })
-        .catch(error => {
-            console.error('Hiba történt a könyvek betöltése során:', error);
-        });
-
-  }])
+  .controller('booksController', [
+    '$scope',
+    'http',
+    function($scope, http) {
+      http.request('./php/books.php')
+      .then(data => {
+        $scope.books = data;
+        $scope.$applyAsync();
+      })
+      .catch(error => console.log(error));
+    }
+  ])
 
   // bookController
   .controller('bookController', [
-    '$scope', '$stateParams', 
-    function ($scope, $stateParams) {
-        console.log('Book Controller loaded');
-        let bookId = $stateParams.bookId;
-        fetch(`./php/book.php?book_id=${bookId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Hálózati hiba: ' + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.error) {
-                    console.error('Hiba:', data.error);
-                    return;
-                }
-                $scope.book = data[0];
-                console.log('Book data:', $scope.book);
-                $scope.$apply();
-            })
-            .catch(error => {
-                console.error('Hiba a könyv betöltésekor:', error);
-            });
+    '$scope', 
+    '$stateParams', 
+    '$state',
+    'http',
+    function ($scope, $stateParams, $state, http) {
+
+      if (!$stateParams.book_id) {
+        console.log('Nem létező könyv azonosító!');
+        $state.go('home');
+      }
+
+      http.request({
+        url: './php/book.php',
+        data: {book_id: $stateParams.book_id}
+      })
+      .then(data => {
+        $scope.book = data;
+        $scope.$applyAsync();
+      })
+      .catch(error => console.log(error));
     }
   ])
 
@@ -181,39 +174,34 @@
 
   // loginController
   .controller('loginController', [
-    '$scope', '$state',
-    function($scope, $state) {
-        console.log('Login controller...');
-        $scope.login = function() {
-            fetch("./php/login.php", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify($scope.model)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Hálózati hiba: ' + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                $scope.model = data;
-                if (data.success) {
-                    alert('Sikeres bejelentkezés!');
-                    console.log(data);
-                    $state.go('home');
-                } else {
-                    alert('Hibás email vagy jelszó.');
-                }
-            })
-            .catch(error => {
-                console.error('Bejelentkezési hiba:', error);
-                alert('Hálózati hiba történt. Próbáld újra később.');
-            });
+    '$rootScope', 
+    '$scope', 
+    '$state',
+    'http',
+    'util',
+    function($rootScope, $scope, $state, http, util) {
+      
+        $scope.model = {
+          email: util.localStorage('get', 'mok_user_email')
         };
 
+        $scope.login = function() {
+          http.request({
+            url: './php/login.php',
+            data: util.objFilterByKeys($scope.model, 'showPassword', false)
+          })
+          .then(data => {
+            $rootScope.user = data;
+            $rootScope.user.email = $scope.model.email;
+            util.localStorage('set', 'mok_user_email', $rootScope.user.email);
+            $rootScope.$applyAsync();
+            alert('Sikeres bejelentkezés!');
+            $state.go('home');
+          })
+          .catch(e => alert(e));
+        };
+
+        // 
         $scope.cancel = function() {
             $state.go('home');
         };

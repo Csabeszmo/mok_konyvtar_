@@ -1,10 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
-require_once('./environment.php');
+require_once("../../common/php/environment.php");
 
-$bookId = $_GET['book_id'] ?? null;
+$args = Util::getArgs();
 
 $query = "SELECT `books`.`title`, 
                  `authors`.`first_name`,
@@ -25,12 +24,17 @@ $query = "SELECT `books`.`title`,
           ON `books`.`author_id` = `authors`.`author_id`
           INNER JOIN `categories`
           ON `books`.`categories_id` = `categories`.`categories_id`
-          WHERE `books`.`book_id` = :book_id";
+          WHERE `books`.`book_id` = :book_id
+          LIMIT 1;";
 
 $db = new Database();
 
-$result = $db->execute($query, ['book_id' => $bookId]);
+$result = $db->execute($query, $args);
 
 $db = null;
 
-echo json_encode($result);
+if (!is_null($result)) {
+    $result = $result[0];
+}
+
+Util::setResponse($result);
