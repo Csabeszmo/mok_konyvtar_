@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Jan 23. 12:03
+-- Létrehozás ideje: 2025. Feb 04. 11:52
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.1.17
 
@@ -168,10 +168,19 @@ INSERT INTO `categories` (`categories_id`, `categories_name`) VALUES
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `date` datetime NOT NULL,
+  `date` varchar(70) NOT NULL,
   `description` text NOT NULL,
   `img` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `events`
+--
+
+INSERT INTO `events` (`id`, `name`, `date`, `description`, `img`) VALUES
+(3, 'Dedikálás és beszélgetés Varró Dániellel', '2025. Május 23. 14:00', 'Találkozz Varró Dániellel egy dedikálással egybekötött beszélgetésen! Vers, humor és könnyed irodalmi élmény vár.', 'varro_daniel.png'),
+(4, 'Informatikai alapoktatás nyugdíjasoknak - Egyszerűen és érthetően!', 'Minden szerdán délután 5-től.', 'Ismerje meg az informatika alapjait könnyen és érthetően! Nyugdíjasoknak szóló gyakorlati oktatás türelemmel és támogatással.', 'infalapokt.png'),
+(5, 'Szeged-menti Történetek', '2025. júniusában négy héten keresztül minden csütörtökön 4-től.', 'Tarts velünk, és fedezd fel a Szeged-menti titkokat könyveken keresztül!', 'szegedmentitortenetek.png');
 
 -- --------------------------------------------------------
 
@@ -340,7 +349,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT a táblához `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT a táblához `reviews`
