@@ -87,12 +87,18 @@
     '$rootScope',
     function($rootScope) {
 			console.log('Run...');
-      let tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-      if (tooltips.length) {
-        [...tooltips].map(e => new bootstrap.Tooltip(e));
-      }
 
-      $rootScope.user = {id: null}
+      $rootScope.user = { id: null };
+
+      document.addEventListener("DOMContentLoaded", function() {
+        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
+      });
+
+      $rootScope.$on('$viewContentLoaded', function() {
+        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
+      });
     }
   ])
 
@@ -252,5 +258,11 @@
     }
   ])
 
-  .controller('cartController', [])
+  //Cart controller
+  .controller('cartController', [
+    '$scope', 
+    function(){
+      console.log("Cart controller...");
+    }
+  ])
 })(window, angular);
