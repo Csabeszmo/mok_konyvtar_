@@ -124,9 +124,10 @@
             return response.json();
         })
         .then(data => {
-            $scope.books = data;
-            console.log('Könyvek betöltve:', $scope.books);
-            $scope.$apply();
+            $scope.$applyAsync(() => {  // Ez az Angular natív módja
+                $scope.books = data;
+                console.log('Könyvek betöltve:', $scope.books);
+            });
         })
         .catch(error => {
             console.error('Hiba történt a könyvek betöltése során:', error);

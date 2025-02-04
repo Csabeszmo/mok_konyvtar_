@@ -2,13 +2,10 @@
 
 declare(strict_types=1);
 
-// Környezet meghívása
 require_once('./environment.php');
 
-// Az URL-ből érkezett `book_id` paraméter lekérdezése
 $bookId = $_GET['book_id'] ?? null;
 
-// SQL parancs, ahol a book_id alapján szűrjük az adatokat
 $query = "SELECT `books`.`title`, 
                  `authors`.`first_name`,
                  `authors`.`last_name`,
@@ -30,14 +27,10 @@ $query = "SELECT `books`.`title`,
           ON `books`.`categories_id` = `categories`.`categories_id`
           WHERE `books`.`book_id` = :book_id";
 
-// Adatbázis kapcsolat létrehozása
 $db = new Database();
 
-// Az adatbázis lekérdezés végrehajtása
 $result = $db->execute($query, ['book_id' => $bookId]);
 
-// Kapcsolat lezárása
 $db = null;
 
-// Az eredmény visszaküldése JSON formátumban
 echo json_encode($result);
