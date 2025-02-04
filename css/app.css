@@ -124,3 +124,20 @@ input, select, .list-group-item {
 .img-hover-zoom:hover img {
     transform: scale(1.1);
 }
+
+.blog-temp {
+	background: url('../media/image/libraryinterior/libraryblog.jpg') center/cover no-repeat;
+	height: 400px; 
+}
+
+.custom-btn {
+	border: 2px solid white;
+	padding: 10px 20px;
+	color: white;
+	text-decoration: none;
+}
+
+.custom-btn:hover {
+	background: white;
+	color: black;
+}

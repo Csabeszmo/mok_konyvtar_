@@ -7,5 +7,3 @@ rólunk-nál hosszabb szöveg (1 bekezdésnyi)
 
 képek mérete a carousel-nél 1920x600
 Cascadia Code SemiBold
-
-tooltip működésének megoldása

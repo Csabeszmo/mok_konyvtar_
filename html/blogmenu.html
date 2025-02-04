@@ -1,0 +1,51 @@
+<div id="blogCarousel" class="carousel slide w-100" data-bs-ride="carousel">
+  <div class="carousel-inner">
+      <div class="carousel-item active">
+          <div class="blog-temp d-flex flex-column justify-content-center 
+                      align-items-center">
+              <h1 class="fw-bold text-white text-center">MOK KÖNYVTÁR BLOGOLDALA</h1>
+              <p class="fs-4 text-white text-center">Hírek a könyvtárról és azzal kapcsolatos tevékenységekről</p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="container"></div>
+  <div class="row mt-5 justify-content-center">
+      <h1 class="text-center">Blog</h1>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-4 mb-4" 
+         ng-repeat="blog in blogs">
+      <div class="card" id="{{blog.id}}">
+        <img ng-src="{{blog.image}}" 
+             class="card-img-top" 
+             alt="Blog kép">
+        <div class="card-body">
+          <h5 class="card-title">{{blog.title}}</h5>
+          <p class="card-text">{{blog.short_description}}</p>
+          <a class="btn btn-brown" data-bs-toggle="modal" data-bs-target="blogModal">
+            Bővebben
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" id="{{blog.id}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{blog.title}}</h5>
+        </div>
+        <div class="modal-body">
+          <p>{{blog.long_description}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
