@@ -165,10 +165,10 @@
   ])
 
   // page3Controller
-  .controller('page3Controller', [
+  .controller('blogmenuController', [
     '$scope',
     function($scope) {
-      console.log('Page3 controller...');
+      console.log('blogmenu controller...');
     }
   ])
 
