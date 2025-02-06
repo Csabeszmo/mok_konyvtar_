@@ -12,9 +12,9 @@ $query =  "SELECT `user_id`,
 				  `middle_name`, 
 				  `last_name`,
 				  `password`
-		   FROM `users`  
-		   WHERE `email` = ? AND    
-		   `is_active` = 1 LIMIT 1;";
+		     FROM `users`  
+		    WHERE `email` = ? AND    
+		   		  `is_active` = 1 LIMIT 1;";
 
 $result = $db->execute($query, array($args['email']));
 

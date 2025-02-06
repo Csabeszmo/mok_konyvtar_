@@ -161,6 +161,13 @@
     '$scope',
     function($scope) {
       console.log('Events controller...');
+      $scope.slides = [];
+      $scope.currentSlide = 0;
+      $scope.isActive = true;
+
+      $scope.nextSlide = function() {
+        $scope.currentSlide = ($scope.currentSlide + 1) % $scope.slides.length;
+      };
     }
   ])
 
