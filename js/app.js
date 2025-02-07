@@ -171,11 +171,17 @@
     }
   ])
 
-  // page3Controller
+  // blogmenuController
   .controller('blogmenuController', [
     '$scope',
-    function($scope) {
-      console.log('blogmenu controller...');
+    'http',
+    function($scope, http) {
+      http.request('./php/blogmenu.php')
+      .then(data => {
+        $scope.blog = data;
+        $scope.$applyAsync();
+      })
+      .catch(error => console.log(error));
     }
   ])
 
