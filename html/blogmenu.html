@@ -27,10 +27,26 @@
             <p class="card-text">{{x.short_description}}</p>
             <a class="btn btn-brown" 
                data-bs-toggle="modal" 
-               data-bs-target="blogModal">
+               ng-attr-data-bs-target="#id{{$index+1}}">
                Bővebben
             </a>
           </div>
+      </div>
+
+      <div class="modal" ng-attr-id="id{{$index+1}}" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{x.title}}</h5>
+            </div>
+            <div class="modal-body">
+              <p>{{x.long_description}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
       </div>
       <!--
       <div class="card" id="{{blog.id}}">
@@ -46,22 +62,6 @@
         </div>
       </div>
       -->
-    </div>
-  </div>
-
-  <div class="modal" tabindex="-1" id="{{blog.id}}">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{{blog.title}}</h5>
-        </div>
-        <div class="modal-body">
-          <p>{{blog.long_description}}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
   </div>
 </div>
