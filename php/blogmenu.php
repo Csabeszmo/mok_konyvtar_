@@ -6,8 +6,21 @@ $db = new Database;
 
 $query= "SELECT `name`, 
                 `short_description`, 
-                `long_description`, 
-                `image_url` 
+                `image_url`, 
+                `heading1`, 
+                `description1`, 
+                `heading2`, 
+                `description2`, 
+                `heading3`, 
+                `description3`, 
+                `heading4`, 
+                `description4`, 
+                `heading5`, 
+                `description5`, 
+                `heading6`, 
+                `description6`, 
+                `conclusion`, 
+                `description7` 
            FROM `blog`";
 
 $result = $db->execute($query);
