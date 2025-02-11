@@ -7,6 +7,7 @@ $db = new Database;
 $query= "SELECT `name`, 
                 `short_description`, 
                 `image_url`, 
+                `carousel`, 
                 `heading1`, 
                 `description1`, 
                 `heading2`, 
@@ -20,7 +21,9 @@ $query= "SELECT `name`,
                 `heading6`, 
                 `description6`, 
                 `conclusion`, 
-                `description7` 
+                `description7`,  
+                `img2`, 
+                `img3` 
            FROM `blog`";
 
 $result = $db->execute($query);
