@@ -23,10 +23,10 @@
              class="card-img-left" 
              alt="x.name">
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title text-center">{{x.name}}</h5>
+            <h5 class="card-title">{{x.name}}</h5>
             <p class="card-text">{{x.short_description}}</p>
           </div>
-          <div class="card-footer">
+          <div class="card-footer bg-gradient shadow-lg">
             <a class="btn btn-brown" 
                data-bs-toggle="modal" 
                ng-attr-data-bs-target="#id{{$index+1}}">
@@ -38,27 +38,51 @@
       <div class="modal" ng-attr-id="id{{$index+1}}" tabindex="-1">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">{{x.name}}</h5>
+            <div class="modal-header bg-gradient shadow-lg">
+              <h5 class="modal-title justify-content-center">{{x.name}}</h5>
             </div>
             <div class="modal-body">
+              <div class="carosuel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                      <div class="d-flex flex-column justify-content-center 
+                                  align-items-center">
+                        <img ng-src="./media/image/blogs/{{x.carousel}}">  
+                      </div>
+                  </div>
+                </div>
+              </div><br>
               <p>{{x.heading1}}</p><br>
               <p>{{x.description1}}</p><br>
               <p>{{x.heading2}}</p><br>
               <p>{{x.description2}}</p><br>
-              <p>{{x.heading3}}</p><br>
-              <p>{{x.description3}}</p><br>
+              <div class="row">
+                <div class="col-6">
+                  <p>{{x.heading3}}</p><br>
+                  <p>{{x.description3}}</p>
+                </div>
+                <div class="col-6">
+                  <img ng-src="./media/image/blogs/{{x.img2}}" class="img-fluid">
+                </div>
+              </div><br>
               <p>{{x.heading4}}</p><br>
               <p>{{x.description4}}</p><br>
               <p>{{x.heading5}}</p><br>
               <p>{{x.description5}}</p><br>
-              <p>{{x.heading6}}</p><br>
-              <p>{{x.description6}}</p><br>
+              <div class="row">
+                <div class="col-6">
+                  <img ng-src="./media/image/blogs/{{x.img3}}" class="img-fluid">
+                </div><br>
+                <div class="col-6">
+                  <p>{{x.heading6}}</p><br>
+                  <p>{{x.description6}}</p><br>
+                </div>
+              </div><br>
               <p>{{x.conclusion}}</p><br>
               <p>{{x.description7}}</p><br>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <div class="modal-footer bg-gradient shadow-lg">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Bezárás</button>
             </div>
           </div>
         </div>

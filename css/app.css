@@ -141,3 +141,22 @@ input, select, .list-group-item {
 	background: white;
 	color: black;
 }
+
+.card-footer{
+	background-color: #4B5E4B;
+}
+
+.modal-header{
+	background-color: #4B5E4B;
+}
+
+.modal-title{
+	color: white;
+}
+.modal-body{
+	background-color: #F5E6DF;
+}
+
+.modal-footer{
+	background-color: #4B5E4B;
+}

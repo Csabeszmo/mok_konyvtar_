@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once("./environment.php");
+require_once("../../common/php/environment.php");
 
 $db = new Database();
 
@@ -22,4 +22,4 @@ $result = $db->execute($query);
 
 $db = null;
 
-echo json_encode($result);
+Util::setResponse($result);
