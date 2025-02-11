@@ -99,6 +99,11 @@
         tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
       });
 
+      $rootScope.$on('$viewContentLoaded', function() {
+        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
+      });
+
       $rootScope.logout = () => {
         if (confirm('Kijelenkezik?')) {
           $rootScope.user = null;
