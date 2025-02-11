@@ -1,6 +1,6 @@
 TESZT:
 
-- id: 00011 
+- id: 00001
   dátum: 2025-01-23
   címe: login
   megjegyzés: 
@@ -11,4 +11,14 @@ TESZT:
 
     - password üres maradt
     - login buttomn activ maradt
-  
+
+- id: 00002
+  dátum: 2025-02-08
+  címe: könyvek
+  megjegyzés:
+  végezte: Csaba
+  leírás:
+    - gombokra való kattintás után a megfelelő könyv adatai töltődnek be.
+    - hibakód nincs
+    - a könyvek adatlapjait fel kell tölteni a megfelelő adatokkal.
+    - az adatbázissal való kapcsolat megfelelő.
