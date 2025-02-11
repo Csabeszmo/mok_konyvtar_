@@ -13,12 +13,9 @@ $query= "INSERT INTO `users`
                      `last_name`, 
                      `email`,
                      `password`) 
-         VALUES (:first_name,
-                 :last_name,
-                 :email,
-                 BINARY :password)";
+             VALUES (?,?,?,?)";
 
-$result = $db->execute($query, $args);
+$result = $db->execute($query, array($args['email']));
 
 $db = null;
 

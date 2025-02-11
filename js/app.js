@@ -227,36 +227,42 @@
 
   // registerController
   .controller('registerController', [
-    '$scope', '$state',
-    function($scope, $state) {
-        console.log('Register controller...');
+    '$rootScope',
+    '$scope', 
+    '$state',
+    'http',
+    'util',
+    function($rootScope, $scope, $state, http, util) {
         $scope.register = function() {
-            fetch('./php/register.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify($scope.model)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Hálózati hiba: ' + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    alert('Sikeres regisztráció!');
-                    $scope.user = {};
-                    $state.go('home');
-                } else {
-                    alert('Hiba történt: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Regisztrációs hiba:', error);
-                alert('Hálózati hiba történt. Próbáld újra később.');
-            });
+          http.request({
+            url: './php/register.php',
+            data: util.objFilterByKeys($scope.model, [ 
+              'emailConfirm',
+              'passwordConfirm',
+              'showPassword'
+            ], false)
+          })
+          /* 
+          .then(response => {
+            if (!response.ok) {
+                  throw new Error('Hálózati hiba: ' + response.status);
+            }
+            return response.json();
+          })
+          */
+          .then(data => {
+            if (data.success) {
+              alert('Sikeres regisztráció!');
+              $scope.user = {};
+              $state.go('home');
+            } else {
+              alert('Hiba történt: ' + data.message);
+            }
+          })
+          .catch(error => {
+            console.error('Regisztrációs hiba:', error);
+            alert('Hálózati hiba történt. Próbáld újra később.');
+          });
         };
         $scope.cancel = function() {
             $state.go('home');
