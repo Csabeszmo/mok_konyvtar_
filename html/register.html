@@ -46,9 +46,7 @@
                                             </div>
                                             <div class="col-1 d-flex align-items-center justify-content-start ps-1">
                                                 <span class="fw-bolder text-success"
-                                                      ng-class="{'invisible': registerForm.first_name.$invalid}">
-                                                    &check;
-                                                </span>
+                                                      ng-class="{'invisible': registerForm.first_name.$invalid}">&check;</span>
                                             </div>
                                         </div>
 
@@ -75,9 +73,7 @@
                                             </div>
                                             <div class="col-1 d-flex align-items-center justify-content-start ps-1">
                                                 <span class="fw-bolder text-success"
-                                                      ng-class="{'invisible': registerForm.last_name.$invalid}">
-                                                    &check;
-                                                </span>
+                                                      ng-class="{'invisible': registerForm.last_name.$invalid}">&check;</span>
                                             </div>
                                         </div>
 
@@ -92,7 +88,7 @@
                                                 <input id="register-email"
                                                        class="form-control"
                                                        name="email" 
-                                                       type="text"
+                                                       type="email"
                                                        placeholder="email-cím"
                                                        spellcheck="false" 
                                                        autocomplete="off" 
@@ -106,13 +102,46 @@
                                             </div>
                                             <div class="col-1 d-flex align-items-center justify-content-start ps-1">
                                                 <span class="fw-bolder text-success"
-                                                      ng-class="{'invisible': registerForm.email.$invalid}">
-                                                    &check;
-                                                </span>
+                                                      ng-class="{'invisible': registerForm.email.$invalid}">&check;</span>
                                                 <span data-bs-toggle="tooltip"
                                                       data-bs-custom-class="custom-tooltip"
                                                       data-bs-html="true"
-                                                      data-bs-title="&lt;p class='my-1'>Email-cím megadása kötelező!&lt;/p>">
+                                                      data-bs-title="Email-cím megadása kötelező!">
+                                                    <i class="fa-solid fa-circle-info text-primary ms-2"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Email Megerősítése -->
+                                        <div class="row mt-3">
+                                            <label for="register-email-confirm" 
+                                                   class="col-form-label col-12 col-md-5 text-md-end">
+                                                <i class="fa-solid fa-star fa-2xs text-danger"></i>
+                                                <span class="text-capitalize">Email megerősítése:</span>
+                                            </label>
+                                            <div class="col-11 col-md-6 position-relative">
+                                                <input id="register-email-confirm"
+                                                       class="form-control"
+                                                       name="emailConfirm" 
+                                                       type="email"
+                                                       placeholder="email megerősítése"
+                                                       spellcheck="false" 
+                                                       autocomplete="off" 
+                                                       required
+                                                       maxlength="50"
+                                                       ng-init="model.emailConfirm=null"
+                                                       ng-model="model.emailConfirm"
+                                                       ng-pattern="model.email"
+                                                       ng-change="checkEmailMatch()"
+                                                       ng-clear-icon>
+                                            </div>
+                                            <div class="col-1 d-flex align-items-center justify-content-start ps-1">
+                                                <span class="fw-bolder text-success"
+                                                      ng-class="{'invisible': registerForm.emailConfirm.$invalid}">&check;</span>
+                                                <span data-bs-toggle="tooltip"
+                                                      data-bs-custom-class="custom-tooltip"
+                                                      data-bs-html="true"
+                                                      data-bs-title="Az email-címeknek egyezniük kell!">
                                                     <i class="fa-solid fa-circle-info text-primary ms-2"></i>
                                                 </span>
                                             </div>
@@ -144,16 +173,56 @@
                                             </div>
                                             <div class="col-1 d-flex align-items-center justify-content-start ps-1">
                                                 <span class="fw-bolder text-success"
-                                                      ng-class="{'invisible': registerForm.password.$invalid}">
-                                                    &check;
-                                                </span>
+                                                      ng-class="{'invisible': registerForm.password.$invalid}">&check;</span>
                                                 <span data-bs-toggle="tooltip"
                                                       data-bs-custom-class="custom-tooltip"
                                                       data-bs-html="true"
-                                                      data-bs-title="&lt;p class='my-1'>6-20 karakter lehetséges&lt;/br>
-                                                                      &lt;small>Tartalmazzon nagybetűket, kisbetűket és számokat&lt;/small>&lt;/p>">
+                                                      data-bs-title="6-20 karakter, tartalmazzon nagybetűket, kisbetűket és számokat.">
                                                     <i class="fa-solid fa-circle-info text-primary ms-2"></i>
                                                 </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Jelszó Megerősítés -->
+                                        <div class="row mt-3">
+                                            <label for="register-password-confirm" class="col-form-label col-12 col-md-5 text-md-end">
+                                                <i class="fa-solid fa-star fa-2xs text-danger"></i>
+                                                <span class="text-capitalize">Jelszó megerősítése:</span>
+                                            </label>
+                                            <div class="col-11 col-md-6 position-relative">
+                                                <input id="register-password-confirm"
+                                                       class="form-control"
+                                                       name="passwordConfirm" 
+                                                       type="{{model.showPassword ? 'text' : 'password'}}"
+                                                       placeholder="jelszó megerősítése"
+                                                       spellcheck="false" 
+                                                       autocomplete="off" 
+                                                       required
+                                                       minlength="6"
+                                                       maxlength="20"
+                                                       ng-init="model.passwordConfirm=null"
+                                                       ng-model="model.passwordConfirm"
+                                                       ng-pattern="model.password"
+                                                       ng-change="checkPasswordMatch()"
+                                                       ng-clear-icon>
+                                            </div>
+                                            <div class="col-1 d-flex align-items-center justify-content-start ps-1">
+                                                <span class="fw-bolder text-success"
+                                                      ng-class="{'invisible': registerForm.passwordConfirm.$invalid}">&check;</span>
+                                                <span data-bs-toggle="tooltip"
+                                                      data-bs-custom-class="custom-tooltip"
+                                                      data-bs-html="true"
+                                                      data-bs-title="A jelszavaknak egyezniük kell!">
+                                                    <i class="fa-solid fa-circle-info text-primary ms-2"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Show Password Checkbox -->
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <input type="checkbox" id="show-password" ng-model="model.showPassword">
+                                                <label for="show-password" class="ms-2">Jelszó megjelenítése</label>
                                             </div>
                                         </div>
 
