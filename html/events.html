@@ -1,8 +1,11 @@
-<div class="container mt-5">
-    <h1 class="text-center mb-4">Események</h1>
-
+<div class="container">
+    <div class="row mt-5">
+        <h1 class="text-center mb-4 mt-4">Események</h1>
+    </div>
     <div class="row justify-content-center">
-        <div id="carouselExample" class="carousel slide w-75" data-bs-ride="carousel">
+        <div id="carouselExample" 
+             class="carousel slide w-75" 
+             data-bs-ride="carousel">
             
             <!-- Indicators -->
             <div class="carousel-indicators">
@@ -18,23 +21,32 @@
 
             <!-- Slides -->
             <div class="carousel-inner">
-                <div class="carousel-item" ng-class="{'active': $index === 0}" ng-repeat="x in events track by $index">
-                    <img ng-src="./media/image/events/{{x.img}}" class="d-block w-100 mx-auto" alt="{{x.name}}">
-                    <div class="carousel-caption d-none d-md-block">
-                    </div>
+                <div class="carousel-item" 
+                     ng-class="{'active': $index === 0}" 
+                     ng-repeat="x in events track by $index">
+                    <img ng-src="./media/image/events/{{x.img}}" 
+                         class="d-block w-100 mx-auto" 
+                         alt="{{x.name}}">
                 </div>
             </div>
 
             <!-- Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Előző</span>
+            <button class="carousel-control-prev" 
+                    type="button" 
+                    data-bs-target="#carouselExample" 
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" 
+                      aria-hidden="true">
+                </span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Következő</span>
+            <button class="carousel-control-next" 
+                    type="button" 
+                    data-bs-target="#carouselExample" 
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" 
+                      aria-hidden="true">
+                </span>
             </button>
-
         </div>
     </div>
 </div>
