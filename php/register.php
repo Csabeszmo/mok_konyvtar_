@@ -15,7 +15,7 @@ $query= "INSERT INTO `users`
                      `password`) 
              VALUES (?,?,?,?)";
 
-$result = $db->execute($query, array($args['email']));
+$result = $db->execute($query, array($args));
 
 $db = null;
 
