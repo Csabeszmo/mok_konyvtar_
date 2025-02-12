@@ -160,3 +160,7 @@ input, select, .list-group-item {
 .modal-footer{
 	background-color: #4B5E4B;
 }
+
+.text-justify{
+	text-align: justify;
+}
