@@ -180,12 +180,20 @@
     '$scope',
     'http',
     function($scope, http) {
+
+      // Get blogs
       http.request('./php/blogmenu.php')
       .then(data => {
         $scope.blog = data;
         $scope.$applyAsync();
       })
       .catch(error => console.log(error));
+
+      // Show description
+      $scope.showDescription = (blogId) => {
+        $scope.blogDescription = $scope.blog[blogId];
+        $scope.$applyAsync();
+      };
     }
   ])
 

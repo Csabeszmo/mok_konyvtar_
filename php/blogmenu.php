@@ -20,10 +20,10 @@ $query= "SELECT `name`,
                 `description5`, 
                 `heading6`, 
                 `description6`, 
-                `conclusion`, 
+                `heading7`, 
                 `description7`,  
-                `img2`, 
-                `img3` 
+                `img3`, 
+                `img6` 
            FROM `blog`";
 
 $result = $db->execute($query);
