@@ -44,7 +44,7 @@
                     <a class="btn btn-brown"
                        data-bs-toggle="modal" 
                        ng-attr-data-bs-target="#description_modal"
-                       ng-click="showDescription($index)">
+                       ng-click="showDescription(x.id)">
                        Bővebben
                     </a>
                 </div>
@@ -61,7 +61,7 @@
                     <!-- Modal Header -->
                     <div class="modal-header bg-gradient shadow-lg">
                         <h3 class="modal-title justify-content-center">
-                            {{blogDescription.name}}
+                            {{selectedBlog.name}}
                         </h3>
                     </div>
 
@@ -72,7 +72,7 @@
                                 <div class="carousel-item active">
                                     <div class="d-flex flex-column justify-content-center 
                                                 align-items-center">
-                                        <img ng-src="./media/image/blogs/{{blogDescription.img_top}}">  
+                                        <img ng-src="./media/image/blogs/{{selectedBlog.img_top}}">  
                                     </div>
                                 </div>
                             </div>
@@ -80,25 +80,25 @@
 
                         <div class="row mb-4 flex-row"
                              ng-repeat="x in blogDescription track by $index"
-                             ng-class="{'flex-row-reverse': blogDescription.img_align_end}">
+                             ng-class="{'flex-row-reverse': x.img_align_end}">
 
                             <div class="col-6"
-                                 ng-if="blogDescription.img">
-                                <img ng-src="./media/image/blogs/{{blogDescription.img}}" 
+                                 ng-if="x.img">
+                                <img ng-src="./media/image/blogs/{{x.img}}" 
                                      class="img-fluid">
                             </div>
                             <div ng-class="{'col-6': blogDescription.img}">
-                                <h4>{{$index+1}}. {{blogDescription.heading}}</h4><br>
+                                <h4>{{$index+1}}. {{x.heading}}</h4><br>
                                 <p class="text-justify">
-                                    {{blogDescription.description}}
+                                    {{x.description}}
                                 </p><br>
                             </div>
                         </div>
 
                         <div class="row mb-4 ">
-                            <h3>{{blogDescription.conclusion}}</h3>
+                            <h3>{{selectedBlog.conclusion}}</h3>
                             <p class="text-justify">
-                                {{blogDescription.conclusion_description}}
+                                {{selectedBlog.conclusion_description}}
                             </p><br>
                         </div>
                     </div>

@@ -4,21 +4,28 @@ require_once("../../common/php/environment.php");
 
 $db = new Database;
 
-$query= "SELECT `blog`.`name`, 
-                `blog`.`short_description`, 
-                `blog`.`image_url`, 
-                `blog`.`img_top`, 
-                `blog`.`conclusion`, 
-                `blog`.`conclusion_description`, 
-                `blog_descriptions`.`heading`, 
-                `blog_descriptions`.`description`, 
-                `blog_descriptions`.`img`, 
-                `blog_descriptions`.`img_align_end` 
-           FROM `blog` 
-     INNER JOIN `blog_descriptions` 
-             ON `blog_descriptions`.`blog_id` = `blog`.`id`";
+$query= "SELECT `id`,
+                `name`, 
+                `short_description`, 
+                `image_url`, 
+                `img_top`, 
+                `conclusion`,
+                `conclusion_description`
+           FROM `blog`
+       ORDER BY `id`;";
 
-$result = $db->execute($query);
+$result['blog'] = $db->execute($query);
+
+$query= "SELECT `id`,
+                `blog_id`,
+                `heading`, 
+                `description`, 
+                `img`, 
+                `img_align_end` 
+           FROM `blog_descriptions`
+       ORDER BY `blog_id`, `id`;";
+
+$result['blog_descriptions'] = $db->execute($query);
 
 $db = null;
 

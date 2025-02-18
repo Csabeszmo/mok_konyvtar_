@@ -195,14 +195,21 @@
       // Get blogs
       http.request('./php/blogmenu.php')
       .then(data => {
-        $scope.blog = data;
+        $scope.blog = data.blog;
+        $scope.blog_descriptions = data.blog_descriptions;
         $scope.$applyAsync();
       })
       .catch(error => console.log(error));
 
       // Show description
       $scope.showDescription = (blogId) => {
-        $scope.blogDescription = $scope.blog[blogId];
+        let selectedBlock = $scope.blog.filter(item => {
+          return item.id === blogId;
+        });
+        $scope.selectedBlog = selectedBlock[0];
+        $scope.blogDescription =  $scope.blog_descriptions.filter(item => {
+          return item.blog_id === blogId;
+        });
         $scope.$applyAsync();
       };
     }
