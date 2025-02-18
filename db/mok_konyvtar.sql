@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 14. 12:16
+-- Létrehozás ideje: 2025. Feb 18. 11:13
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.1.17
 
@@ -338,8 +338,7 @@ ALTER TABLE `blog`
 -- A tábla indexei `blog_descriptions`
 --
 ALTER TABLE `blog_descriptions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `blog_id` (`blog_id`);
+  ADD PRIMARY KEY (`id`,`blog_id`);
 
 --
 -- A tábla indexei `books`

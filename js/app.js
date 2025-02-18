@@ -89,20 +89,31 @@
   .run([
     '$rootScope',
     '$state',
-    function($rootScope, $state) {
-			console.log('Run...');
+    '$stateParams',
+    function($rootScope, $state, $stateParams) {
 
-      $rootScope.user = { user_id: null };
+        $rootScope.user = { user_id: null };
 
-      document.addEventListener("DOMContentLoaded", function() {
-        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
-      });
+        document.addEventListener("DOMContentLoaded", function() {
+            let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
+        });
 
-      $rootScope.$on('$viewContentLoaded', function() {
-        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
-      });
+        $rootScope.$on('$viewContentLoaded', function() {
+            let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
+        });
+
+        $rootScope.searchBook = () => {
+            $scope.search = $stateParams.data;
+            if (!$scope.search) {
+                $state.go('home');
+                return;
+
+            } else {
+                $state.go('book');
+            }
+        } 
 
       $rootScope.logout = () => {
         if (confirm('Kijelenkezik?')) {
