@@ -115,13 +115,13 @@
             }
         } 
 
-      $rootScope.logout = () => {
-        if (confirm('Kijelenkezik?')) {
-          $rootScope.user = null;
-          $rootScope.$applyAsync();
-          $state.go('login');
+        $rootScope.logout = () => {
+            if (confirm('Kijelentkezik?')) {
+                $rootScope.user = null;
+                $rootScope.$applyAsync();
+                $state.go('login');
+            }
         }
-      }
     }
   ])
 
