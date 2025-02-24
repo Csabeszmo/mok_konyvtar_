@@ -1,12 +1,13 @@
-<nav class="navbar navbar-expand-lg fixed-top bg-gradient shadow-lg custom-header">
+<nav class="navbar navbar-expand-lg fixed-top bg-gradient shadow-lg custom-header mb-5">
     <div class="container">
         <!-- Logó és cím -->
         <a class="navbar-brand fw-bold d-flex align-items-center text-white" href="#">
-            <i class="fa-solid fa-book-open-reader fs-3 me-2 text-white"></i>
+            <img src="./media/image/logos/mok_konyvtar_logo.png" alt="MOK Könyvtár" class="custom-icon me-2">
             <span class="fs-4 text-uppercase">
                 MOK Könyvtár
             </span>
         </a>
+        
 
         <!-- Hamburger menü -->
         <button class="navbar-toggler border-0" 
@@ -20,26 +21,25 @@
         </button>
 
         <!-- Menü -->
-        <div class="collapse navbar-collapse" 
-             id="navbarNav">
-            <ul class="navbar-nav ms-4">
-                <li class="nav-item">
-                    <a class="nav-link text-white fw-semibold" ui-sref="home" 
-                       ui-sref-active="active">Főoldal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white fw-semibold" ui-sref="books" 
-                       ui-sref-active="active">Könyvek</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white fw-semibold" ui-sref="events" 
-                       ui-sref-active="active">Események</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white fw-semibold" ui-sref="blogmenu" 
-                       ui-sref-active="active">Blog</a>
-                </li>
-            </ul>
+        <ul class="navbar-nav ms-4">
+            <li class="nav-item">
+                <a class="nav-link custom-nav-link text-white fw-semibold" ui-sref="home" 
+                   ui-sref-active="active">Főoldal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link custom-nav-link text-white fw-semibold" ui-sref="books" 
+                   ui-sref-active="active">Könyvek</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link custom-nav-link text-white fw-semibold" ui-sref="events" 
+                   ui-sref-active="active">Események</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link custom-nav-link text-white fw-semibold" ui-sref="blogmenu" 
+                   ui-sref-active="active">Blog</a>
+            </li>
+        </ul>
+        
 
             <!-- Keresősáv -->
             <form name="searchForm" class="d-flex ms-auto me-3">
