@@ -304,9 +304,15 @@
 
   //Profile controller
   .controller('profileController', [
-    '$scope', 
-    function(){
-      console.log("Profile controller...");
+    '$scope',
+    'http',
+    function($scope, http) {
+      http.request('./php/profile.php')
+      .then(data => {
+        $scope.profiles = data;
+        $scope.$applyAsync();
+      })
+      .catch(error => console.log(error));
     }
   ])
 
