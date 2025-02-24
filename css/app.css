@@ -164,3 +164,37 @@ input, select, .list-group-item {
 .text-justify{
 	text-align: justify;
 }
+
+header nav a {
+    text-decoration: none !important;
+}
+
+/* Menü animáció */
+.custom-nav-link {
+    position: relative;
+    transition: color 0.3s ease-in-out;
+    padding-bottom: 5px;
+}
+
+.custom-nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+    transform: translateX(-50%);
+}
+
+.custom-nav-link:hover::after,
+.custom-nav-link:focus::after,
+.custom-nav-link.active::after {
+    width: 100%;
+}
+
+.custom-icon {
+    width: 35px;
+    height: auto;
+}
