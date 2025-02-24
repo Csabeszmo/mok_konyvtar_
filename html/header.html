@@ -76,6 +76,14 @@
                         aria-labelledby="userDropdown">
                         <li>
                             <a class="dropdown-item" 
+                               ui-sref="profile" 
+                               ui-sref-active="active" 
+                               ng-if="$root.user.user_id">
+                                Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" 
                                ui-sref="cart" 
                                ui-sref-active="active" 
                                ng-if="$root.user.user_id">

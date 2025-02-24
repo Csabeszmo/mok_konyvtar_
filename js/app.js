@@ -74,6 +74,12 @@
 				templateUrl: './html/register.html',
 				controller: 'registerController'
 			})
+      .state('profile', {
+				url: '/profile',
+        parent: 'root',
+				templateUrl: './html/profile.html',
+				controller: 'profileController'
+			})
       .state('cart', {
 				url: '/cart',
         parent: 'root',
@@ -125,7 +131,7 @@
     }
   ])
 
-  // homeController
+  //Home Controller
   .controller('homeController', [
     '$scope',
     function($scope) {
@@ -133,7 +139,7 @@
     }
   ])
 
-  // booksController
+  //Books Controller
   .controller('booksController', [
     '$scope',
     'http',
@@ -147,7 +153,7 @@
     }
   ])
 
-  // bookController
+  //Book Controller
   .controller('bookController', [
     '$scope', 
     '$stateParams', 
@@ -172,7 +178,7 @@
     }
   ])
 
-  // eventsController
+  //Events Controller
   .controller('eventsController', [
     '$scope',
     'http',
@@ -186,7 +192,7 @@
     }
   ])
 
-  // blogmenuController
+  //Blogmenu Controller
   .controller('blogmenuController', [
     '$scope',
     'http',
@@ -215,7 +221,7 @@
     }
   ])
 
-  // loginController
+  //Login Controller
   .controller('loginController', [
     '$rootScope', 
     '$scope', 
@@ -251,7 +257,7 @@
     }
   ])
 
-  // registerController
+  //Register Controller
   .controller('registerController', [
     '$rootScope',
     '$scope', 
@@ -293,6 +299,14 @@
         $scope.cancel = function() {
             $state.go('home');
         };
+    }
+  ])
+
+  //Profile controller
+  .controller('profileController', [
+    '$scope', 
+    function(){
+      console.log("Profile controller...");
     }
   ])
 
