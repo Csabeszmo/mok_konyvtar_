@@ -8,10 +8,6 @@ $db = new Database();
 $query = "SELECT `books`.`title`, 
                  `authors`.`first_name`,
                  `authors`.`last_name`,
-                 `authors`.`biography`,
-                 `authors`.`author_image_url`,
-                 `authors`.`birth_date`,
-                 `authors`.`death_date`,
                  `books`.`translator`,
                  `books`.`publisher`,
                  `books`.`series`,
@@ -23,6 +19,10 @@ $query = "SELECT `books`.`title`,
                  `books`.`detailed_description`,
                  `books`.`cover_image_url`,
                  `categories`.`categories_name`
+                 `authors`.`biography`,
+                 `authors`.`author_image_url`,
+                 `authors`.`birth_date`,
+                 `authors`.`death_date`
             FROM `books`
       INNER JOIN `authors`
               ON `books`.`author_id` = `authors`.`author_id`
