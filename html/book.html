@@ -1,11 +1,14 @@
 <div class="container py-4">
-    <div class="row align-items-center mt-5">
-        <div class="col-lg-4 text-center mb-4 mt-5">
-            <img class="img-fluid rounded shadow" ng-src="./media/image/books/{{ book.cover_image_url }}" alt="{{ book.title }}">
-        </div>
-        <div class="col-lg-8">
+    <div class="row mt-5 mt-lg-5 pt-lg-4 flex-column-reverse flex-lg-row align-items-start">
+        <div class="col-lg-8 pt-3 pt-lg-5">
             <h1 class="fw-bold">{{ book.title }}</h1>
-            <p><strong>Szerző:</strong> {{ book.first_name }} {{ book.last_name }}</p>
+            <p class="d-flex align-items-center">
+                <strong>Szerző:</strong> <span class="ms-1">{{ book.first_name }} {{ book.last_name }}</span>
+                <button class="btn btn-brown btn-sm ms-3 rounded-pill shadow-sm px-3" 
+                        ng-click="showAuthorCard = !showAuthorCard">
+                    Íróról
+                </button>
+            </p>            
             <p><strong>Fordító:</strong> {{ book.translator }}</p>
             <p><strong>Kiadó:</strong> {{ book.publisher }}</p>
             <p><strong>Sorozat:</strong> {{ book.series }}</p>
@@ -15,16 +18,55 @@
             <p><strong>ISBN:</strong> {{ book.isbn }}</p>
             <p><strong>Kategória:</strong> {{ book.categories_name }}</p>
         </div>
+        <div class="col-lg-4 text-center mb-4 d-flex align-items-center pt-3 pt-lg-5">
+            <img class="img-fluid rounded shadow w-100 w-md-75 w-lg-100" 
+                 ng-src="./media/image/books/{{ book.cover_image_url }}" 
+                 alt="{{ book.title }}">
+        </div>
     </div>
+
+    <div class="row mt-4 justify-content-center" 
+         ng-show="showAuthorCard">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-lg bg-light text-dark p-3 rounded">
+                <div class="row g-0">
+                    <div class="col-md-4 text-center">
+                        <img ng-src="./media/image/authors/{{ book.author_image_url }}" 
+                             class="img-fluid rounded shadow-sm" 
+                             alt="{{ book.first_name }} {{ book.last_name }}">
+                    </div>
+                    <div class="col-md-8 d-flex flex-column justify-content-center">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold text-brown">{{ book.first_name }} {{ book.last_name }}</h4>
+                            <p><strong>Születési dátum:</strong> {{ book.birth_date }}</p>
+                            <p ng-if="book.death_date"><strong>Halálozási dátum:</strong> {{ book.death_date }}</p>
+                            <p class="card-text text-muted">{{ book.biography }}</p>
+                            <div class="text-end">
+                                <button class="btn btn-danger btn-sm rounded-pill px-3 shadow-sm" 
+                                        ng-click="showAuthorCard = false">
+                                    Bezárás
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row mt-5">
         <div class="col">
             <h3 class="border-bottom pb-2">Leírás</h3>
             <p class="lead">{{ book.detailed_description }}</p>
         </div>
     </div>
+
     <div class="row mt-5 text-center">
         <div class="col">
-            <button class="btn btn-brown px-4 py-2 rounded-pill shadow" ui-sref="books">&#8592; Vissza a könyvekhez</button>
+            <button class="btn btn-brown px-4 py-2 rounded-pill shadow" 
+                    ui-sref="books">
+                &#8592; Vissza a könyvekhez
+            </button>
         </div>
     </div>
 </div>

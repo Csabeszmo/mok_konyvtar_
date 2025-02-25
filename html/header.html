@@ -1,60 +1,80 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-gradient shadow-lg custom-header mb-5">
-    <div class="container">
+    <div class="container-fluid">
         <!-- Logó és cím -->
-        <a class="navbar-brand fw-bold d-flex align-items-center text-white" href="#">
-            <img src="./media/image/logos/mok_konyvtar_logo.png" alt="MOK Könyvtár" class="custom-icon me-2">
-            <span class="fs-4 text-uppercase">
-                MOK Könyvtár
-            </span>
+        <a class="navbar-brand fw-bold d-flex align-items-center text-white" 
+           href="#">
+            <img src="./media/image/logos/mok_konyvtar_logo.png" 
+                 alt="MOK Könyvtár" 
+                 class="custom-icon me-2">
+            <span class="fs-4 text-uppercase">MOK Könyvtár</span>
         </a>
-        
 
-        <!-- Hamburger menü -->
-        <button class="navbar-toggler border-0" 
+        <!-- Hamburger menü gomb -->
+        <button class="navbar-toggler border-0 text-white" 
                 type="button" 
                 data-bs-toggle="collapse" 
                 data-bs-target="#navbarNav" 
                 aria-controls="navbarNav" 
                 aria-expanded="false" 
                 aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon text-white"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Menü -->
-        <ul class="navbar-nav ms-4">
-            <li class="nav-item">
-                <a class="nav-link custom-nav-link text-white fw-semibold" ui-sref="home" 
-                   ui-sref-active="active">Főoldal</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link custom-nav-link text-white fw-semibold" ui-sref="books" 
-                   ui-sref-active="active">Könyvek</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link custom-nav-link text-white fw-semibold" ui-sref="events" 
-                   ui-sref-active="active">Események</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link custom-nav-link text-white fw-semibold" ui-sref="blogmenu" 
-                   ui-sref-active="active">Blog</a>
-            </li>
-        </ul>
-        
+        <!-- Menü és keresősáv -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link custom-nav-link text-white fw-semibold" 
+                       ui-sref="home" 
+                       ui-sref-active="active">
+                       Főoldal
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-nav-link text-white fw-semibold" 
+                       ui-sref="books" 
+                       ui-sref-active="active">
+                       Könyvek
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-nav-link text-white fw-semibold" 
+                       ui-sref="events" 
+                       ui-sref-active="active">
+                       Események
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-nav-link text-white fw-semibold" 
+                       ui-sref="blogmenu" 
+                       ui-sref-active="active">
+                       Blog
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link custom-nav-link text-white fw-semibold" 
+                       ui-sref="faq" 
+                       ui-sref-active="active">
+                       GYIK
+                    </a>
+                </li>
+            </ul>
 
             <!-- Keresősáv -->
-            <form name="searchForm" class="d-flex ms-auto me-3">
+            <form name="searchForm" 
+                  class="d-flex me-3">
                 <input class="form-control form-control-sm me-2 border-0 shadow-sm" 
                        type="search" 
                        placeholder="Keresés..." 
                        aria-label="Search"
                        autocomplete="off"
-					   ng-model="model.search"
-					   required>
+                       ng-model="model.search"
+                       required>
                 <button class="btn btn-outline-light btn-sm" 
                         type="submit"
                         ng-disabled="searchForm.$invalid"
                         ng-click="$root.searchBook()">
-                        <i class="fa-solid fa-search"></i>
+                    <i class="fa-solid fa-search"></i>
                 </button>
             </form>
 
@@ -79,7 +99,7 @@
                                ui-sref="profile" 
                                ui-sref-active="active" 
                                ng-if="$root.user.user_id">
-                                Profil
+                               Profil
                             </a>
                         </li>
                         <li>
@@ -87,28 +107,29 @@
                                ui-sref="cart" 
                                ui-sref-active="active" 
                                ng-if="$root.user.user_id">
-                                Kosár
+                               Kosár
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" 
                                ui-sref="login" 
-                               ui-sref-active="active">Bejelentkezés
+                               ui-sref-active="active">
+                               Bejelentkezés
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" 
                                ui-sref="register" 
                                ui-sref-active="active">
-                                Regisztráció
+                               Regisztráció
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" 
-                               ui-sref-active="active"
-                               ng-if="$root.user.user_id"
+                               ui-sref-active="active" 
+                               ng-if="$root.user.user_id" 
                                ng-click="$root.logout()">
-                                Kijelentkezés
+                               Kijelentkezés
                             </a>
                         </li>
                     </ul>

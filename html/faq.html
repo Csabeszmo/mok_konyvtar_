@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col mt-5 text-center">
+            <h1 class="fw-bold">
+                Gyakran Ismételt Kérdések
+            </h1>
+        </div>
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-8">
+            <div class="accordion" 
+                 id="faqAccordion">
+                <div class="accordion-item mb-3 shadow-sm" 
+                     ng-repeat="item in books">
+                    <h2 class="accordion-header" 
+                        id="heading{{item.id}}">
+                        <button class="accordion-button collapsed custom-accordion-btn" 
+                                type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#collapse{{item.id}}" 
+                                aria-expanded="false" 
+                                aria-controls="collapse{{item.id}}">
+                            {{item.kerdes}}
+                        </button>
+                    </h2>
+                    <div id="collapse{{item.id}}" 
+                         class="accordion-collapse collapse" 
+                         aria-labelledby="heading{{item.id}}" 
+                         data-bs-parent="#faqAccordion">
+                        <div class="accordion-body custom-accordion-body">
+                            {{item.valasz}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

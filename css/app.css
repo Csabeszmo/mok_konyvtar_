@@ -1,8 +1,8 @@
 *:not(input):not(textarea) {
-  -webkit-touch-callout:none !important;
+	-webkit-touch-callout:none !important;
 	  -webkit-user-select:none !important;
-						user-select:none !important;
-					outline-style:none !important;
+			  user-select:none !important;
+			outline-style:none !important;
 }
 header nav a.active{
 	text-decoration: underline;
@@ -208,4 +208,37 @@ header nav a {
 .custom-icon {
     width: 35px;
     height: auto;
+}
+
+.custom-accordion-btn {
+    background-color: #94614C !important;
+    color: #fff !important;
+    border: 1px solid #a87661 !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.custom-accordion-btn:not(.collapsed) {
+    background-color: #a77f6e !important;
+    color: #fff !important;
+    border-color: #a77f6e !important;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important; /* Finom belső árnyék */
+}
+
+.custom-accordion-btn:hover {
+    background-color: #a87661 !important;
+    border-color: #a87661 !important;
+}
+
+.custom-accordion-btn:focus {
+    box-shadow: none !important; /* Fókusz körvonal eltüntetése */
+    outline: none !important; /* Külső kékes körvonal eltüntetése */
+}
+
+.custom-accordion-body {
+    background-color: #f8f1ee !important;
+    color: #5a3e32 !important;
+    border: 1px solid #a87661 !important;
+    border-top: none;
 }

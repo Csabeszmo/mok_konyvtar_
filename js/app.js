@@ -85,6 +85,12 @@
         parent: 'root',
 				templateUrl: './html/cart.html',
 				controller: 'cartController'
+			})
+      .state('faq', {
+				url: '/faq',
+        parent: 'root',
+				templateUrl: './html/faq.html',
+				controller: 'faqController'
 			});
       
       $urlRouterProvider.otherwise('/');
@@ -178,19 +184,25 @@
     }
   ])
 
-  //Events Controller
+  // Events Controller
   .controller('eventsController', [
-    '$scope',
-    'http',
-    function($scope, http) {
+  '$scope',
+  'http',
+  function($scope, http) {
       http.request('./php/events.php')
       .then(data => {
-        $scope.events = data;
-        $scope.$applyAsync();
+          $scope.events = data;
+          $scope.$applyAsync();
       })
       .catch(error => console.log(error));
+      //Jernei ezt nézd meg!
+      $scope.setActiveSlide = function(index) {
+          let carousel = new bootstrap.Carousel(document.getElementById('carouselExample'));
+          carousel.to(index);
+      };
     }
   ])
+
 
   //Blogmenu Controller
   .controller('blogmenuController', [
@@ -323,4 +335,19 @@
       console.log("Cart controller...");
     }
   ])
+
+  //FAQ Controller
+  .controller('faqController', [
+    '$scope',
+    'http',
+    function($scope, http) {
+      http.request('./php/faq.php')
+      .then(data => {
+        $scope.books = data;
+        $scope.$applyAsync();
+      })
+      .catch(error => console.log(error));
+    }
+  ])
+
 })(window, angular);
