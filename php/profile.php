@@ -4,7 +4,8 @@ require_once('../../common/php/environment.php');
 
 $db = new Database();
 
-$query = "SELECT `first_name`, 
+$query = "SELECT `user_id`,
+                 `first_name`, 
                  `middle_name`, 
                  `last_name`, 
                  `registration_date`, 
