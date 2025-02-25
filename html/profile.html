@@ -1,33 +1,36 @@
-<div class="container-fluid">
-    <div class="row mt-5 justify-content-center">
-        <div class="col-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 mt-5">
-            <div class="card border-5 loginborder shadow-sm">
-                <div class="card-body bglogin">
-                    
-                    <!-- Űrlap -->
-                    <div class="col-md-7 text-black p-4 rounded-end justify-content-center">
-                        <!-- Cím -->
-                        <h3 class="card-title text-center fw-bold titleuser">Profil</h3>
-
-                        <div class="d-flex"
-                             ng-repeat="x in profiles">
-                            <label class="text-center">{{x.first_name}}</label>
-                            <label class="text-center">{{x.middle_name}}</label>
-                            <label class="text-center">{{x.last_name}}</label>
-                            <label class="text-center">{{x.registration_date}}</label>
-                            <label class="text-center">{{x.phone}}</label>
-                            <label class="text-center">{{x.city}}</label>
-                            <label class="text-center">{{x.postalcode}}</label>
-                            <label class="text-center">{{x.address}}</label>
-                            <label class="text-center">{{x.email}}</label>
-                            <label class="text-center">{{x.password}}</label>
-                            <label class="text-center">{{x.is_active}}</label>
+<div class="profilepic">
+    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row justify-content-center">
+            <div class="col-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
+                <div class="card border-5 loginborder shadow-sm">
+                    <div class="card-body bglogin text-center">
+                        
+                        <!-- Űrlap -->
+                        <div class="col-md-7 text-black p-4 mx-auto">
+                            <!-- Cím -->
+                            <h3 class="card-title fw-bold titleuser">Profil</h3>
+    
+                            <div class="row d-flex justify-content-center"
+                                 ng-repeat="x in profiles">
+                                <div>
+                                    <label>{{x.first_name}}</label>
+                                </div>
+                                <label>{{x.middle_name}}</label>
+                                <label>{{x.last_name}}</label>
+                                <label>{{x.registration_date}}</label>
+                                <label>{{x.phone}}</label>
+                                <label>{{x.city}}</label>
+                                <label>{{x.postalcode}}</label>
+                                <label>{{x.address}}</label>
+                                <label>{{x.email}}</label>
+                                <label>{{x.password}}</label>
+                                <label>{{x.is_active}}</label>
+                            </div>
                         </div>
-
+    
                     </div>
-                    
                 </div>
             </div>
         </div>
     </div>
-</div>    
+</div>

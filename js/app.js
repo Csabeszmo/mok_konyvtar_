@@ -312,7 +312,7 @@
         $scope.profiles = data;
         $scope.$applyAsync();
       })
-      .catch(error => console.log(error));
+      .catch(e => alert(e));
     }
   ])
 
