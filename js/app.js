@@ -277,7 +277,9 @@
     'http',
     'util',
     function($rootScope, $scope, $state, http, util) {
+
         $scope.register = function() {
+
           http.request({
             url: './php/register.php',
             data: util.objFilterByKeys($scope.model, [ 
@@ -286,26 +288,17 @@
               'showPassword'
             ], false)
           })
-          /* 
-          .then(response => {
-            if (!response.ok) {
-                  throw new Error('Hálózati hiba: ' + response.status);
-            }
-            return response.json();
-          })
-          */
           .then(data => {
-            if (data.success) {
-              alert('Sikeres regisztráció!');
-              $scope.user = {};
-              $state.go('home');
-            } else {
-              alert('Hiba történt: ' + data.message);
-            }
+            $rootScope.user = data;
+            $rootScope.user.email = $scope.model.email;
+            util.localStorage('set', 'mok_user_email', $rootScope.user.email);
+            $rootScope.$applyAsync();
+            alert('Sikeres regsiztráció!');
+            $state.go('login');
           })
-          .catch(error => {
-            console.error('Regisztrációs hiba:', error);
-            alert('Hálózati hiba történt. Próbáld újra később.');
+          .catch(e => {
+            alert(e);
+            
           });
         };
         $scope.cancel = function() {
@@ -320,10 +313,23 @@
     '$scope', 
     '$state',
     'http',
-    function($rootScope, $scope, $state ,http) {
+    'util',
+    function($rootScope, $scope, $state, http, util) {
+
+      $scope.model = {
+        email: util.localStorage('get', 'mok_user_email'),
+        last_name: util.localStorage('get', 'mok_user_last_name'),
+        first_name: util.localStorage('get', 'mok_user_first_name'),
+        middle_name: util.localStorage('get', 'mok_user_middle_name'),
+
+
+      };
+
       http.request('./php/profile.php')
       .then(data => {
         $scope.profiles = data;
+        $rootScope.user.last_name = $scope.model.last_name;
+        util.localStorage('set', 'mok_user_last_name', $rootScope.user.last_name);
         $scope.$applyAsync();
       })
       .catch(e => alert(e));
