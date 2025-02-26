@@ -195,7 +195,7 @@
           $scope.$applyAsync();
       })
       .catch(error => console.log(error));
-      //Jernei ezt nézd meg!
+
       $scope.setActiveSlide = function(index) {
           let carousel = new bootstrap.Carousel(document.getElementById('carouselExample'));
           carousel.to(index);
@@ -262,7 +262,7 @@
           .catch(e => alert(e));
         };
 
-        // 
+        //Visszalépés a főoldalra
         $scope.cancel = function() {
             $state.go('home');
         };
@@ -316,15 +316,22 @@
 
   //Profile controller
   .controller('profileController', [
-    '$scope',
+    '$rootScope', 
+    '$scope', 
+    '$state',
     'http',
-    function($scope, http) {
+    function($rootScope, $scope, $state ,http) {
       http.request('./php/profile.php')
       .then(data => {
         $scope.profiles = data;
         $scope.$applyAsync();
       })
       .catch(e => alert(e));
+
+      //Visszalépés a főoldalra
+      $scope.cancel = function() {
+        $state.go('home');
+      };
     }
   ])
 

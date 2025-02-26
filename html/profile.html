@@ -5,17 +5,29 @@
                 <div class="card border-5 loginborder shadow-sm">
                     <div class="card-body bglogin text-center">
                         
+                        <!-- Űrlap -->
                         <div class="col-md-7 text-black p-4 mx-auto">
+
+                            <!-- Cím -->
                             <h3 class="card-title fw-bold titleuser mb-3">Felhasználó adatai:</h3>
                             
                             <!-- Vezetéknév -->
                             <div class="row mb-3 align-items-center g-3">
-                                <label for="profile-last_name" class="col-md-4 col-form-label text-md-end">
-                                    Vezetéknév:
+                                <label for="profile-last_name" 
+                                       class="col-md-4 col-form-label text-md-end">
+                                       Vezetéknév:
                                 </label>
                                 <div class="col-md-8">
-                                    <input id="profile-last_name" class="form-control" name="last_name" type="text"
-                                        placeholder="last name" required maxlength="100">
+                                    <input id="profile-last_name" 
+                                           class="form-control" 
+                                           name="last_name" 
+                                           type="text"
+                                           spellcheck="false"
+                                           autocomplete="off" 
+                                           required 
+                                           maxlength="100"
+                                           ng-model="model.last_name"
+                                           ng-clear-icon>
                                 </div>
                             </div>
     
@@ -23,14 +35,13 @@
                             <div class="row mb-3 align-items-center g-3">
                                 <label for="profile-first_name" 
                                        class="col-md-4 col-form-label text-md-end">
-                                    Keresztnév:
+                                       Keresztnév:
                                 </label>
                                 <div class="col-md-8">
                                     <input id="profile-first_name"
                                            class="form-control"
 									       name="first_name" 
 									       type="text"
-									       placeholder="first name"
 									       spellcheck="false" 
 									       autocomplete="off" 
 									       required
@@ -44,14 +55,13 @@
                             <div class="row mb-3 align-items-center g-3">
                                 <label for="profile-middle_name" 
                                        class="col-md-4 col-form-label text-md-end">
-                                    Utónév:
+                                       Utónév:
                                 </label>
                                 <div class="col-md-8">
                                     <input id="profile-middle_name"
 									       class="form-control"
 									       name="middle_name" 
 									       type="text"
-									       placeholder="middle name"
 									       spellcheck="false" 
 									       autocomplete="off" 
 									       maxlength="100"
@@ -64,14 +74,13 @@
                             <div class="row mb-3 align-items-center g-3">
                                 <label for="profile-registration_date" 
                                        class="col-md-4 col-form-label text-md-end">
-                                    Regisztráció dátuma: 
+                                       Regisztráció dátuma: 
                                 </label>
                                 <div class="col-md-8">
                                     <input id="profile-registration_date"
                                            class="form-control"
                                            name="registration_date" 
                                            type="date"
-                                           placeholder="registration_date"
                                            spellcheck="false" 
                                            autocomplete="off"
                                            ng-model="model.registration_date"
@@ -84,13 +93,12 @@
                             <div class="row mb-3 align-items-center g-3">
                                 <label for="profile-phone" 
                                        class="col-md-4 col-form-label text-md-end">
-                                    Telefonszám:
+                                       Telefonszám:
                                 </label>
                                 <div class="col-md-8">
                                     <input id="profile-phone"
                                            name="phone" 
                                            type="tel"
-                                           placeholder="phone"
                                            class="form-control"
                                            spellcheck="false" 
                                            autocomplete="off"
@@ -106,13 +114,12 @@
                             <div class="row mb-3 align-items-center g-3">
                                 <label for="profile-city" 
                                        class="col-md-4 col-form-label text-md-end">
-                                    Város:
+                                       Város:
                                 </label>
                                 <div class="col-md-8">
                                     <input id="profile-city"
                                            name="city" 
                                            type="text"
-                                           placeholder="city"
                                            class="form-control"
                                            spellcheck="false" 
                                            autocomplete="off"
@@ -126,13 +133,12 @@
                             <div class="row mb-3 align-items-center g-3">
                                 <label for="profile-postcode" 
                                        class="col-md-4 col-form-label text-md-end">
-                                    Irányítószám:
+                                       Irányítószám:
                                 </label>
                                 <div class="col-md-8">
                                     <input id="profile-postcode"
                                            name="postcode" 
                                            type="text"
-                                           placeholder="postcode"
                                            class="form-control"
                                            spellcheck="false" 
                                            autocomplete="off"
@@ -146,12 +152,11 @@
                             <div class="row mb-3 align-items-center g-3">
                                 <label for="profile-address" 
                                        class="col-md-4 col-form-label text-md-end">
-                                    Lakcím:
+                                       Lakcím:
                                 </label>
                                 <div class="col-md-8">
                                     <textarea id="profile-address" 
                                               name="address"
-											  placeholder="address"
 											  class="form-control"
 											  spellcheck="false" 
 											  autocomplete="off"
@@ -166,10 +171,17 @@
                             <div class="row mb-3 justify-content-end">
                                 <hr>
                                 <div class="col-md-auto">
-                                    <button type="button" class="btn btn-primary w-auto">Mentés</button>
+                                    <button type="button" 
+                                            class="btn btn-primary rounded-pill w-auto">
+                                            Mentés
+                                    </button>
                                 </div>
                                 <div class="col-md-auto">
-                                    <button type="button" class="btn btn-danger w-auto">Mégsem</button>
+                                    <button type="button" 
+                                            class="btn btn-danger rounded-pill w-auto"
+                                            ng-click="cancel()">
+                                            Mégsem
+                                    </button>
                                 </div>
                             </div>
                         </div>
