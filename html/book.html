@@ -40,7 +40,7 @@
                             <h4 class="card-title fw-bold text-brown">{{ book.first_name }} {{ book.last_name }}</h4>
                             <p><strong>Születési dátum:</strong> {{ book.birth_date }}</p>
                             <p ng-if="book.death_date"><strong>Halálozási dátum:</strong> {{ book.death_date }}</p>
-                            <p class="card-text text-muted">{{ book.biography }}</p>
+                            <p class="card-text text-muted text-justify">{{ book.biography }}</p>
                             <div class="text-end">
                                 <button class="btn btn-danger btn-sm rounded-pill px-3 shadow-sm" 
                                         ng-click="showAuthorCard = false">
@@ -57,7 +57,7 @@
     <div class="row mt-5">
         <div class="col">
             <h3 class="border-bottom pb-2">Leírás</h3>
-            <p class="lead">{{ book.detailed_description }}</p>
+            <p class="lead text-justify">{{ book.detailed_description }}</p>
         </div>
     </div>
 
