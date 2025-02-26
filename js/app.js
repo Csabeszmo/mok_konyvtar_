@@ -301,6 +301,8 @@
             
           });
         };
+
+        //Visszalépés a főoldalra
         $scope.cancel = function() {
             $state.go('home');
         };

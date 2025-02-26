@@ -12,8 +12,9 @@ $query= "INSERT INTO `users`
                     (`first_name`,
                      `last_name`, 
                      `email`,
-                     `password`) 
-             VALUES (:first_name, :last_name, :email, :password)";
+                     `password`, 
+                     `is_active`) 
+             VALUES (:first_name, :last_name, :email, :password, 1)";
 
 $result = $db->execute($query, array_values($args));
 
