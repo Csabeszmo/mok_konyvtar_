@@ -2,24 +2,23 @@
 
 require_once('../../common/php/environment.php');
 
+$args = Util::getArgs();
+
 $db = new Database();
 
-$query = "SELECT `user_id`,
-                 `first_name`, 
-                 `middle_name`, 
-                 `last_name`, 
-                 `registration_date`, 
-                 `phone`, 
+$query = "SELECT `phone`, 
                  `city`, 
                  `postalcode`, 
-                 `address`, 
-                 `email`, 
-                 `password`, 
-                 `is_active` 
-            FROM `users` ";
+                 `address`
+            FROM `users` 
+           WHERE `user_id` = :user_id
+           LIMIT 1;";
 
-$result = $db->execute($query);
+$result = $db->execute($query, $args);
 
 $db = null;
+
+if (!is_null($result))
+  $result = $result[0];
 
 Util::setResponse($result);

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 25. 19:53
--- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- Létrehozás ideje: 2025. Feb 28. 12:10
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -330,7 +330,7 @@ CREATE TABLE `users` (
   `first_name` varchar(50) NOT NULL,
   `middle_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
-  `registration_date` date NOT NULL,
+  `registration_date` datetime NOT NULL DEFAULT current_timestamp(),
   `phone` varchar(20) NOT NULL,
   `city` varchar(30) NOT NULL,
   `postalcode` int(10) NOT NULL,
@@ -345,7 +345,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `middle_name`, `last_name`, `registration_date`, `phone`, `city`, `postalcode`, `address`, `email`, `password`, `is_active`) VALUES
-(1, 'Ákos', '', 'Jernei', '2024-12-02', '+36 20 325 1764', 'Makó', 6900, 'Kígyó utca 11.', 'jernei.akos-2020@keri.mako.hu', '1234Aa', 1);
+(1, 'Ákos', '', 'Jernei', '2024-12-02 00:00:00', '+36 20 325 1764', 'Makó', 6900, 'Kígyó utca 11.', 'jernei.akos-2020@keri.mako.hu', '1234Aa', 1);
 
 --
 -- Indexek a kiírt táblákhoz
