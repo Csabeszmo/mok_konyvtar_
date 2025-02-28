@@ -292,6 +292,8 @@
             $rootScope.user = data;
             $rootScope.user.email = $scope.model.email;
             util.localStorage('set', 'mok_user_email', $rootScope.user.email);
+            util.localStorage('set', 'mok_user_last_name', $rootScope.user.email);
+            util.localStorage('set', 'mok_user_first_name', $rootScope.user.email);
             $rootScope.$applyAsync();
             alert('Sikeres regsiztráció!');
             $state.go('login');
@@ -320,21 +322,44 @@
 
       $scope.model = {
         email: util.localStorage('get', 'mok_user_email'),
-        last_name: util.localStorage('get', 'mok_user_last_name'),
         first_name: util.localStorage('get', 'mok_user_first_name'),
         middle_name: util.localStorage('get', 'mok_user_middle_name'),
-
+        last_name: util.localStorage('get', 'mok_user_last_name'),
+        registration_date: util.localStorage('get', 'mok_user_registration_date'),
+        phone: util.localStorage('get', 'mok_user_phone'),
+        city: util.localStorage('get', 'mok_user_city'),
+        postcode: util.localStorage('get', 'mok_user_postcode'),
+        address: util.localStorage('get', 'mok_user_address'),
 
       };
 
       http.request('./php/profile.php')
       .then(data => {
-        $scope.profiles = data;
+        $rootScope.user = data;
+        $rootScope.user.first_name = $scope.model.first_name;
+        $rootScope.user.middle_name = $scope.model.middle_name;
         $rootScope.user.last_name = $scope.model.last_name;
+        $rootScope.user.registration_date = $scope.model.registration_date;
+        $rootScope.user.phone = $scope.model.phone;
+        $rootScope.user.city = $scope.model.city;
+        $rootScope.user.postcode = $scope.model.postcode;
+        $rootScope.user.address = $scope.model.address;
+        
         util.localStorage('set', 'mok_user_last_name', $rootScope.user.last_name);
-        $scope.$applyAsync();
+        util.localStorage('set', 'mok_user_first_name', $rootScope.user.first_name);
+        util.localStorage('set', 'mok_user_middle_name', $rootScope.user.middle_name);
+        util.localStorage('set', 'mok_user_registration_date', $rootScope.user.registration_date);
+        util.localStorage('set', 'mok_user_phone', $rootScope.user.phone);
+        util.localStorage('set', 'mok_user_city', $rootScope.user.city);
+        util.localStorage('set', 'mok_user_postcode', $rootScope.user.postcode);
+        util.localStorage('set', 'mok_user_address', $rootScope.user.address);
+
+        $rootScope.$applyAsync();
       })
       .catch(e => alert(e));
+      
+      //Felhasználó adatainak módosítása
+      $scope.update = function(){};
 
       //Visszalépés a főoldalra
       $scope.cancel = function() {
