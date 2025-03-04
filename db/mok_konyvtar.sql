@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 28. 12:10
+-- Létrehozás ideje: 2025. Már 04. 12:19
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.1.17
 
@@ -327,13 +327,13 @@ CREATE TABLE `reviews` (
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `middle_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
   `registration_date` datetime NOT NULL DEFAULT current_timestamp(),
   `phone` varchar(20) NOT NULL,
   `city` varchar(30) NOT NULL,
-  `postalcode` int(10) NOT NULL,
+  `postalcode` varchar(10) NOT NULL,
   `address` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(30) NOT NULL,
@@ -344,8 +344,9 @@ CREATE TABLE `users` (
 -- A tábla adatainak kiíratása `users`
 --
 
-INSERT INTO `users` (`user_id`, `first_name`, `middle_name`, `last_name`, `registration_date`, `phone`, `city`, `postalcode`, `address`, `email`, `password`, `is_active`) VALUES
-(1, 'Ákos', '', 'Jernei', '2024-12-02 00:00:00', '+36 20 325 1764', 'Makó', 6900, 'Kígyó utca 11.', 'jernei.akos-2020@keri.mako.hu', '1234Aa', 1);
+INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `registration_date`, `phone`, `city`, `postalcode`, `address`, `email`, `password`, `is_active`) VALUES
+(1, 'Jernei', 'Ákos', '', '2024-12-02 00:00:00', '20 325 1764', 'Makó', '6900', 'Kígyó utca 11.', 'jernei.akos-2020@keri.mako.hu', '1234Aa', 1),
+(2, 'Kovács', 'Gábor', '', '2025-02-28 12:19:23', '203215678', 'Makó', '6900', 'Liget u. 23', 'kovacs.gabor@gmail.com', '1234Aa', 1);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -497,7 +498,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
