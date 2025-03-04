@@ -65,12 +65,34 @@
                         {{x.description}}
                     </p>
                     <div class="text-center">
-                        <button class="btn btn-brown w-50 px-4 py-2 rounded-pill">
+                        <button class="btn btn-brown w-50 px-4 py-2 rounded-pill"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#eventModal"
+                                ng-click="showEventModal(x)">
                             Regisztráció
                         </button>
                     </div>
-
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Figyelem</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center fw-bold">A jelentkezéshez bejelentkezés szükséges. Ha nincs fiókja, regisztráljon.</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-primary">Bejelentkezés</button>
+                <button type="button" class="btn btn-success">Regisztráció</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
             </div>
         </div>
     </div>

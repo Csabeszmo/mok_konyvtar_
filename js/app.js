@@ -186,23 +186,27 @@
 
   // Events Controller
   .controller('eventsController', [
-  '$scope',
-  'http',
-  function($scope, http) {
-      http.request('./php/events.php')
-      .then(data => {
-          $scope.events = data;
-          $scope.$applyAsync();
-      })
-      .catch(error => console.log(error));
-
-      $scope.setActiveSlide = function(index) {
-          let carousel = new bootstrap.Carousel(document.getElementById('carouselExample'));
-          carousel.to(index);
-      };
+    '$scope',
+    'http',
+    function($scope, http) {
+        http.request('./php/events.php')
+        .then(data => {
+            $scope.events = data;
+            $scope.$applyAsync();
+        })
+        .catch(error => console.log(error));
+  
+        $scope.setActiveSlide = function(index) {
+            let carousel = new bootstrap.Carousel(document.getElementById('carouselExample'));
+            carousel.to(index);
+        };
+  
+        $scope.showEventModal = function(event) {
+            $scope.selectedEvent = event;
+            $scope.$applyAsync();
+        };
     }
-  ])
-
+  ])  
 
   //Blogmenu Controller
   .controller('blogmenuController', [
