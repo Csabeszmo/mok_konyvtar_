@@ -87,11 +87,14 @@
                        role="button" 
                        data-bs-toggle="dropdown" 
                        aria-expanded="false">
-                        <i class="fa-solid fa-user me-1"></i>
-                        <span class="text-capitalize text-small-caps">
-                            felhasználó
-                        </span>
+                       <i class="fa-solid fa-user me-1"></i>
+                       <span class="text-capitalize text-small-caps">
+                        {{ $root.user.last_name && $root.user.first_name 
+                           ? $root.user.last_name + ' ' + $root.user.first_name 
+                           : 'Felhasználó' }}
+                       </span>
                     </a>
+
                     <ul class="dropdown-menu dropdown-menu-end shadow" 
                         aria-labelledby="userDropdown">
                         <li>
@@ -99,7 +102,7 @@
                                ui-sref="profile" 
                                ui-sref-active="active" 
                                ng-if="$root.user.user_id">
-                               Profil
+                                Profil
                             </a>
                         </li>
                         <li>
@@ -107,21 +110,23 @@
                                ui-sref="cart" 
                                ui-sref-active="active" 
                                ng-if="$root.user.user_id">
-                               Kosár
+                                Kosár
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" 
                                ui-sref="login" 
-                               ui-sref-active="active">
-                               Bejelentkezés
+                               ui-sref-active="active" 
+                               ng-if="!$root.user.user_id">
+                                Bejelentkezés
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item" 
                                ui-sref="register" 
-                               ui-sref-active="active">
-                               Regisztráció
+                               ui-sref-active="active" 
+                               ng-if="!$root.user.user_id">
+                                Regisztráció
                             </a>
                         </li>
                         <li>
@@ -129,12 +134,12 @@
                                ui-sref-active="active" 
                                ng-if="$root.user.user_id" 
                                ng-click="$root.logout()">
-                               Kijelentkezés
+                                Kijelentkezés
                             </a>
                         </li>
                     </ul>
                 </li>
-            </ul>
+            </ul>            
         </div>
     </div>
 </nav>
