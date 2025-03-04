@@ -210,7 +210,7 @@
     'http',
     function($scope, http) {
 
-      // Get blogs
+      
       http.request('./php/blogmenu.php')
       .then(data => {
         $scope.blog = data.blog;
@@ -320,19 +320,6 @@
     'util',
     function($rootScope, $scope, $state, http, util) {
 
-      // $scope.model = {
-      //   email: util.localStorage('get', 'mok_user_email'),
-      //   first_name: util.localStorage('get', 'mok_user_first_name'),
-      //   middle_name: util.localStorage('get', 'mok_user_middle_name'),
-      //   last_name: util.localStorage('get', 'mok_user_last_name'),
-      //   registration_date: util.localStorage('get', 'mok_user_registration_date'),
-      //   phone: util.localStorage('get', 'mok_user_phone'),
-      //   city: util.localStorage('get', 'mok_user_city'),
-      //   postcode: util.localStorage('get', 'mok_user_postcode'),
-      //   address: util.localStorage('get', 'mok_user_address'),
-
-      // };
-
       $scope.model = util.objMerge({}, $rootScope.user);
 
       http.request({
@@ -342,32 +329,26 @@
       .then(data => {
         $scope.model = util.objMerge($scope.model, data);
 
-
-        // $rootScope.user = data;
-        // $rootScope.user.first_name = $scope.model.first_name;
-        // $rootScope.user.middle_name = $scope.model.middle_name;
-        // $rootScope.user.last_name = $scope.model.last_name;
-        // $rootScope.user.registration_date = $scope.model.registration_date;
-        // $rootScope.user.phone = $scope.model.phone;
-        // $rootScope.user.city = $scope.model.city;
-        // $rootScope.user.postcode = $scope.model.postcode;
-        // $rootScope.user.address = $scope.model.address;
-        
-        // util.localStorage('set', 'mok_user_last_name', $rootScope.user.last_name);
-        // util.localStorage('set', 'mok_user_first_name', $rootScope.user.first_name);
-        // util.localStorage('set', 'mok_user_middle_name', $rootScope.user.middle_name);
-        // util.localStorage('set', 'mok_user_registration_date', $rootScope.user.registration_date);
-        // util.localStorage('set', 'mok_user_phone', $rootScope.user.phone);
-        // util.localStorage('set', 'mok_user_city', $rootScope.user.city);
-        // util.localStorage('set', 'mok_user_postcode', $rootScope.user.postcode);
-        // util.localStorage('set', 'mok_user_address', $rootScope.user.address);
-
         $scope.$applyAsync();
       })
       .catch(e => alert(e));
       
       //Felhasználó adatainak módosítása
-      $scope.update = function(){};
+      $scope.update = function(){
+        http.request({
+          url: './php/update.php',
+          data: util.objFilterByKeys($scope.model, 'email', false)
+        })
+        .then(data => {
+          $scope.user = data;
+          $scope.$applyAsync();
+          if (confirm("Biztosan végre akarja hajtani a módosításokat")) {
+            alert('Sikeresen módosította adatait!'); 
+          }
+          $state.go('home');
+        })
+        .catch(e => alert(e));
+      };
 
       //Visszalépés a főoldalra
       $scope.cancel = function() {
