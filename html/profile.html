@@ -109,30 +109,6 @@
                                                ng-clear-icon>
                                     </div>
                                 </div>
-    
-                                <!-- 
-                                <div class="row mb-3 align-items-center g-3">
-                                    <label for="profile-registration_date" 
-                                           class="col-md-4 col-form-label text-md-end">
-                                        <i class="fa-solid fa-calendar-days me-1 titleuser"></i>
-                                        <span class="text-capitalize">
-                                            regisztráció dátuma:
-                                        </span> 
-                                    </label>
-                                    <div class="col-md-8">
-                                        <input id="profile-registration_date"
-                                               class="form-control"
-                                               name="registration_date" 
-                                               type="date"
-                                               placeholder="regisztráció dátuma..."
-                                               spellcheck="false" 
-                                               autocomplete="off"
-                                               ng-model="model.registration_date"
-                                               ng-disable-space
-                                               ng-clear-icon>
-                                    </div>
-                                </div>
-                                -->
         
                                 <!-- Telefonszám -->
                                 <div class="row mb-3 align-items-center g-3">
@@ -233,16 +209,16 @@
                                     <hr>
                                     <div class="col-md-auto">
                                         <button type="button" 
-                                                class="btn btn-brown w-auto mt-3"
-                                                ng-click="update()">
-                                                Mentés
+                                                class="btn btn-danger w-auto mt-3"
+                                                ng-click="cancel()">
+                                                Mégsem
                                         </button>
                                     </div>
                                     <div class="col-md-auto">
                                         <button type="button" 
-                                                class="btn btn-danger w-auto mt-3"
-                                                ng-click="cancel()">
-                                                Mégsem
+                                                class="btn btn-brown w-auto mt-3"
+                                                ng-click="update()">
+                                                Mentés
                                         </button>
                                     </div>
                                 </div>
