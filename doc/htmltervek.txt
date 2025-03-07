@@ -5,3 +5,11 @@ Cascadia Code SemiBold
 
 1. register-nél hogyan lehet megoldani hogy először ellenőrizze a kód hogy van-e már regisztrálva ilyen felhasználó. Lehet-e a php-ban egyszerre select és insert.
 2. regisztráció rész, csak felhasználók regisztrálhassanak.
+
+Daily standup, agilis módszertan
+
+Mivel foglalkoztál?
+
+Mit fogsz csinálni?
+
+Mi az ami megakadályoz a haladásban?
