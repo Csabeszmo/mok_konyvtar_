@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 04. 12:19
+-- Létrehozás ideje: 2025. Már 07. 09:42
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.1.17
 
@@ -183,13 +183,19 @@ INSERT INTO `books` (`book_id`, `author_id`, `title`, `translator`, `publisher`,
 --
 
 CREATE TABLE `cart` (
-  `cart_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `book_id` int(11) NOT NULL,
-  `loan_start_date` date NOT NULL,
-  `return_date` date NOT NULL,
-  `return_status` tinyint(1) NOT NULL
+  `start_date` date NOT NULL,
+  `return_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `start_date`, `return_date`) VALUES
+(1, 1, '2025-03-04', '2025-03-28'),
+(2, 2, '2025-03-11', '2025-04-17');
 
 -- --------------------------------------------------------
 
@@ -198,10 +204,30 @@ CREATE TABLE `cart` (
 --
 
 CREATE TABLE `cart_items_books` (
-  `book_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `cart_id` int(11) NOT NULL,
-  `db` int(2) NOT NULL
+  `book_id` int(11) NOT NULL,
+  `db` int(2) NOT NULL,
+  `return_status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `cart_items_books`
+--
+
+INSERT INTO `cart_items_books` (`id`, `cart_id`, `book_id`, `db`, `return_status`) VALUES
+(1, 1, 12, 1, 0),
+(2, 1, 13, 1, 0),
+(3, 1, 9, 2, 0),
+(4, 1, 19, 3, 0),
+(5, 2, 1, 3, 0),
+(6, 2, 2, 3, 0),
+(7, 2, 3, 3, 0),
+(8, 2, 4, 3, 0),
+(9, 2, 5, 3, 0),
+(10, 2, 6, 3, 0),
+(11, 2, 7, 3, 0),
+(12, 2, 16, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -345,8 +371,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `registration_date`, `phone`, `city`, `postalcode`, `address`, `email`, `password`, `is_active`) VALUES
-(1, 'Jernei', 'Ákos', '', '2024-12-02 00:00:00', '20 325 1764', 'Makó', '6900', 'Kígyó utca 11.', 'jernei.akos-2020@keri.mako.hu', '1234Aa', 1),
-(2, 'Kovács', 'Gábor', '', '2025-02-28 12:19:23', '203215678', 'Makó', '6900', 'Liget u. 23', 'kovacs.gabor@gmail.com', '1234Aa', 1);
+(1, 'Jernei', 'Ákos', '', '2024-12-02 00:00:00', '203251765', 'Makó', '6900', 'Kígyó utca 11.', 'jernei.akos-2020@keri.mako.hu', '1234Aa', 1),
+(2, 'Kovács', 'Gábor', '', '2025-02-28 12:19:23', '306289476', 'Makó', '6900', 'Liget utca 23.', 'kovacs.gabor@gmail.com', '1234Aa', 1);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -382,15 +408,15 @@ ALTER TABLE `books`
 -- A tábla indexei `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cart_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `book_id` (`book_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- A tábla indexei `cart_items_books`
 --
 ALTER TABLE `cart_items_books`
-  ADD PRIMARY KEY (`book_id`,`cart_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `book_id` (`book_id`,`cart_id`);
 
 --
 -- A tábla indexei `categories`
@@ -468,7 +494,13 @@ ALTER TABLE `books`
 -- AUTO_INCREMENT a táblához `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT a táblához `cart_items_books`
+--
+ALTER TABLE `cart_items_books`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT a táblához `categories`
