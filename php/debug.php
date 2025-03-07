@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
 
-$_POST['data'] = '{"password":"1234Aa","email":"kovacs.gabor@gmail.com","first_name":"Gábor","last_name":"Kovács"}';
+$_POST['data'] = '{"user_id":"1"}';
 
-require_once('./register.php');
+require_once('./cart.php');

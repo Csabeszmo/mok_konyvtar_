@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 require_once("../../common/php/environment.php");
 
+$args = Util::getArgs();
+
 $db = new Database();
 
 $query = "SELECT `books`.`title`, 
-                 `cart`.`loan_start_date`, 
+                 `books`.`cover_image_url`, 
+                 `cart`.`start_date`, 
                  `cart`.`return_date`, 
-                 `cart`.`return_status`, 
-                 `cart_items_books`.`db` 
-            FROM `cart` 
-      INNER JOIN `cart_items_books` 
-              ON `cart`.`cart_id` = `cart_items_books`.`cart_id` 
-      INNER JOIN `books` 
-              ON `cart`.`book_id` = `books`.`book_id` 
-           WHERE `cart`.`return_status` = 1";
+                 `cart_items_books`.`db`, 
+                 `cart_items_books`.`return_status` 
+            FROM `cart_items_books` 
+      INNER JOIN `books`
+              ON `books`.`book_id` = `cart_items_books`.`book_id`
+      INNER JOIN `cart`
+              ON `cart`.`id` = `cart_items_books`.`cart_id`
+           WHERE `cart`.`user_id` = :user_id";
 
-$result = $db->execute($query);
+$result = $db->execute($query, $args);
 
 $db = null;
 
