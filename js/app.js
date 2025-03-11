@@ -117,6 +117,7 @@
             tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
         });
 
+        /*
         $rootScope.searchBook = () => {
             $rootScope.search = $stateParams.data;
             if ($rootScope.search) {
@@ -127,6 +128,7 @@
                 $state.go('home');
             }
         } 
+        */
 
         $rootScope.logout = () => {
             if (confirm('Kijelentkezik?')) {
@@ -364,9 +366,24 @@
 
   //Cart controller
   .controller('cartController', [
-    '$scope', 
-    function(){
-      console.log("Cart controller...");
+    '$rootScope',
+    '$scope',
+    'http',
+    '$state',
+    function($rootScope, $scope, http, $state){
+      http.request({
+        url: './php/cart.php',
+        data: {user_id: $rootScope.user.user_id}})
+      .then(data => {
+        $scope.carts = data;
+        $scope.$applyAsync();
+      })
+      .catch(error => console.log(error));
+
+      //Visszalépés a főoldalra
+      $scope.cancel = function() {
+        $state.go('home');
+      };
     }
   ])
 
@@ -376,10 +393,10 @@
     '$scope',
     function($state, $scope) {
       $scope.model = {search: null};
-      $scope.searches = {
+      $scope.methods = {
         search: () => {
           $state.go('books', {
-            data: $scope.model.search
+            data: $scope.model.book_id
           });
         }
       };
