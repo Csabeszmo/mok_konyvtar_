@@ -363,21 +363,9 @@
 
   //Cart controller
   .controller('cartController', [
-    '$scope',
-    'http',
-    '$state',
-    function($scope, http, $state) {
-      http.request('./php/cart.php')
-      .then(data => {
-        $scope.carts = data;
-        $scope.$applyAsync();
-      })
-      .catch(error => console.log(error));
-
-      //Visszalépés a főoldalra
-      $scope.cancel = function() {
-        $state.go('home');
-      };
+    '$scope', 
+    function(){
+      console.log("Cart controller...");
     }
   ])
 
