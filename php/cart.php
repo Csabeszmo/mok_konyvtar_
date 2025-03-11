@@ -1,19 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 require_once("../../common/php/environment.php");
 
 $args = Util::getArgs();
 
 $db = new Database();
 
-$query = "SELECT `books`.`title`, 
-                 `books`.`cover_image_url`, 
-                 `cart`.`start_date`, 
-                 `cart`.`return_date`, 
-                 `cart_items_books`.`db`, 
-                 `cart_items_books`.`return_status` 
+$query = "SELECT `books`.`title` AS `Címe`,
+                 `books`.`cover_image_url` AS `Könyv`, 
+                 `cart`.`start_date` AS `Kölcsönzés kezdete`, 
+                 `cart`.`return_date` AS `Visszahozás határideje`, 
+                 `cart_items_books`.`db` AS `Mennyiség`
             FROM `cart_items_books` 
       INNER JOIN `books`
               ON `books`.`book_id` = `cart_items_books`.`book_id`

@@ -27,37 +27,8 @@
                                     <!-- Form -->
                                     <form name="registerForm" novalidate>
 
-                                        <!-- Keresztnév -->
-                                        <div class="row mt-5">
-                                            <label for="register-first_name" 
-                                                   class="col-form-label col-12 col-md-5 text-md-end">
-                                                <i class="fa-solid fa-star fa-2xs text-danger"></i>
-                                                <span class="text-capitalize">
-                                                    Keresztnév:
-                                                </span>
-                                            </label>
-                                            <div class="col-11 col-md-6 position-relative">
-                                                <input id="register-first_name"
-                                                       class="form-control"
-                                                       name="first_name" 
-                                                       type="text"
-                                                       placeholder="keresztnév"
-                                                       spellcheck="false" 
-                                                       autocomplete="off" 
-                                                       required
-                                                       maxlength="100"
-                                                       ng-init="model.first_name=null"
-                                                       ng-model="model.first_name"
-                                                       ng-clear-icon>
-                                            </div>
-                                            <div class="col-1 d-flex align-items-center justify-content-start ps-1">
-                                                <span class="fw-bolder text-success"
-                                                      ng-class="{'invisible': registerForm.first_name.$invalid}">&check;</span>
-                                            </div>
-                                        </div>
-
                                         <!-- Vezetéknév -->
-                                        <div class="row mt-3">
+                                        <div class="row mt-5">
                                             <label for="register-last_name" 
                                                    class="col-form-label col-12 col-md-5 text-md-end">
                                                 <i class="fa-solid fa-star fa-2xs text-danger"></i>
@@ -82,6 +53,35 @@
                                             <div class="col-1 d-flex align-items-center justify-content-start ps-1">
                                                 <span class="fw-bolder text-success"
                                                       ng-class="{'invisible': registerForm.last_name.$invalid}">&check;</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Keresztnév -->
+                                        <div class="row mt-3">
+                                            <label for="register-first_name" 
+                                                   class="col-form-label col-12 col-md-5 text-md-end">
+                                                <i class="fa-solid fa-star fa-2xs text-danger"></i>
+                                                <span class="text-capitalize">
+                                                    Keresztnév:
+                                                </span>
+                                            </label>
+                                            <div class="col-11 col-md-6 position-relative">
+                                                <input id="register-first_name"
+                                                       class="form-control"
+                                                       name="first_name" 
+                                                       type="text"
+                                                       placeholder="keresztnév"
+                                                       spellcheck="false" 
+                                                       autocomplete="off" 
+                                                       required
+                                                       maxlength="100"
+                                                       ng-init="model.first_name=null"
+                                                       ng-model="model.first_name"
+                                                       ng-clear-icon>
+                                            </div>
+                                            <div class="col-1 d-flex align-items-center justify-content-start ps-1">
+                                                <span class="fw-bolder text-success"
+                                                      ng-class="{'invisible': registerForm.first_name.$invalid}">&check;</span>
                                             </div>
                                         </div>
 
