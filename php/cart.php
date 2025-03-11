@@ -6,8 +6,8 @@ $args = Util::getArgs();
 
 $db = new Database();
 
-$query = "SELECT `books`.`title` AS `Címe`,
-                 `books`.`cover_image_url` AS `Könyv`, 
+$query = "SELECT `books`.`cover_image_url` AS `Könyv`,
+                 `books`.`title` AS `Címe`, 
                  `cart`.`start_date` AS `Kölcsönzés kezdete`, 
                  `cart`.`return_date` AS `Visszahozás határideje`, 
                  `cart_items_books`.`db` AS `Mennyiség`
