@@ -22,7 +22,8 @@
             templateUrl: './html/root.html'
           },
           'header@root': {
-            templateUrl: './html/header.html'
+            templateUrl: './html/header.html',
+            controller: 'headerController'
           },
           'footer@root': {
             templateUrl: './html/footer.html'
@@ -117,13 +118,13 @@
         });
 
         $rootScope.searchBook = () => {
-            $scope.search = $stateParams.data;
-            if (!$scope.search) {
-                $state.go('home');
+            $rootScope.search = $stateParams.data;
+            if ($rootScope.search) {
+                $state.go('book');
                 return;
 
             } else {
-                $state.go('book');
+                $state.go('home');
             }
         } 
 
@@ -377,6 +378,22 @@
       //Visszalépés a főoldalra
       $scope.cancel = function() {
         $state.go('home');
+      };
+    }
+  ])
+
+  // Header controller
+  .controller('headerController', [
+    '$state',
+    '$scope',
+    function($state, $scope) {
+      $scope.model = {search: null};
+      $scope.searches = {
+        search: () => {
+          $state.go('books', {
+            data: $scope.model.search
+          });
+        }
       };
     }
   ])
