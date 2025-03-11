@@ -13,3 +13,18 @@ Mivel foglalkoztál?
 Mit fogsz csinálni?
 
 Mi az ami megakadályoz a haladásban?
+
+
+Jövőbeli tervek a maradék időre:
+
+Fontos:
+- Könyv kölcsönzés kivitelezése
+- Eseményekre jelentkezés kivitelezése
+- keresés kivitelezése
+
+Ha van idő:
+- értékelés kivitelezése
+- nyelv váltó kivitelezése
+
+Ami még kell de nem programozás:
+Közösségi oldalak és az email cím létrehozása.
