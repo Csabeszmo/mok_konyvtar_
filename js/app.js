@@ -189,28 +189,39 @@
 
   // Events Controller
   .controller('eventsController', [
-    '$scope',
+    '$scope', 
+    '$rootScope', 
     'http',
-    function($scope, http) {
+    function($scope, $rootScope, http) {
         http.request('./php/events.php')
-        .then(data => {
-            $scope.events = data;
-            $scope.$applyAsync();
-        })
-        .catch(error => console.log(error));
-  
+            .then(data => {
+                $scope.events = data;
+                $scope.$applyAsync();
+            })
+            .catch(error => console.log(error));
+
         $scope.setActiveSlide = function(index) {
             let carousel = new bootstrap.Carousel(document.getElementById('carouselExample'));
             carousel.to(index);
         };
-  
+
         $scope.showEventModal = function(event) {
             $scope.selectedEvent = event;
             $scope.$applyAsync();
+
+            if ($rootScope.user && $rootScope.user.user_id) {
+                new bootstrap.Modal(document.getElementById('eventModalLoggedIn')).show();
+            } else {
+                new bootstrap.Modal(document.getElementById('eventModalNotLoggedIn')).show();
+            }
+        };
+
+        $scope.registerForEvent = function() {
+            alert("Sikeresen jelentkeztél a(z) " + $scope.selectedEvent.name + " eseményre!");
         };
     }
-  ])  
-
+  ])
+  
   //Blogmenu Controller
   .controller('blogmenuController', [
     '$scope',
