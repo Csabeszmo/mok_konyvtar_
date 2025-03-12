@@ -184,6 +184,17 @@
         $scope.$applyAsync();
       })
       .catch(error => console.log(error));
+
+      $scope.addBook = function(){
+        http.request({
+          url: './php/addBook.php',
+          data: {book_id: $stateParams.book_id}
+        })
+        .then(data => {
+          $scope.book = data;
+          $scope.$applyAsync();
+        })
+      } 
     }
   ])
 
@@ -316,10 +327,7 @@
             alert('Sikeres regsiztráció!');
             $state.go('login');
           })
-          .catch(e => {
-            alert(e);
-            
-          });
+          .catch(e => alert(e));
         };
 
         //Visszalépés a főoldalra
@@ -365,7 +373,7 @@
           }
           $state.go('home');
         })
-        .catch(e => alert(e));
+        .catch(error => console.log(error));
       };
 
       //Visszalépés a főoldalra
