@@ -8,6 +8,7 @@ $args = Util::getArgs();
 
 $db = new Database();
 
+/*
 $query= "SELECT `id` FROM `users` WHERE `email` = ?";
 
 $result = $db->execute($query, [$args['email']]);
@@ -16,9 +17,11 @@ if ($result) {
     Util::setError('A felhasználó ezen az email címen már létezik!');
 }
 
+*/
+
 $query= "INSERT INTO `users` 
-                    (`first_name`,
-                     `last_name`, 
+                    (`last_name`,
+                     `first_name`, 
                      `email`,
                      `password`, 
                      `is_active`) 

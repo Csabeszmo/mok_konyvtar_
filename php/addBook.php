@@ -7,12 +7,24 @@ $args = Util::getArgs();
 $db = new Database();
 
 $query = "INSERT INTO `cart`
-                     (`user_id`, 
-                      `book_id`,
-                      `return_status`) 
-              VALUES (:user_id, :book_id, 1)";
+                     (`user_id`) 
+              VALUES (:user_id)";
 
-$result = $db->execute($query, $args);
+$result1 = $db->execute($query, $args);
+
+$query = "INSERT INTO `cart_items_books`
+                     (`cart_id`, 
+                      `book_id`, 
+                      `db`) 
+             VALUES  (:cart_id, :book_id)";
+
+$result2 = $db->execute($query, $args);
+
+$query = "UPDATE `cart_items_books` SET 
+                 `db`= `db`+1
+           WHERE `user_id` = :user_id;";
+
+$result3 = $db->execute($query, $args);
 
 $db = null;
 
