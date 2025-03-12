@@ -78,22 +78,13 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" 
-     id="eventModal" 
-     tabindex="-1" 
-     aria-hidden="true">
+<!-- modal ha be van jelentkezve -->
+<div class="modal fade" id="eventModalNotLoggedIn" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">
-                    Figyelem
-                </h5>
-                <button type="button" 
-                        class="btn-close" 
-                        data-bs-dismiss="modal" 
-                        aria-label="Close">
-                </button>
+                <h5 class="modal-title">Figyelem</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p class="text-center fw-bold">
@@ -101,21 +92,38 @@
                 </p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button type="button" 
-                        class="btn btn-primary"
-                        ui-sref="login"
-                        data-bs-dismiss="modal">
+                <button type="button" class="btn btn-primary" ui-sref="login" data-bs-dismiss="modal">
                     Bejelentkezés
                 </button>
-                <button type="button" 
-                        class="btn btn-success"
-                        ui-sref="register"
-                        data-bs-dismiss="modal">
+                <button type="button" class="btn btn-success" ui-sref="register" data-bs-dismiss="modal">
                     Regisztráció
                 </button>
-                <button type="button" 
-                        class="btn btn-secondary" 
-                        data-bs-dismiss="modal">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Mégse
+                </button>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<!-- modal ha nincs be jelentkezve -->
+<div class="modal fade" id="eventModalLoggedIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Jelentkezés megerősítése</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center fw-bold">
+                    Biztosan szeretnél jelentkezni erre az eseményre?
+                </p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-success" ng-click="registerForEvent()" data-bs-dismiss="modal">
+                    Igen, jelentkezem
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     Mégse
                 </button>
             </div>            
