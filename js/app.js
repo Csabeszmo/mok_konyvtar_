@@ -228,7 +228,17 @@
         };
 
         $scope.registerForEvent = function() {
+
+          http.request({
+            url: './php/registerEvent.php',
+            data: {user_id: $rootScope.user.user_id}
+          })
+          .then(data => {
+            $scope.eventItems = data;
+            $scope.event_id = data.event_id;
+            $scope.$applyAsync();
             alert("Sikeresen jelentkeztél a(z) " + $scope.selectedEvent.name + " eseményre!");
+          })
         };
     }
   ])
