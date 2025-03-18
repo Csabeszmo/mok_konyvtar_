@@ -43,14 +43,11 @@
 				controller: 'booksController'
 			})
       .state('book', {
-				url: '/book',
+        url: '/book/:book_id',
         parent: 'root',
-				templateUrl: './html/book.html',
-				controller: 'bookController',
-        params: {
-          book_id: null
-        }
-			})
+        templateUrl: './html/book.html',
+        controller: 'bookController'
+      })
       .state('events', {
 				url: '/events',
         parent: 'root',
@@ -173,6 +170,7 @@
 
       if (!$stateParams.book_id) {
         console.error('Nem létező könyv azonosító!');
+        $state.go('home');
         return;
       }
 
