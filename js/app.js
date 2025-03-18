@@ -347,51 +347,78 @@
     }
   ])
 
-  //Profile controller
-  .controller('profileController', [
-    '$rootScope', 
-    '$scope', 
-    '$state',
-    'http',
-    'util',
-    function($rootScope, $scope, $state, http, util) {
+  // Profile controller
+.controller('profileController', [
+  '$rootScope', 
+  '$scope', 
+  '$state', 
+  'http', 
+  'util', 
+  function($rootScope, $scope, $state, http, util) {
 
-      $scope.model = util.objMerge({}, $rootScope.user);
+    $scope.model = util.objMerge({}, $rootScope.user);
 
+    // Felhasználó adatainak betöltése
+    http.request({
+      url: './php/profile.php',
+      data: {user_id: $rootScope.user.user_id}
+    })
+    .then(data => {
+      $scope.model = util.objMerge($scope.model, data);
+      $scope.$applyAsync();
+    })
+    .catch(e => alert(e));
+
+    // Felhasználói adat módosítása
+    $scope.update = function(){
       http.request({
-        url: './php/profile.php',
-        data: {user_id: $rootScope.user.user_id}
+        url: './php/update.php',
+        data: util.objFilterByKeys($scope.model, 'email', false)
       })
       .then(data => {
-        $scope.model = util.objMerge($scope.model, data);
-
+        $scope.user = data;
         $scope.$applyAsync();
-      })
-      .catch(e => alert(e));
-      
-      //Felhasználó adatainak módosítása
-      $scope.update = function(){
-        http.request({
-          url: './php/update.php',
-          data: util.objFilterByKeys($scope.model, 'email', false)
-        })
-        .then(data => {
-          $scope.user = data;
-          $scope.$applyAsync();
-          if (confirm("Biztosan végre akarja hajtani a módosításokat")) {
-            alert('Sikeresen módosította adatait!'); 
-          }
-          $state.go('home');
-        })
-        .catch(error => console.log(error));
-      };
-
-      //Visszalépés a főoldalra
-      $scope.cancel = function() {
+        if (confirm("Biztosan végre akarja hajtani a módosításokat?")) {
+          alert('Sikeresen módosította adatait!'); 
+        }
         $state.go('home');
-      };
-    }
-  ])
+      })
+      .catch(error => console.log(error));
+    };
+
+    // Visszalépés a főoldalra
+    $scope.cancel = function() {
+      $state.go('home');
+    };
+
+    // Fiók törlésének kezelése
+    $scope.deleteAccount = function() {
+      // Kérjük be az email címet a törlés megerősítéséhez
+      let email = prompt("Kérjük, írja be az email címét a fiók törléséhez:");
+
+      if (email && email === $scope.model.email) {
+        if (confirm('Biztosan törölni szeretné a fiókját? Ez a művelet nem visszavonható!')) {
+          // Ha az email címek egyeznek és a felhasználó megerősítette a törlést, küldjük a törlés kérést
+          http.request({
+            url: './php/delete_profile.php',
+            method: 'POST',
+            data: {user_id: $rootScope.user.user_id}
+          })
+          .then(response => {
+            if (response.success) {
+              alert('A fiók törlésére sikeresen sor került!');
+              $state.go('home');
+            } else {
+              alert('Hiba történt a fiók törlésénél. Kérem próbálja újra!');
+            }
+          })
+          .catch(e => alert('Hiba történt!'));
+        }
+      } else {
+        alert("Az email címek nem egyeznek. A fiók törlése nem történt meg.");
+      }
+    };
+  }])
 
   //Cart controller
   .controller('cartController', [
