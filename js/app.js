@@ -162,7 +162,7 @@
     }
   ])
 
-  //Book Controller
+  //book Controller
   .controller('bookController', [
     '$scope', 
     '$rootScope',
@@ -172,60 +172,65 @@
     function ($scope, $rootScope, $stateParams, $state, http) {
 
       if (!$stateParams.book_id) {
-        console.log('Nem létező könyv azonosító!');
-        $state.go('home');
+        console.error('Nem létező könyv azonosító!');
+        return;
       }
 
       http.request({
         url: './php/book.php',
-        data: {book_id: $stateParams.book_id}
+        data: { book_id: $stateParams.book_id }
       })
       .then(data => {
         $scope.book = data;
         $scope.$applyAsync();
       })
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
 
-      $scope.addBook = function(){
+      $scope.addBook = function() {
         http.request({
           url: './php/addBook.php',
-          data: {book_id: $stateParams.book_id}
+          data: { book_id: $stateParams.book_id }
         })
         .then(data => {
-          $scope.book = data;
+          alert("Sikeresen kikölcsönözted a könyvet!");
           $scope.$applyAsync();
         })
-      } 
+        .catch(error => console.error(error));
+      };
 
       $scope.showBookModal = function() {
         $scope.$applyAsync();
-
-        if ($rootScope.user && $rootScope.user.user_id) {
-            new bootstrap.Modal(document.getElementById('bookModalLoggedIn')).show();
+        let modalId = $rootScope.user?.user_id ? 'bookModalLoggedIn' : 'eventModalNotLoggedIn';
+        let modalElement = document.getElementById(modalId);
+        if (modalElement) {
+            new bootstrap.Modal(modalElement).show();
         } else {
-            new bootstrap.Modal(document.getElementById('eventModalNotLoggedIn')).show();
+            console.error(`Nem található a modál: ${modalId}`);
         }
-      }
+      };
 
       $scope.showReviewModal = function() {
         $scope.$applyAsync();
-
-        if ($rootScope.user && $rootScope.user.user_id) {
-            new bootstrap.Modal(document.getElementById('reviewModalLoggedIn')).show();
+        let modalId = $rootScope.user?.user_id ? 'reviewModalLoggedIn' : 'eventModalNotLoggedIn';
+        let modalElement = document.getElementById(modalId);
+        if (modalElement) {
+            new bootstrap.Modal(modalElement).show();
         } else {
-            new bootstrap.Modal(document.getElementById('eventModalNotLoggedIn')).show();
+            console.error(`Nem található a modál: ${modalId}`);
         }
-      }
+      };
     }
   ])
 
-  // Events Controller
+  //Events Controller
   .controller('eventsController', [
     '$scope', 
     '$rootScope', 
     '$stateParams',
     'http',
     function($scope, $rootScope, $stateParams, http) {
+        $scope.isLoggedIn = !!$rootScope.user?.user_id;
+
         http.request('./php/events.php')
             .then(data => {
                 $scope.events = data;
@@ -234,38 +239,41 @@
             .catch(error => console.log(error));
 
         $scope.setActiveSlide = function(index) {
-            let carousel = new bootstrap.Carousel(document.getElementById('carouselExample'));
+            let carousel = bootstrap.Carousel.getOrCreateInstance(document.getElementById('carouselExample'));
             carousel.to(index);
         };
 
-        $scope.showEventModal = function() {
+        $scope.showEventModal = function(event) {
+            $scope.selectedEvent = event;
             $scope.$applyAsync();
 
-            if ($rootScope.user && $rootScope.user.user_id) {
-                new bootstrap.Modal(document.getElementById('eventModalLoggedIn')).show();
-            } else {
-                new bootstrap.Modal(document.getElementById('eventModalNotLoggedIn')).show();
+            let modalId = $scope.isLoggedIn ? 'eventModalLoggedIn' : 'eventModalNotLoggedIn';
+            let modalElement = document.getElementById(modalId);
+
+            if (modalElement) {
+                let modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+                modal.show();
             }
         };
 
         $scope.registerForEvent = function(event) {
-          http.request({
-              url: './php/registerEvent.php',
-              data: {
-                  user_id: $rootScope.user.user_id,
-                  event_id: $stateParams.id
-              }
-          })
-          .then(data => {
-              $scope.eventItems = data;
-              $scope.selectedEvent = event;
-              $scope.$applyAsync();
-              alert("Sikeresen jelentkeztél a(z) " + $scope.selectedEvent.name + " eseményre!");
-          })
-        }
+            if (!event) return;
+
+            http.request({
+                url: './php/registerEvent.php',
+                data: {
+                    user_id: $rootScope.user.user_id,
+                    event_id: event.id
+                }
+            })
+            .then(() => {
+                alert("Sikeresen jelentkeztél a(z) " + event.name + " eseményre!");
+            })
+            .catch(error => console.log(error));
+        };
     }
   ])
-  
+
   //Blogmenu Controller
   .controller('blogmenuController', [
     '$scope',
