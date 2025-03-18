@@ -132,6 +132,7 @@
 
         $rootScope.logout = () => {
             if (confirm('Kijelentkezik?')) {
+                $rootScope.user = null;
                 $rootScope.$applyAsync();
                 $state.go('login');
             }
@@ -164,10 +165,11 @@
   //Book Controller
   .controller('bookController', [
     '$scope', 
+    '$rootScope',
     '$stateParams', 
     '$state',
     'http',
-    function ($scope, $stateParams, $state, http) {
+    function ($scope, $rootScope, $stateParams, $state, http) {
 
       if (!$stateParams.book_id) {
         console.log('Nem létező könyv azonosító!');
@@ -194,6 +196,26 @@
           $scope.$applyAsync();
         })
       } 
+
+      $scope.showBookModal = function() {
+        $scope.$applyAsync();
+
+        if ($rootScope.user && $rootScope.user.user_id) {
+            new bootstrap.Modal(document.getElementById('bookModalLoggedIn')).show();
+        } else {
+            new bootstrap.Modal(document.getElementById('eventModalNotLoggedIn')).show();
+        }
+      }
+
+      $scope.showReviewModal = function() {
+        $scope.$applyAsync();
+
+        if ($rootScope.user && $rootScope.user.user_id) {
+            new bootstrap.Modal(document.getElementById('reviewModalLoggedIn')).show();
+        } else {
+            new bootstrap.Modal(document.getElementById('eventModalNotLoggedIn')).show();
+        }
+      }
     }
   ])
 

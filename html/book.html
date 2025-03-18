@@ -79,12 +79,12 @@
         <div class="col">
             <button class="btn btn-brown px-4 py-2 rounded-pill shadow" 
                     data-bs-toggle="modal" data-bs-target="#eventModal" 
-                    ng-click="addBook()">
+                    ng-click="showBookModal(x)">
                 Kölcsönzés
             </button>
             <button class="btn btn-brown px-4 py-2 rounded-pill shadow" 
                     data-bs-toggle="modal" data-bs-target="#eventModal" 
-                    ng-click="addReview()">
+                    ng-click="showReviewModal(x)">
                 Értékeld
             </button>
         </div>
@@ -111,7 +111,7 @@
     </div>
     
     <!-- Kölcsönzés modal -->
-    <div class="modal fade" id="eventModalLoggedIn" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="bookModalLoggedIn" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -123,6 +123,25 @@
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
                     <button class="btn btn-success" ng-click="addBook()" data-bs-dismiss="modal">Igen</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kölcsönzés modal -->
+    <div class="modal fade" id="reviewModalLoggedIn" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Értékelés</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center fw-bold">
+                    Értékeld
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-success" ng-click="addBook()" data-bs-dismiss="modal">Beküldés</button>
                     <button class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
                 </div>
             </div>
