@@ -132,7 +132,6 @@
 
         $rootScope.logout = () => {
             if (confirm('Kijelentkezik?')) {
-                $rootScope.user = null;
                 $rootScope.$applyAsync();
                 $state.go('login');
             }
@@ -202,8 +201,9 @@
   .controller('eventsController', [
     '$scope', 
     '$rootScope', 
+    '$stateParams',
     'http',
-    function($scope, $rootScope, http) {
+    function($scope, $rootScope, $stateParams, http) {
         http.request('./php/events.php')
             .then(data => {
                 $scope.events = data;
@@ -216,8 +216,7 @@
             carousel.to(index);
         };
 
-        $scope.showEventModal = function(event) {
-            $scope.selectedEvent = event;
+        $scope.showEventModal = function() {
             $scope.$applyAsync();
 
             if ($rootScope.user && $rootScope.user.user_id) {
@@ -227,18 +226,19 @@
             }
         };
 
-        $scope.registerForEvent = function(eventId) {
+        $scope.registerForEvent = function(event) {
           http.request({
               url: './php/registerEvent.php',
               data: {
                   user_id: $rootScope.user.user_id,
-                  event_id: eventId
+                  event_id: $stateParams.id
               }
           })
           .then(data => {
               $scope.eventItems = data;
+              $scope.selectedEvent = event;
               $scope.$applyAsync();
-              alert("Sikeresen jelentkeztél a(z) " + $scope.eventId.name + " eseményre!");
+              alert("Sikeresen jelentkeztél a(z) " + $scope.selectedEvent.name + " eseményre!");
           })
         }
     }
@@ -349,77 +349,77 @@
   ])
 
   // Profile controller
-.controller('profileController', [
-  '$rootScope', 
-  '$scope', 
-  '$state', 
-  'http', 
-  'util', 
-  function($rootScope, $scope, $state, http, util) {
-
-    $scope.model = util.objMerge({}, $rootScope.user);
-
-    // Felhasználó adatainak betöltése
-    http.request({
-      url: './php/profile.php',
-      data: {user_id: $rootScope.user.user_id}
-    })
-    .then(data => {
-      $scope.model = util.objMerge($scope.model, data);
-      $scope.$applyAsync();
-    })
-    .catch(e => alert(e));
-
-    // Felhasználói adat módosítása
-    $scope.update = function(){
+  .controller('profileController', [
+    '$rootScope', 
+    '$scope', 
+    '$state', 
+    'http', 
+    'util', 
+    function($rootScope, $scope, $state, http, util) {
+  
+      $scope.model = util.objMerge({}, $rootScope.user);
+  
+      // Felhasználó adatainak betöltése
       http.request({
-        url: './php/update.php',
-        data: util.objFilterByKeys($scope.model, 'email', false)
+        url: './php/profile.php',
+        data: {user_id: $rootScope.user.user_id}
       })
       .then(data => {
-        $scope.user = data;
+        $scope.model = util.objMerge($scope.model, data);
         $scope.$applyAsync();
-        if (confirm("Biztosan végre akarja hajtani a módosításokat?")) {
-          alert('Sikeresen módosította adatait!'); 
-        }
-        $state.go('home');
       })
-      .catch(error => console.log(error));
-    };
-
-    // Visszalépés a főoldalra
-    $scope.cancel = function() {
-      $state.go('home');
-    };
-
-    // Fiók törlésének kezelése
-    $scope.deleteAccount = function() {
-      // Kérjük be az email címet a törlés megerősítéséhez
-      let email = prompt("Kérjük, írja be az email címét a fiók törléséhez:");
-
-      if (email && email === $scope.model.email) {
-        if (confirm('Biztosan törölni szeretné a fiókját? Ez a művelet nem visszavonható!')) {
-          // Ha az email címek egyeznek és a felhasználó megerősítette a törlést, küldjük a törlés kérést
-          http.request({
-            url: './php/delete_profile.php',
-            method: 'POST',
-            data: {user_id: $rootScope.user.user_id}
-          })
-          .then(response => {
-            if (response.success) {
-              alert('A fiók törlésére sikeresen sor került!');
-              $state.go('home');
-            } else {
-              alert('Hiba történt a fiók törlésénél. Kérem próbálja újra!');
-            }
-          })
-          .catch(e => alert('Hiba történt!'));
+      .catch(e => alert(e));
+  
+      // Felhasználói adat módosítása
+      $scope.update = function(){
+        http.request({
+          url: './php/update.php',
+          data: util.objFilterByKeys($scope.model, 'email', false)
+        })
+        .then(data => {
+          $scope.user = data;
+          $scope.$applyAsync();
+          if (confirm("Biztosan végre akarja hajtani a módosításokat?")) {
+            alert('Sikeresen módosította adatait!'); 
+          }
+          $state.go('home');
+        })
+        .catch(error => console.log(error));
+      };
+  
+      // Visszalépés a főoldalra
+      $scope.cancel = function() {
+        $state.go('home');
+      };
+  
+      // Fiók törlésének kezelése
+      $scope.deleteAccount = function() {
+  
+        let email = prompt("Kérjük, írja be az email címét a fiók törléséhez:");
+  
+        if (email && email === $scope.model.email) {
+          if (confirm('Biztosan törölni szeretné a fiókját? Ez a művelet nem visszavonható!')) {
+            http.request({
+              url: './php/delete_profile.php',
+              data: {user_id: $rootScope.user.user_id}
+            })
+            .then(response => {
+              if (response.success) {
+                alert('A fiók törlésére sikeresen sor került!');
+                $rootScope.user = null;
+                $state.go('home');
+              } else {
+                alert('Hiba történt a fiók törlésénél. Kérem próbálja újra!');
+              }
+            })
+            .catch(e => alert(e));
+          }
+        } else {
+          alert("Az email címek nem egyeznek. A fiók törlése nem történt meg.");
         }
-      } else {
-        alert("Az email címek nem egyeznek. A fiók törlése nem történt meg.");
-      }
-    };
-  }])
+      };
+    }
+  ])
 
   //Cart controller
   .controller('cartController', [
