@@ -227,19 +227,20 @@
             }
         };
 
-        $scope.registerForEvent = function() {
-
+        $scope.registerForEvent = function(eventId) {
           http.request({
-            url: './php/registerEvent.php',
-            data: {user_id: $rootScope.user.user_id}
+              url: './php/registerEvent.php',
+              data: {
+                  user_id: $rootScope.user.user_id,
+                  event_id: eventId
+              }
           })
           .then(data => {
-            $scope.eventItems = data;
-            $scope.event_id = data.event_id;
-            $scope.$applyAsync();
-            alert("Sikeresen jelentkeztél a(z) " + $scope.selectedEvent.name + " eseményre!");
+              $scope.eventItems = data;
+              $scope.$applyAsync();
+              alert("Sikeresen jelentkeztél a(z) " + $scope.eventId.name + " eseményre!");
           })
-        };
+        }
     }
   ])
   
