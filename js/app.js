@@ -187,7 +187,10 @@
       $scope.addBook = function() {
         http.request({
           url: './php/addBook.php',
-          data: { book_id: $stateParams.book_id }
+          data: {
+            user_id: $rootScope.user.user_id,
+            book_id: $stateParams.book_id
+          }
         })
         .then(data => {
           alert("Sikeresen kikölcsönözted a könyvet!");
@@ -226,7 +229,7 @@
     '$rootScope', 
     '$stateParams',
     'http',
-    function($scope, $rootScope, $stateParams, http) {
+    function($scope, $rootScope, http) {
         $scope.isLoggedIn = !!$rootScope.user?.user_id;
 
         http.request('./php/events.php')
