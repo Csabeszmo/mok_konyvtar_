@@ -6,7 +6,7 @@ $args = Util::getArgs();
 
 $db = new Database();
 
-$query = "INSERT INTO `event_items`(`user_id`, 
+$query = "INSERT INTO `event_items` (`user_id`, 
                                     `event_id`) 
                             VALUES (:user_id, :event_id)";
 

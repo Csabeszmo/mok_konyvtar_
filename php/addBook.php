@@ -8,23 +8,32 @@ $db = new Database();
 
 $query = "INSERT INTO `cart`
                      (`user_id`) 
-              VALUES (:user_id)";
+              VALUES (?)";
 
-$result['cart'] = $db->execute($query, $args);
+$result = $db->execute($query, $args["user_id"]);
+$cartId = $result['lastInsertId'];
+if (!$cartId)
+      Util::setError("Nem sikerült!");
+
+
 
 $query = "INSERT INTO `cart_items_books`
                      (`cart_id`, 
-                      `book_id`) 
-             VALUES  (:cart_id, :book_id)";
+                      `book_id`,
+                      `db`) 
+             VALUES  (?, ?, ?)";
 
-$result['cart_items_books'] = $db->execute($query, $args);
+$result = $db->execute($query, [$cartId, $args['book_id'], $args['db']]);
+if (!$result['lastInsertId'])
+      Util::setError("Nem sikerült!");
 
-$query = "UPDATE `cart_items_books` SET 
-                 `db`=`db`+1
-           WHERE `user_id` = :user_id;";
 
-$result = $db->execute($query, $args);
+// $query = "UPDATE `cart_items_books` SET 
+//                  `db`=`db`+1
+//            WHERE `user_id` = ?;";
+
+// $result = $db->execute($query, $args['user_id']);
 
 $db = null;
 
-Util::setResponse($result);
+Util::setResponse("Sikerült!");
