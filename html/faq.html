@@ -6,6 +6,7 @@
             </h1>
         </div>
     </div>
+
     <div class="row mt-5 justify-content-center">
         <div class="col-md-8">
             <div class="accordion" 
@@ -14,7 +15,8 @@
                      ng-repeat="item in books">
                     <h2 class="accordion-header" 
                         id="heading{{item.id}}">
-                        <button class="accordion-button collapsed custom-accordion-btn" 
+                        <button class="accordion-button collapsed 
+                                       custom-accordion-btn" 
                                 type="button" 
                                 data-bs-toggle="collapse" 
                                 data-bs-target="#collapse{{item.id}}" 

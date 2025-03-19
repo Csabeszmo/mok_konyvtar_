@@ -6,24 +6,27 @@
                     <div class="card-body bglogin">
                         <div class="row align-items-center">
     
-                            <!-- Kép az űrlap baloldalán -->
+                            <!-- Bal oldali kép -->
                             <div class="col-md-5 text-center text-white p-3 rounded-start">
                                 <img src="./media/image/libraryinterior/booklogin.jpg" 
                                      alt="MOK Könyvtár logó" 
                                      class="img-fluid formUser w-100 h-100">
                             </div>
     
-                            <!-- Űrlap -->
+                            <!-- Jobb oldali űrlap -->
                             <div class="col-md-7 text-black p-4 rounded-end">
+
                                 <!-- Cím -->
                                 <h3 class="card-title text-center fw-bold titleuser">Bejelentkezés</h3>
     
+                                <!-- Form -->
                                 <form name="loginForm" novalidate>
     
                                     <!-- Email -->
                                     <div class="row mb-3 mt-5">
                                         <label for="login-email" 
-                                               class="col-form-label col-12 col-md-5 text-md-end">
+                                               class="col-form-label col-12 
+                                                      col-md-5 text-md-end">
                                             <i class="fa-solid fa-star fa-2xs text-danger"></i>
                                             <i class="fa-solid fa-envelope me-1"></i>
                                             <span class="text-capitalize">Email:</span>
@@ -43,7 +46,8 @@
                                                    ng-disable-space
                                                    ng-clear-icon>
                                         </div>
-                                        <div class="col-1 d-flex align-items-center justify-content-start ps-1">
+                                        <div class="col-1 d-flex align-items-center 
+                                                    justify-content-start ps-1">
                                             <span class="fw-bolder text-success"
                                                   ng-class="{'invisible': loginForm.email.$invalid}">
                                                 &check;
@@ -54,7 +58,8 @@
                                     <!-- Jelszó -->
                                     <div class="row mb-2">
                                         <label for="login-password" 
-                                               class="col-form-label col-12 col-md-5 text-md-end">
+                                               class="col-form-label col-12 
+                                                      col-md-5 text-md-end">
                                             <i class="fa-solid fa-star fa-2xs text-danger"></i>
                                             <i class="fa-solid fa-key me-1"></i>
                                             <span class="text-capitalize">Jelszó:</span>
@@ -84,7 +89,8 @@
                                             <span data-bs-toggle="tooltip"
                                                   data-bs-html="true"
                                                   data-bs-title="&lt;p class='my-1'>6-20 karakter lehetséges&lt;/br>
-                                                        &lt;small>Tartalmazzon nagybetűket, kisbetűket és számokat&lt;/small>&lt;/p>">
+                                                    &lt;small>Tartalmazzon nagybetűket, kisbetűket és számokat
+                                                    &lt;/small>&lt;/p>">
                                                 <i class="fa-solid fa-circle-info text-primary ms-2"></i>
                                             </span>
                                         </div>
@@ -92,7 +98,8 @@
     
                                     <!-- Jelszó megjelenítése/elrejtése -->
                                     <div class="row mb-4">
-                                        <div class="col-form-label d-none d-md-block col-md-5 text-md-end"></div>
+                                        <div class="col-form-label d-none d-md-block 
+                                                    col-md-5 text-md-end">
                                         <div class="col-12 col-md-7">
                                             <input id="login-showPassword"
                                                    class="form-check-input"
@@ -106,15 +113,21 @@
                                         </div>
                                     </div>
     
-                                    <!-- Bejelentkezés gomb -->
+                                    <!-- Gombok -->
                                     <div class="row justify-content-end">
+
+                                        <!-- Mégsem gomb -->
                                         <button type="button"
-                                                    class="btn btn-danger w-auto px-5 me-3 text-capitalize mt-3"
+                                                    class="btn btn-danger w-auto px-5 
+                                                           me-3 text-capitalize mt-3"
                                                     ng-click="cancel()">
                                                 Mégsem
                                         </button>
+
+                                        <!-- Bejelentkezés gomb -->
                                         <button type="button"
-                                                class="btn btn-brown w-auto px-5 me-3 text-capitalize mt-3"
+                                                class="btn btn-brown w-auto px-5 
+                                                       me-3 text-capitalize mt-3"
                                                 ng-disabled="loginForm.$invalid"
                                                 ng-click="login()">
                                                 Bejelentkezés

@@ -25,8 +25,9 @@
 
     <div class="row mt-4 justify-content-center">
 
-        <!-- Cards -->
-        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 mb-4 d-flex" 
+        <!-- Kártyák címe és leírása -->
+        <div class="col-12 col-sm-10 col-md-8 
+                    col-lg-6 col-xl-6 mb-4 d-flex" 
              ng-repeat="x in blog">
             <div class="card border-rounded">
                 <img ng-src="./media/image/blogs/{{x.image_url}}" 
@@ -41,7 +42,8 @@
                     </p>
                 </div>
                 <div class="card-footer bg-gradient shadow-lg">
-                    <a class="btn btn-brown px-4 py-2 rounded-pill shadow"
+                    <a class="btn btn-brown px-4 
+                              py-2 rounded-pill shadow"
                        data-bs-toggle="modal" 
                        ng-attr-data-bs-target="#description_modal"
                        ng-click="showDescription(x.id)">
@@ -58,14 +60,14 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
 
-                    <!-- Modal Header -->
+                    <!-- Cím -->
                     <div class="modal-header bg-gradient shadow-lg">
                         <h3 class="modal-title justify-content-center">
                             {{selectedBlog.name}}
                         </h3>
                     </div>
 
-                    <!-- Modal Body -->
+                    <!-- Bővebb leírások -->
                     <div class="modal-body">
                         <div class="carousel">
                             <div class="carousel-inner">
@@ -103,7 +105,7 @@
                         </div>
                     </div>
 
-                    <!-- Modal Footer -->
+                    <!-- Bezárás -->
                     <div class="modal-footer bg-gradient shadow-lg">
                         <button type="button" 
                                 class="btn btn-danger px-4 py-2 rounded-pill shadow" 
