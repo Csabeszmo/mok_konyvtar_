@@ -61,24 +61,6 @@
                 </li>
             </ul>
 
-            <!-- Keresősáv -->
-            <form name="searchForm" 
-                  class="d-flex me-3">
-                <input class="form-control form-control-sm me-2 border-0 shadow-sm" 
-                       type="search" 
-                       placeholder="Keresés..." 
-                       aria-label="Search"
-                       autocomplete="off"
-                       ng-model="model.search"
-                       required>
-                <button class="btn btn-outline-light btn-sm" 
-                        type="submit"
-                        ng-disabled="searchForm.$invalid"
-                        ng-click="methods.search()">
-                    <i class="fa-solid fa-search"></i>
-                </button>
-            </form>
-
             <!-- Nyelvváltó -->
             <button class="btn btn-outline-light me-3">
                 <img ng-src="{{ currentLanguage === 'hu' ? '../../common/media/image/countries/hun.png' : '../../common/media/image/countries/gbr.png' }}" 
