@@ -227,7 +227,6 @@
   .controller('eventsController', [
     '$scope', 
     '$rootScope', 
-    '$stateParams',
     'http',
     function($scope, $rootScope, http) {
         $scope.isLoggedIn = !!$rootScope.user?.user_id;
