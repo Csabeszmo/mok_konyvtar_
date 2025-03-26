@@ -12,9 +12,9 @@ $query = "INSERT INTO `cart`
 
 $result = $db->execute($query, $args["user_id"]);
 $cartId = $result['lastInsertId'];
-if (!$cartId)
+if (!$cartId){
       Util::setError("Nem sikerült!");
-
+}
 
 
 $query = "INSERT INTO `cart_items_books`
@@ -24,16 +24,10 @@ $query = "INSERT INTO `cart_items_books`
              VALUES  (?, ?, ?)";
 
 $result = $db->execute($query, [$cartId, $args['book_id'], $args['db']]);
-if (!$result['lastInsertId'])
+
+if (!$result['lastInsertId']){
       Util::setError("Nem sikerült!");
-
-
-// $query = "UPDATE `cart_items_books` SET 
-//                  `db`=`db`+1
-//            WHERE `user_id` = ?;";
-
-// $result = $db->execute($query, $args['user_id']);
-
+}
 $db = null;
 
 Util::setResponse("Sikerült!");

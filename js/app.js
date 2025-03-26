@@ -189,12 +189,12 @@
           url: './php/addBook.php',
           data: {
             user_id: $rootScope.user.user_id,
-            book_id: $stateParams.book_id
+            book_id: $stateParams.book_id,
+                 db: $scope.model.amount
           }
         })
         .then(data => {
           alert("Sikeresen kikölcsönözted a könyvet!");
-          $scope.$applyAsync();
         })
         .catch(error => console.error(error));
       };
