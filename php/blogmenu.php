@@ -2,7 +2,7 @@
 
 require_once("../../common/php/environment.php");
 
-$db = new Database;
+$db = new Database();
 
 $query= "SELECT `id`,
                 `name`, 
