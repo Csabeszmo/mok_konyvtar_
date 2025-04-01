@@ -6,28 +6,29 @@ $args = Util::getArgs();
 
 $db = new Database();
 
-$query = "INSERT INTO `cart`
-                     (`user_id`) 
-              VALUES (?)";
+$query = "INSERT INTO `cart_items_books`
+                     (`user_id`, 
+                      `book_id`,
+                      `db`,
+                      `return_date`) 
+             VALUES  (:user_id, :book_id, :db, :return_date)";
 
-$result = $db->execute($query, $args["user_id"]);
-$cartId = $result['lastInsertId'];
-if (!$cartId){
-      Util::setError("Nem sikerült!");
-}
+$result = $db->execute($query, [$args['user_id'], $args['book_id'], $args['db'], $args['return_date']]);
 
+/*
+$today = strtotime(getdate());
+$final = date("Y-m-d", strtotime("+1 month", $today));
 
 $query = "INSERT INTO `cart_items_books`
-                     (`cart_id`, 
-                      `book_id`,
-                      `db`) 
-             VALUES  (?, ?, ?)";
+                     (`return_date`) 
+             VALUES  ($final)";
 
-$result = $db->execute($query, [$cartId, $args['book_id'], $args['db']]);
+$result = $db->execute($query, $args['return_date']);
+*/
 
 if (!$result['lastInsertId']){
-      Util::setError("Nem sikerült!");
+      Util::setError("Nem sikerült a könyv kosárba helyezése!");
 }
 $db = null;
 
-Util::setResponse("Sikerült!");
+Util::setResponse("A könyv kosárba helyezése sikerült!");

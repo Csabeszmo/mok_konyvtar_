@@ -188,9 +188,10 @@
         http.request({
           url: './php/addBook.php',
           data: {
-            user_id: $rootScope.user.user_id,
-            book_id: $stateParams.book_id,
-                 db: $scope.model.amount
+                user_id: $rootScope.user.user_id,
+                book_id: $stateParams.book_id,
+                     db: $scope.model.amount,
+            return_date: $scope.model.return
           }
         })
         .then(data => {

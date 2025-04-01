@@ -8,16 +8,17 @@ $args = Util::getArgs();
 
 $db = new Database();
 
-/*
-$query= "SELECT `id` FROM `users` WHERE `email` = ?";
+$query= "SELECT `user_id` 
+           FROM `users` 
+          WHERE `email` = ?
+          LIMIT 1;";
 
-$result = $db->execute($query, [$args['email']]);
+$result = $db->execute($query, $args['email']);
 
-if ($result) {
+if (!is_null($result)) {
+    $db = null;
     Util::setError('A felhasználó ezen az email címen már létezik!');
 }
-
-*/
 
 $query= "INSERT INTO `users` 
                     (`last_name`,
@@ -30,5 +31,9 @@ $query= "INSERT INTO `users`
 $result = $db->execute($query, array_values($args));
 
 $db = null;
+
+if(!$result['affectedRows']){
+    Util::setError("Nem működik a regisztráció!");
+}
 
 Util::setResponse($result);
