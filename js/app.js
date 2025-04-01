@@ -468,6 +468,14 @@
       })
       .catch(error => console.log(error));
 
+      $scope.deleteCart = () => {
+        console.log("Delete Cart...");
+      }
+
+      $scope.rentBook = function(){
+        console.log('Rent Book...');
+      }
+
       //Visszalépés a főoldalra
       $scope.cancel = function() {
         $state.go('home');
