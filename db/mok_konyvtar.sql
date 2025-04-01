@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 18. 11:51
+-- Létrehozás ideje: 2025. Ápr 01. 11:42
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.1.17
 
@@ -179,55 +179,30 @@ INSERT INTO `books` (`book_id`, `author_id`, `title`, `translator`, `publisher`,
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `cart`
---
-
-CREATE TABLE `cart` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `start_date` date NOT NULL DEFAULT current_timestamp(),
-  `return_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- A tábla adatainak kiíratása `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `start_date`, `return_date`) VALUES
-(1, 1, '2025-03-04', '2025-03-28'),
-(2, 2, '2025-03-11', '2025-04-17');
-
--- --------------------------------------------------------
-
---
 -- Tábla szerkezet ehhez a táblához `cart_items_books`
 --
 
 CREATE TABLE `cart_items_books` (
   `id` int(11) NOT NULL,
-  `cart_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `book_id` int(11) NOT NULL,
   `db` int(2) NOT NULL,
-  `return_status` tinyint(1) NOT NULL DEFAULT 0
+  `start_date` date NOT NULL DEFAULT current_timestamp(),
+  `return_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `cart_items_books`
 --
 
-INSERT INTO `cart_items_books` (`id`, `cart_id`, `book_id`, `db`, `return_status`) VALUES
-(1, 1, 12, 2, 0),
-(2, 1, 13, 2, 0),
-(3, 1, 9, 3, 0),
-(4, 1, 19, 4, 0),
-(5, 2, 1, 4, 0),
-(6, 2, 2, 4, 0),
-(7, 2, 3, 4, 0),
-(8, 2, 4, 4, 0),
-(9, 2, 5, 4, 0),
-(10, 2, 6, 4, 0),
-(11, 2, 7, 4, 0),
-(12, 2, 16, 2, 0);
+INSERT INTO `cart_items_books` (`id`, `user_id`, `book_id`, `db`, `start_date`, `return_date`) VALUES
+(17, 5, 8, 3, '2025-04-01', '0000-00-00'),
+(18, 1, 11, 3, '2025-04-01', '0000-00-00'),
+(19, 1, 1, 3, '2025-04-01', '0000-00-00'),
+(20, 1, 11, 3, '2025-04-01', '0000-00-00'),
+(21, 1, 11, 3, '2025-04-01', '0000-00-00'),
+(22, 1, 12, 1, '2025-04-01', '2025-04-23'),
+(23, 1, 13, 1, '2025-04-01', '2025-04-24');
 
 -- --------------------------------------------------------
 
@@ -296,7 +271,8 @@ CREATE TABLE `event_items` (
 --
 
 INSERT INTO `event_items` (`id`, `user_id`, `event_id`) VALUES
-(3, 1, 3);
+(3, 1, 3),
+(4, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -414,18 +390,12 @@ ALTER TABLE `books`
   ADD KEY `categories_id` (`categories_id`);
 
 --
--- A tábla indexei `cart`
---
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- A tábla indexei `cart_items_books`
 --
 ALTER TABLE `cart_items_books`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `book_id` (`book_id`,`cart_id`);
+  ADD KEY `book_id` (`book_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- A tábla indexei `categories`
@@ -500,16 +470,10 @@ ALTER TABLE `books`
   MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT a táblához `cart`
---
-ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT a táblához `cart_items_books`
 --
 ALTER TABLE `cart_items_books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT a táblához `categories`
@@ -527,7 +491,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT a táblához `event_items`
 --
 ALTER TABLE `event_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `faq`
@@ -545,7 +509,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
