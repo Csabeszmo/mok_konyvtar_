@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Ápr 01. 11:42
+-- Létrehozás ideje: 2025. Ápr 02. 09:13
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.1.17
 
@@ -196,7 +196,6 @@ CREATE TABLE `cart_items_books` (
 --
 
 INSERT INTO `cart_items_books` (`id`, `user_id`, `book_id`, `db`, `start_date`, `return_date`) VALUES
-(17, 5, 8, 3, '2025-04-01', '0000-00-00'),
 (18, 1, 11, 3, '2025-04-01', '0000-00-00'),
 (19, 1, 1, 3, '2025-04-01', '0000-00-00'),
 (20, 1, 11, 3, '2025-04-01', '0000-00-00'),
@@ -277,31 +276,20 @@ INSERT INTO `event_items` (`id`, `user_id`, `event_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `expired_books`
---
-
-CREATE TABLE `expired_books` (
-  `book_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Tábla szerkezet ehhez a táblához `faq`
 --
 
 CREATE TABLE `faq` (
   `id` int(11) NOT NULL,
-  `kerdes` varchar(300) NOT NULL,
-  `valasz` varchar(300) NOT NULL
+  `question` varchar(300) NOT NULL,
+  `answer` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `faq`
 --
 
-INSERT INTO `faq` (`id`, `kerdes`, `valasz`) VALUES
+INSERT INTO `faq` (`id`, `question`, `answer`) VALUES
 (1, 'Mi a MOK Könyvtár?', 'A MOK Könyvtár egy nyilvános könyvtár, amely széles könyvkínálattal, kutatási lehetőségekkel és közösségi programokkal várja az olvasókat.'),
 (2, 'Hol található a MOK Könyvtár?', 'A pontos címünk: Makó, Kossuth u. 33, 6900. Könnyen megközelíthető tömegközlekedéssel és autóval is.'),
 (3, 'Hogyan lehet beiratkozni a MOK Könyvtárba?', 'A könyvtárban a pultos kollégák segítségével vagy a weboldalon lehet regisztrálni.'),
@@ -414,12 +402,6 @@ ALTER TABLE `events`
 --
 ALTER TABLE `event_items`
   ADD PRIMARY KEY (`id`);
-
---
--- A tábla indexei `expired_books`
---
-ALTER TABLE `expired_books`
-  ADD PRIMARY KEY (`book_id`,`user_id`);
 
 --
 -- A tábla indexei `faq`
