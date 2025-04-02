@@ -7,8 +7,8 @@ require_once("../../common/php/environment.php");
 $db = new Database();
 
 $query = "SELECT `id`, 
-                 `kerdes`, 
-                 `valasz` 
+                 `question`, 
+                 `answer` 
             FROM `faq`";
 
 $result = $db->execute($query);
