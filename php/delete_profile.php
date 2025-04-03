@@ -5,7 +5,7 @@ require_once('../../common/php/environment.php');
 $args = Util::getArgs();
 
 if (empty($args['user_id'])) {
-    Util::setResponse(['error' => 'User ID missing.'], 400);
+    Util::setError('User ID missing.');
     exit();
 }
 
@@ -18,7 +18,7 @@ $result = $db->execute($query, $args);
 $db = null;
 
 if ($result) {
-    Util::setResponse(['success' => true]);
+    Util::setResponse('Törlés sikeres.');
 } else {
-    Util::setResponse(['success' => false, 'error' => 'Törlés sikertelen.'], 500);
+    Util::setResponse('Törlés sikertelen.');
 }

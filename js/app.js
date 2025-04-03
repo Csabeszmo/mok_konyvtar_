@@ -470,10 +470,7 @@
       .catch(error => console.log(error));
 
       $scope.deleteCart = () => {
-        
-        let email = prompt("Kérjük, írja be az email címét a kosár törléséhez:");
-  
-        if (email && email === $scope.model.email) {
+
           if (confirm('Biztosan törölni szeretné a kosarát? Ez a művelet nem visszavonható!')) {
             http.request({
               url: './php/deleteCart.php',
@@ -489,9 +486,6 @@
             })
             .catch(error => alert(error));
           }
-        } else {
-          alert("Az email címek nem egyeznek. A kosár kiürítése nem történt meg.");
-        }
       }
 
       $scope.rentBook = function(){
