@@ -233,7 +233,7 @@
     </div>
 </div>
 
-<!-- Értékelés modal -->
+<!-- Értékelés Modal -->
 <div class="modal fade" 
      id="reviewModalLoggedIn" 
      tabindex="-1" 
@@ -241,9 +241,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">
-                    Értékelés
-                </h5>
+                <h5 class="modal-title">Értékelés</h5>
                 <button type="button" 
                         class="btn-close" 
                         data-bs-dismiss="modal">
@@ -252,11 +250,21 @@
             <div class="modal-body text-center fw-bold">
                 Írd le a véleményed a könyvről!
             </div>
+            <div class="modal-body d-flex justify-content-center">
+                <div class="d-flex flex-row-reverse">
+                    <button ng-repeat="star in [1,2,3,4,5] track by $index" 
+                            class="star-btn"
+                            ng-class="{'active': 5 - $index <= rating}"
+                            ng-click="setRating(5 - $index)">
+                        ★
+                    </button>
+                </div>
+            </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-success" 
                         ng-click="submitReview()" 
                         data-bs-dismiss="modal">
-                        Beküldés
+                    Beküldés
                 </button>
                 <button class="btn btn-secondary" 
                         data-bs-dismiss="modal">
