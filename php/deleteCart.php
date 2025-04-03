@@ -6,9 +6,10 @@ $args = Util::getArgs();
 
 $db = new Database();
 
-$query = "";
+$query = "DELETE FROM `cart_items_books` 
+                WHERE `user_id` = :user_id;";
 
-$result = $db->execute();
+$result = $db->execute($query, $args);
 
 $db = null;
 
