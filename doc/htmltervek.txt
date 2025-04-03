@@ -28,3 +28,8 @@ Ha van idő:
 
 Ami még kell de nem programozás:
 Közösségi oldalak és az email cím létrehozása.
+
+
+2025.04.03.: labeleket for-ral hozzákapcsolni az inputokhoz
+modalhide-ok amik az app.common.jsből odrys
+php deleteprofil nagyon rossz!
