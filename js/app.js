@@ -461,7 +461,8 @@
     function($rootScope, $scope, http, $state){
       http.request({
         url: './php/cart.php',
-        data: {user_id: $rootScope.user.user_id}})
+        data: {user_id: $rootScope.user.user_id}
+      })
       .then(data => {
         $scope.carts = data;
         $scope.$applyAsync();
@@ -469,7 +470,28 @@
       .catch(error => console.log(error));
 
       $scope.deleteCart = () => {
-        console.log("Delete Cart...");
+        
+        let email = prompt("Kérjük, írja be az email címét a kosár törléséhez:");
+  
+        if (email && email === $scope.model.email) {
+          if (confirm('Biztosan törölni szeretné a kosarát? Ez a művelet nem visszavonható!')) {
+            http.request({
+              url: './php/deleteCart.php',
+              data: {user_id: $rootScope.user.user_id}
+            })
+            .then(response => {
+              if (response.success) {
+                alert('A sikeresen törölte a kosár tartalmát!');
+                $state.go('home');
+              } else {
+                alert('Hiba történt a kosár kiürítésénél. Kérem próbálja újra!');
+              }
+            })
+            .catch(error => alert(error));
+          }
+        } else {
+          alert("Az email címek nem egyeznek. A kosár kiürítése nem történt meg.");
+        }
       }
 
       $scope.rentBook = function(){
