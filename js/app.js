@@ -198,6 +198,12 @@
         .catch(error => console.error(error));
       };
 
+      $scope.submitReview = function() {
+        http.request({
+          url:'./php',
+        })
+      }
+
       $scope.showBookModal = function() {
         $scope.$applyAsync();
         let modalId = $rootScope.user?.user_id ? 'bookModalLoggedIn' : 'eventModalNotLoggedIn';
@@ -489,10 +495,11 @@
 
       $scope.rentBook = function(){
         http.request({
-          url: './rentBook.php',
+          url: './php/rentBook.php',
           data: $rootScope.user.user_id})
         .then(response => {
           $scope.data = response;
+          alert('Kölcsönzés adatai:'+'')
           $scope.$applyAsync(); 
           $state.go('allinfo');
         })
