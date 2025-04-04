@@ -89,6 +89,12 @@
         parent: 'root',
 				templateUrl: './html/faq.html',
 				controller: 'faqController'
+			})
+      .state('allinfo', {
+				url: '/allinfo',
+        parent: 'root',
+				templateUrl: './html/allinfo.html',
+				controller: 'allinfoController'
 			});
       
       $urlRouterProvider.otherwise('/');
@@ -113,19 +119,6 @@
             let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
         });
-
-        /*
-        $rootScope.searchBook = () => {
-            $rootScope.search = $stateParams.data;
-            if ($rootScope.search) {
-                $state.go('book');
-                return;
-
-            } else {
-                $state.go('home');
-            }
-        } 
-        */
 
         $rootScope.logout = () => {
             if (confirm('Kijelentkezik?')) {
@@ -489,7 +482,7 @@
       }
 
       $scope.rentBook = function(){
-        console.log('Rent Book...');
+        $state.go('allInfo');
       }
 
       //Visszalépés a főoldalra
@@ -526,6 +519,14 @@
         $scope.$applyAsync();
       })
       .catch(error => console.log(error));
+    }
+  ])
+
+  .controller('allinfoController', [
+    '$scope',
+    'http',
+    function($scope, http){
+      console.log('All Info Controller...');
     }
   ])
 
