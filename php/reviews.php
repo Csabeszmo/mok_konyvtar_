@@ -2,24 +2,19 @@
 
 declare(strict_types=1);
 
-require_once('./environment.php');
+require_once("../../common/php/environment.php");
+
+$args = Util::setArgs();
 
 $db = new Database();
 
-$query= "SELECT `users`.`first_name`,
-                `users`.`last_name`,
-                `books`.`title`,
-                `rating`,
-                `reviews`.`review_text`, 
-                `reviews`.`review_date` 
-           FROM `reviews` 
-     INNER JOIN `users` 
-             ON `reviews`.`user_id` = `users`.`user_id` 
-     INNER JOIN `books` 
-             ON `reviews`.`book_id` = `books`.`book_id` 
-          WHERE `reviews`.`book_id` = ':review_id'";
+$query= "INSERT INTO `reviews` 
+                    (`user_id`, 
+                     `book_id`, 
+                     `rating`) 
+             VALUES (?,?,?)";
 
-$result = $db->execute($query);
+$result = $db->execute($query, array_values($args));
 
 $db = null;
 
