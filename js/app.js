@@ -488,7 +488,15 @@
       }
 
       $scope.rentBook = function(){
-        $state.go('allInfo');
+        http.request({
+          url: './rentBook.php',
+          data: $rootScope.user.user_id})
+        .then(response => {
+          $scope.data = response;
+          $scope.$applyAsync(); 
+          $state.go('allinfo');
+        })
+        .catch(error => alert(error));
       }
 
       //Visszalépés a főoldalra
