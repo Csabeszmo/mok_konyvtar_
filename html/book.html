@@ -259,6 +259,7 @@
                 <div class="d-flex flex-row-reverse">
                     <button ng-repeat="star in [1,2,3,4,5] track by $index" 
                             class="star-btn"
+                            ng-model="model.rating"
                             ng-class="{'active': 5 - $index <= rating}"
                             ng-click="setRating(5 - $index)">
                         ★

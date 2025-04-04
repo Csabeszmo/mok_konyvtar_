@@ -200,8 +200,18 @@
 
       $scope.submitReview = function() {
         http.request({
-          url:'./php',
+          url:'./php/reviews.php',
+          data: {
+                user_id: $rootScope.user.user_id,
+                book_id: $stateParams.book_id,
+                rating: $scope.model.rating
+              }
         })
+        .then(response => {
+          $scope.review = response;
+          $scope.$applyAsync();
+        })
+        .catch(error => alert(error));
       }
 
       $scope.showBookModal = function() {
