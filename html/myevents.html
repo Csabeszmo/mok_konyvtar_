@@ -1,0 +1,236 @@
+<div class="profilepic"></div>
+    <div class="container-fluid  justify-content-center align-items-center">
+        <div class="row mt-5 mb-3 justify-content-center">
+            <div class="col-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 mt-5 mb-3">
+                <div class="card border-5 loginborder shadow-sm">
+                    <div class="card-body bglogin text-center">
+                        <div class="row g-0">
+                            <!-- Űrlap -->
+                            <div class="col-md-7 text-black p-4 mx-auto">
+
+                                <!-- Cím -->
+                                <h3 class="card-title fw-bold titleuser mb-3">Felhasználó adatai:</h3>
+    
+                                <!-- Email -->
+                                <div class="row mb-3">
+                                    <label for="profile-email" 
+                                           class="col-form-label col-12 
+                                                  col-md-4 text-md-end">
+                                        <i class="fa-solid fa-envelope me-1 titleuser"></i>
+                                        <span class="text-capitalize">
+                                            email:
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="profile-email"
+                                               class="form-control"
+                                               name="email" 
+                                               type="text"
+                                               placeholder="email..."
+                                               spellcheck="false" 
+                                               autocomplete="off"
+                                               maxlength="100"
+                                               ng-model="model.email"
+                                               disabled>
+                                    </div>
+                                </div>
+                                
+                                <!-- Vezetéknév -->
+                                <div class="row mb-3 align-items-center g-3">
+                                    <label for="profile-last_name" 
+                                           class="col-md-4 col-form-label text-md-end">
+                                        <i class="fa-solid fa-user fa-2xl me-1 titleuser"></i>
+                                        <span class="text-capitalize">
+                                            vezetéknév:
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="profile-last_name" 
+                                               class="form-control" 
+                                               name="last_name" 
+                                               type="text"
+                                               placeholder="vezetéknév..."
+                                               spellcheck="false"
+                                               autocomplete="off" 
+                                               maxlength="100"
+                                               ng-model="model.last_name"
+                                               ng-clear-icon>
+                                    </div>
+                                </div>
+        
+                                <!-- Keresztnév -->
+                                <div class="row mb-3 align-items-center g-3">
+                                    <label for="profile-first_name" 
+                                           class="col-md-4 col-form-label text-md-end">
+                                        <span class="text-capitalize">
+                                            keresztnév:
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="profile-first_name"
+                                               class="form-control"
+                                               name="first_name" 
+                                               type="text"
+                                               placeholder="keresztnév..."
+                                               spellcheck="false" 
+                                               autocomplete="off" 
+                                               maxlength="100"
+                                               ng-model="model.first_name"
+                                               ng-clear-icon>
+                                    </div>
+                                </div>
+        
+                                <!-- Utónév -->
+                                <div class="row mb-3 align-items-center g-3">
+                                    <label for="profile-middle_name" 
+                                           class="col-md-4 col-form-label text-md-end">
+                                        <span class="text-capitalize">
+                                            utónév:
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="profile-middle_name"
+                                               class="form-control"
+                                               name="middle_name" 
+                                               type="text"
+                                               placeholder="utónév..."
+                                               spellcheck="false" 
+                                               autocomplete="off" 
+                                               maxlength="100"
+                                               ng-model="model.middle_name"
+                                               ng-clear-icon>
+                                    </div>
+                                </div>
+        
+                                <!-- Telefonszám -->
+                                <div class="row mb-3 align-items-center g-3">
+                                    <label for="profile-phone" 
+                                           class="col-md-4 col-form-label text-md-end">
+                                        <i class="fa-solid fa-mobile-screen me-1 titleuser"></i>
+                                        <span class="text-capitalize">
+                                            telefonszám:
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="profile-phone"
+                                               class="form-control"
+                                               name="phone" 
+                                               type="tel"
+                                               placeholder="telefonszám...(+36)"
+                                               spellcheck="false" 
+                                               autocomplete="off"
+                                               maxlength="8"
+                                               ng-model="model.phone"
+                                               ng-pattern="/^$|^(?!(0))[0-9]{7,10}$/"
+                                               ng-allow-numbers
+                                               ng-clear-icon>
+                                    </div>
+                                </div>
+        
+                                <!-- Város -->
+                                <div class="row mb-3 align-items-center g-3">
+                                    <label for="profile-city" 
+                                           class="col-md-4 col-form-label text-md-end">
+                                        <i class="fa-solid fa-city me-1 titleuser"></i>
+                                        <span class="text-capitalize">
+                                            város:
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="profile-city"
+                                               class="form-control"
+                                               name="city"
+                                               type="text"
+                                               placeholder="város..."
+                                               spellcheck="false"
+                                               autocomplete="off"
+                                               maxlength="100"
+                                               ng-model="model.city"
+                                               ng-clear-icon>
+                                    </div>
+                                </div>
+        
+                                <!-- Irányítószám -->
+                                <div class="row mb-3 align-items-center g-3">
+                                    <label for="profile-postcode" 
+                                           class="col-md-4 col-form-label text-md-end">
+                                        <i class="fa-solid fa-list-ol me-1 titleuser"></i>
+                                        <span class="text-capitalize">
+                                            irányítószám:
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input id="profile-postcode"
+                                               class="form-control"
+                                               name="postalcode" 
+                                               type="text"
+                                               placeholder="postacím..."
+                                               spellcheck="false" 
+                                               autocomplete="off"
+                                               maxlength="4"
+                                               ng-model="model.postalcode"
+                                               ng-clear-icon>
+                                    </div>
+                                </div>
+        
+                                <!-- Lakcím -->
+                                <div class="row mb-3 align-items-center g-3">
+                                    <label for="profile-address" 
+                                           class="col-md-4 col-form-label text-md-end">
+                                        <i class="fa-solid fa-location-dot me-1 titleuser"></i>
+                                        <span class="text-capitalize">
+                                            lakcím:
+                                        </span>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <textarea id="profile-address"
+                                                  class="form-control"
+                                                  name="address"
+                                                  placeholder="lakcím..."
+                                                  spellcheck="false" 
+                                                  autocomplete="off"
+                                                  rows="2"
+                                                  ng-model="model.address"
+                                                  ng-clear-icon>
+                                        </textarea>
+                                    </div>
+                                </div>
+        
+                                <!-- Gombok -->
+                                <div class="row mb-3 justify-content-end">
+                                    <hr>
+                                    <!-- Törlés gomb -->
+                                    <div class="col-md-auto">
+                                        <button type="button" 
+                                                class="btn btn-danger w-auto mt-3"
+                                                ng-click="deleteAccount()">
+                                                Fiók törlése
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Mégsem gomb -->
+                                    <div class="col-md-auto">
+                                        <button type="button" 
+                                                class="btn btn-danger w-auto mt-3"
+                                                ng-click="cancel()">
+                                                Mégsem
+                                        </button>
+                                    </div>
+
+                                    <!-- Mentés gomb -->
+                                    <div class="col-md-auto">
+                                        <button type="button" 
+                                                class="btn btn-brown w-auto mt-3"
+                                                ng-click="update()">
+                                                Mentés
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

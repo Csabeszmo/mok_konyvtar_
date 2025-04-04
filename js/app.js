@@ -360,7 +360,6 @@
           .then(data => {
             $rootScope.user = data;
             $rootScope.user.email = $scope.model.email;
-            util.localStorage('set', 'mok_user', JSON.stringify($rootScope.user));
             util.localStorage('set', 'mok_user_email', $rootScope.user.email);
             util.localStorage('set', 'mok_user_last_name', $rootScope.user.last_name);
             util.localStorage('set', 'mok_user_first_name', $rootScope.user.first_name);
