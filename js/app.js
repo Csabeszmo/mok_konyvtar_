@@ -105,10 +105,14 @@
   .run([
     '$rootScope',
     '$state',
-    '$stateParams',
-    function($rootScope, $state, $stateParams) {
-
-        $rootScope.user = { user_id: null };
+    'util',
+    function($rootScope, $state, util) {
+        let savedUser = util.localStorage('get', 'mok_user');
+        if (savedUser) {
+            $rootScope.user = JSON.parse(savedUser); 
+        } else {
+            $rootScope.user = { user_id: null };
+        }
 
         document.addEventListener("DOMContentLoaded", function() {
             let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -123,6 +127,7 @@
         $rootScope.logout = () => {
             if (confirm('Kijelentkezik?')) {
                 $rootScope.user = null;
+                util.localStorage('remove', 'mok_user');
                 $rootScope.$applyAsync();
                 $state.go('login');
             }
@@ -317,6 +322,7 @@
           })
           .then(data => {
             $rootScope.user = data;
+            util.localStorage('set', 'mok_user', JSON.stringify($rootScope.user)); // Felhasználó mentése
             $rootScope.user.email = $scope.model.email;
             util.localStorage('set', 'mok_user_email', $rootScope.user.email);
             $rootScope.$applyAsync();
@@ -326,14 +332,13 @@
           .catch(e => alert(e));
         };
 
-        //Visszalépés a főoldalra
         $scope.cancel = function() {
             $state.go('home');
         };
     }
   ])
 
-  //Register Controller
+  //registerController
   .controller('registerController', [
     '$rootScope',
     '$scope', 
@@ -355,9 +360,10 @@
           .then(data => {
             $rootScope.user = data;
             $rootScope.user.email = $scope.model.email;
+            util.localStorage('set', 'mok_user', JSON.stringify($rootScope.user));
             util.localStorage('set', 'mok_user_email', $rootScope.user.email);
-            util.localStorage('set', 'mok_user_last_name', $rootScope.user.email);
-            util.localStorage('set', 'mok_user_first_name', $rootScope.user.email);
+            util.localStorage('set', 'mok_user_last_name', $rootScope.user.last_name);
+            util.localStorage('set', 'mok_user_first_name', $rootScope.user.first_name);
             $rootScope.$applyAsync();
             alert('Sikeres regsiztráció!');
             $state.go('login');
