@@ -30,6 +30,6 @@ Ami még kell de nem programozás:
 Közösségi oldalak és az email cím létrehozása.
 
 
-2025.04.03.: labeleket for-ral hozzákapcsolni az inputokhoz
+2025.04.03.: 
 modalhide-ok amik az app.common.jsből odrys
 php deleteprofil nagyon rossz!
