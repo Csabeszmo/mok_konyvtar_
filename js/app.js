@@ -508,8 +508,10 @@
           data: $rootScope.user.user_id})
         .then(response => {
           $scope.data = response;
-          alert('Kölcsönzés adatai:'+'')
-          $scope.$applyAsync(); 
+          if (confirm('Biztosan szeretné kikölcsönözni ezeket a könyveket?')) {
+            alert('Sikeresen kikölcsönözte a könyveket!\n Köszönjük, hogy minket választott és jó olvasást kívánunk!');
+            $scope.$applyAsync();  
+          }
           $state.go('allinfo');
         })
         .catch(error => alert(error));
