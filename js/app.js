@@ -84,6 +84,12 @@
 				templateUrl: './html/myrents.html',
 				controller: 'myrentsController'
 			})
+      .state('myevents', {
+				url: '/myevents',
+        parent: 'root',
+				templateUrl: './html/myevents.html',
+				controller: 'myeventsController'
+			})
       .state('faq', {
 				url: '/faq',
         parent: 'root',
@@ -479,6 +485,30 @@
       })
       .then(data => {
         $scope.rents = data;
+        $scope.$applyAsync();
+      })
+      .catch(error => console.log(error));
+
+      //Visszalépés a főoldalra
+      $scope.cancel = function() {
+        $state.go('home');
+      };
+    }
+  ])
+
+  //myeventsController
+  .controller('myeventsController', [
+    '$rootScope',
+    '$scope',
+    'http',
+    '$state',
+    function($rootScope, $scope, http, $state){
+      http.request({
+        url: './php/myevents.php',
+        data: {user_id: $rootScope.user.user_id}
+      })
+      .then(data => {
+        $scope.events = data;
         $scope.$applyAsync();
       })
       .catch(error => console.log(error));
