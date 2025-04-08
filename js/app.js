@@ -151,7 +151,7 @@
     'http',
     function($scope, http) {
 
-      // retrieve the data of the books to be displayed
+      // retrieve the data
       http.request('./php/books.php')
       .then(data => {
         $scope.books = data;
@@ -177,7 +177,7 @@
         return;
       }
 
-      // retrieve the data of the book to be displayed
+      // retrieve the data
       http.request({
         url: './php/book.php',
         data: { book_id: $stateParams.book_id }
@@ -247,7 +247,7 @@
         }
       };
 
-      // Értékelés csillag logika
+      // Rating star logic
       $scope.rating = 0;
       $scope.model = { rating: 0 };
 
@@ -265,11 +265,10 @@
     'http',
     function($scope, $rootScope, http) {
 
-        // $scope.isLoggedIn variable is set to true if the user is logged in
+        // logged in user, $scope.isLoggedIn is true
         $scope.isLoggedIn = !!$rootScope.user?.user_id;
 
-        /*Gets the events and saves them in $scope.events. 
-          If there is an error, it prints it to the console.*/
+        //retrieve event data
         http.request('./php/events.php')
             .then(data => {
                 $scope.events = data;
@@ -277,14 +276,13 @@
             })
             .catch(error => console.log(error));
 
-        // Sets the active slides in the carousel based on the specified index.
+        // Sets the active slides based on the index.
         $scope.setActiveSlide = function(index) {
             let carousel = bootstrap.Carousel.getOrCreateInstance(document.getElementById('carouselExample'));
             carousel.to(index);
         };
 
-        /*Selects the event and opens the appropriate modal, 
-          depending on whether the user is logged in.*/
+        //displays the appropriate model, only logged in user
         $scope.showEventModal = function(event) {
             $scope.selectedEvent = event;
             $scope.$applyAsync();
@@ -298,8 +296,7 @@
             }
         };
 
-        /*Registers the user for the event and displays
-          a message if registration is successful.*/
+        //registration for the event
         $scope.registerForEvent = function(event) {
             if (!event) return;
 
@@ -324,7 +321,7 @@
     'http',
     function($scope, http) {
 
-      
+      // retrieve blog menu data
       http.request('./php/blogmenu.php')
       .then(data => {
         $scope.blog = data.blog;
@@ -356,27 +353,35 @@
     'util',
     function($rootScope, $scope, $state, http, util) {
       
+        // Loading and setting up an email address
         $scope.model = {
           email: util.localStorage('get', 'mok_user_email')
         };
 
         $scope.login = function() {
+          
+          // login
           http.request({
             url: './php/login.php',
             data: util.objFilterByKeys($scope.model, 'showPassword', false)
           })
           .then(data => {
+
+            // Sets the logged in user
             $rootScope.user = data;
-            util.localStorage('set', 'mok_user', JSON.stringify($rootScope.user)); // Felhasználó mentése
+            util.localStorage('set', 'mok_user', JSON.stringify($rootScope.user));
             $rootScope.user.email = $scope.model.email;
             util.localStorage('set', 'mok_user_email', $rootScope.user.email);
             $rootScope.$applyAsync();
             alert('Sikeres bejelentkezés!');
+
+            // Back to the main page
             $state.go('home');
           })
           .catch(e => alert(e));
         };
 
+        // Back to the main page
         $scope.cancel = function() {
             $state.go('home');
         };
@@ -393,7 +398,8 @@
     function($rootScope, $scope, $state, http, util) {
 
         $scope.register = function() {
-
+        
+          // sending and retrieving registration data
           http.request({
             url: './php/register.php',
             data: util.objFilterByKeys($scope.model, [ 
@@ -403,6 +409,8 @@
             ], false)
           })
           .then(data => {
+
+            // records the data
             $rootScope.user = data;
             $rootScope.user.email = $scope.model.email;
             util.localStorage('set', 'mok_user_email', $rootScope.user.email);
@@ -415,7 +423,7 @@
           .catch(e => alert(e));
         };
 
-        //Visszalépés a főoldalra
+        //Back to the main page
         $scope.cancel = function() {
             $state.go('home');
         };
@@ -433,7 +441,7 @@
   
       $scope.model = util.objMerge({}, $rootScope.user);
   
-      // Felhasználó adatainak betöltése
+      // Loading user data
       http.request({
         url: './php/profile.php',
         data: {user_id: $rootScope.user.user_id}
@@ -444,7 +452,7 @@
       })
       .catch(e => alert(e));
   
-      // Felhasználói adat módosítása
+      // Change user data
       $scope.update = function(){
         http.request({
           url: './php/update.php',
@@ -461,12 +469,12 @@
         .catch(error => console.log(error));
       };
   
-      // Visszalépés a főoldalra
+      // Back to the main page
       $scope.cancel = function() {
         $state.go('home');
       };
   
-      // Fiók törlésének kezelése
+      // Account deletion management
       $scope.deleteAccount = function() {
   
         let email = prompt("Kérjük, írja be az email címét a fiók törléséhez:");
@@ -502,6 +510,8 @@
     'http',
     '$state',
     function($rootScope, $scope, http, $state){
+    
+      // retrieve rental data
       http.request({
         url: './php/myrents.php',
         data: {user_id: $rootScope.user.user_id}
@@ -512,7 +522,7 @@
       })
       .catch(error => console.log(error));
 
-      //Visszalépés a főoldalra
+      // Back to the main page
       $scope.cancel = function() {
         $state.go('home');
       };
@@ -526,6 +536,8 @@
     'http',
     '$state',
     function($rootScope, $scope, http, $state){
+
+      // retrieve my events data
       http.request({
         url: './php/myevents.php',
         data: {user_id: $rootScope.user.user_id}
@@ -536,7 +548,7 @@
       })
       .catch(error => console.log(error));
 
-      //Visszalépés a főoldalra
+      // Back to the main page
       $scope.cancel = function() {
         $state.go('home');
       };
@@ -548,14 +560,7 @@
     '$state',
     '$scope',
     function($state, $scope) {
-      $scope.model = {search: null};
-      $scope.methods = {
-        search: () => {
-          $state.go('books', {
-            data: $scope.model.book_id
-          });
-        }
-      };
+
     }
   ])
 
@@ -564,21 +569,14 @@
     '$scope',
     'http',
     function($scope, http) {
+
+      // query frequently asked questions
       http.request('./php/faq.php')
       .then(data => {
         $scope.books = data;
         $scope.$applyAsync();
       })
       .catch(error => console.log(error));
-    }
-  ])
-
-  //allInfoController...
-  .controller('allinfoController', [
-    '$scope',
-    'http',
-    function($scope, http){
-      console.log('All Info Controller...');
     }
   ])
 
