@@ -127,6 +127,17 @@ input, select, .list-group-item {
   background-repeat: no-repeat;
 }
 
+.eventpic{
+	display: flex; 
+	flex-direction: column; 
+  justify-content: center; align-items: center; 
+  min-height: 100vh; 
+  background-image: url('../media/image/libraryinterior/bookshelvesevent.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .loginborder{
 	border-color: #4B5E4B;
 }
