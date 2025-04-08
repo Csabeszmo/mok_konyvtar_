@@ -78,11 +78,11 @@
 				templateUrl: './html/profile.html',
 				controller: 'profileController'
 			})
-      .state('cart', {
-				url: '/cart',
+      .state('myrents', {
+				url: '/myrents',
         parent: 'root',
-				templateUrl: './html/cart.html',
-				controller: 'cartController'
+				templateUrl: './html/myrents.html',
+				controller: 'myrentsController'
 			})
       .state('faq', {
 				url: '/faq',
@@ -466,19 +466,19 @@
     }
   ])
 
-  //Cart controller
-  .controller('cartController', [
+  //myrentsController
+  .controller('myrentsController', [
     '$rootScope',
     '$scope',
     'http',
     '$state',
     function($rootScope, $scope, http, $state){
       http.request({
-        url: './php/cart.php',
+        url: './php/myrents.php',
         data: {user_id: $rootScope.user.user_id}
       })
       .then(data => {
-        $scope.carts = data;
+        $scope.rents = data;
         $scope.$applyAsync();
       })
       .catch(error => console.log(error));

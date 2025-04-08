@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Ápr 02. 09:13
+-- Létrehozás ideje: 2025. Ápr 08. 08:20
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.1.17
 
@@ -179,33 +179,6 @@ INSERT INTO `books` (`book_id`, `author_id`, `title`, `translator`, `publisher`,
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `cart_items_books`
---
-
-CREATE TABLE `cart_items_books` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `book_id` int(11) NOT NULL,
-  `db` int(2) NOT NULL,
-  `start_date` date NOT NULL DEFAULT current_timestamp(),
-  `return_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- A tábla adatainak kiíratása `cart_items_books`
---
-
-INSERT INTO `cart_items_books` (`id`, `user_id`, `book_id`, `db`, `start_date`, `return_date`) VALUES
-(18, 1, 11, 3, '2025-04-01', '0000-00-00'),
-(19, 1, 1, 3, '2025-04-01', '0000-00-00'),
-(20, 1, 11, 3, '2025-04-01', '0000-00-00'),
-(21, 1, 11, 3, '2025-04-01', '0000-00-00'),
-(22, 1, 12, 1, '2025-04-01', '2025-04-23'),
-(23, 1, 13, 1, '2025-04-01', '2025-04-24');
-
--- --------------------------------------------------------
-
---
 -- Tábla szerkezet ehhez a táblához `categories`
 --
 
@@ -271,7 +244,8 @@ CREATE TABLE `event_items` (
 
 INSERT INTO `event_items` (`id`, `user_id`, `event_id`) VALUES
 (3, 1, 3),
-(4, 1, 3);
+(4, 1, 3),
+(5, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -305,6 +279,29 @@ INSERT INTO `faq` (`id`, `question`, `answer`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `myrents`
+--
+
+CREATE TABLE `myrents` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `db` int(2) NOT NULL,
+  `start_date` date NOT NULL DEFAULT current_timestamp(),
+  `return_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `myrents`
+--
+
+INSERT INTO `myrents` (`id`, `user_id`, `book_id`, `db`, `start_date`, `return_date`) VALUES
+(26, 1, 16, 1, '2025-04-08', '2025-05-07'),
+(27, 1, 8, 1, '2025-04-08', '2025-08-07');
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `reviews`
 --
 
@@ -313,7 +310,6 @@ CREATE TABLE `reviews` (
   `user_id` int(11) NOT NULL,
   `book_id` int(11) NOT NULL,
   `rating` int(1) NOT NULL,
-  `review_text` text NOT NULL,
   `review_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -345,7 +341,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `registration_date`, `phone`, `city`, `postalcode`, `address`, `email`, `password`, `is_active`) VALUES
 (1, 'Jernei', 'Ákos', '', '2024-12-02 00:00:00', '203251765', 'Makó', '6900', 'Kígyó utca 11.', 'jernei.akos-2020@keri.mako.hu', '1234Aa', 1),
 (2, 'Kovács', 'Sándor', 'András', '2025-02-28 12:19:23', '306289476', 'Makó', '6900', 'Liget utca 23.', 'kovacs.gabor@gmail.com', '1234Aa', 1),
-(5, 'Schneider', 'Kinga', '', '2025-03-18 11:28:12', '', '', '', '', 'schneider.kinga@gmail.com', '1234Aa', 1);
+(5, 'Schneider', 'Kinga', '', '2025-03-18 11:28:12', '', '', '', '', 'schneider.kinga@gmail.com', '1234Aa', 1),
+(7, 'Selmeczi', 'Csaba', '', '2025-04-04 11:55:53', '', '', '', '', 'selmeczi.csaba-2020@keri.mako.hu', '1234Aa', 1);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -378,14 +375,6 @@ ALTER TABLE `books`
   ADD KEY `categories_id` (`categories_id`);
 
 --
--- A tábla indexei `cart_items_books`
---
-ALTER TABLE `cart_items_books`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `book_id` (`book_id`,`user_id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- A tábla indexei `categories`
 --
 ALTER TABLE `categories`
@@ -408,6 +397,14 @@ ALTER TABLE `event_items`
 --
 ALTER TABLE `faq`
   ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `myrents`
+--
+ALTER TABLE `myrents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `book_id` (`book_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- A tábla indexei `reviews`
@@ -452,12 +449,6 @@ ALTER TABLE `books`
   MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT a táblához `cart_items_books`
---
-ALTER TABLE `cart_items_books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
 -- AUTO_INCREMENT a táblához `categories`
 --
 ALTER TABLE `categories`
@@ -473,13 +464,19 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT a táblához `event_items`
 --
 ALTER TABLE `event_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT a táblához `faq`
 --
 ALTER TABLE `faq`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT a táblához `myrents`
+--
+ALTER TABLE `myrents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT a táblához `reviews`
@@ -491,7 +488,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

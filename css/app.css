@@ -116,7 +116,7 @@ input, select, .list-group-item {
   background-repeat: no-repeat;
 }
 
-.cartpic{
+.rentpic{
 	display: flex; 
 	flex-direction: column; 
   justify-content: center; align-items: center; 
