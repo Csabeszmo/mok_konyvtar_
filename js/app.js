@@ -161,7 +161,7 @@
     }
   ])
 
-  //book Controller I
+  //book Controller
   .controller('bookController', [
     '$scope', 
     '$rootScope',
@@ -258,7 +258,7 @@
     }
   ])
 
-  //Events Controller I
+  //Events Controller
   .controller('eventsController', [
     '$scope', 
     '$rootScope', 
