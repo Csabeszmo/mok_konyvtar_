@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once("../../common/php/environment.php");
 
-$args = Util::setArgs();
+$args = Util::getArgs();
 
 $db = new Database();
 

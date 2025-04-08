@@ -194,7 +194,7 @@
           data: {
                 user_id: $rootScope.user.user_id,
                 book_id: $stateParams.book_id,
-                     db: $scope.model.amount,
+                    db: $scope.model.amount,
             return_date: $scope.model.return
           }
         })
@@ -206,7 +206,7 @@
 
       $scope.submitReview = function() {
         http.request({
-          url:'./php/reviews.php',
+          url:'./php/addreview.php',
           data: {
                 user_id: $rootScope.user.user_id,
                 book_id: $stateParams.book_id,
@@ -240,6 +240,15 @@
         } else {
             console.error(`Nem található a modál: ${modalId}`);
         }
+      };
+
+      // ⭐️ Értékelés csillag logika
+      $scope.rating = 0;
+      $scope.model = { rating: 0 };
+
+      $scope.setRating = function(value) {
+        $scope.rating = value;
+        $scope.model.rating = value;
       };
     }
   ])
