@@ -216,6 +216,7 @@
         .then(response => {
           $scope.review = response;
           $scope.$applyAsync();
+          alert('Az értékelés sikeresen végrehajtódott!');
         })
         .catch(error => alert(error));
       }
@@ -242,7 +243,7 @@
         }
       };
 
-      // ⭐️ Értékelés csillag logika
+      // Értékelés csillag logika
       $scope.rating = 0;
       $scope.model = { rating: 0 };
 
