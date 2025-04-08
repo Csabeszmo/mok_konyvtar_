@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Ápr 08. 08:20
+-- Létrehozás ideje: 2025. Ápr 08. 12:55
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.1.17
 
@@ -212,7 +212,7 @@ INSERT INTO `categories` (`categories_id`, `categories_name`) VALUES
 CREATE TABLE `events` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `date` varchar(70) NOT NULL,
+  `date` date NOT NULL,
   `description` text NOT NULL,
   `img` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -222,9 +222,9 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `name`, `date`, `description`, `img`) VALUES
-(3, 'Dedikálás és beszélgetés Varró Dániellel', '2025. Május 23. 14:00', 'Találkozz Varró Dániellel egy dedikálással egybekötött beszélgetésen! Vers, humor és könnyed irodalmi élmény vár.', 'varro_daniel.png'),
-(4, 'Informatikai alapoktatás nyugdíjasoknak - Egyszerűen és érthetően!', 'Minden szerdán délután 5-től.', 'Ismerje meg az informatika alapjait könnyen és érthetően! Nyugdíjasoknak szóló gyakorlati oktatás türelemmel és támogatással.', 'infalapokt.png'),
-(5, 'Szeged-menti Történetek', '2025. júniusában négy héten keresztül minden csütörtökön 4-től.', 'Tarts velünk, és fedezd fel a Szeged-menti titkokat könyveken keresztül!', 'szegedmentitortenetek.png');
+(3, 'Dedikálás és beszélgetés Varró Dániellel', '2025-06-06', 'Találkozz Varró Dániellel egy dedikálással egybekötött beszélgetésen! Vers, humor és könnyed irodalmi élmény vár.', 'varro_daniel.png'),
+(4, 'Informatikai alapoktatás nyugdíjasoknak - Egyszerűen és érthetően!', '2025-06-04', 'Ismerje meg az informatika alapjait könnyen és érthetően! Nyugdíjasoknak szóló gyakorlati oktatás türelemmel és támogatással.', 'infalapokt.png'),
+(5, 'Szeged-menti Történetek', '2025-05-16', 'Tarts velünk, és fedezd fel a Szeged-menti titkokat könyveken keresztül!', 'szegedmentitortenetek.png');
 
 -- --------------------------------------------------------
 
@@ -243,9 +243,9 @@ CREATE TABLE `event_items` (
 --
 
 INSERT INTO `event_items` (`id`, `user_id`, `event_id`) VALUES
-(3, 1, 3),
-(4, 1, 3),
-(5, 1, 3);
+(6, 1, 3),
+(7, 1, 4),
+(8, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -297,7 +297,10 @@ CREATE TABLE `myrents` (
 
 INSERT INTO `myrents` (`id`, `user_id`, `book_id`, `db`, `start_date`, `return_date`) VALUES
 (26, 1, 16, 1, '2025-04-08', '2025-05-07'),
-(27, 1, 8, 1, '2025-04-08', '2025-08-07');
+(27, 1, 8, 1, '2025-04-08', '2025-08-07'),
+(28, 1, 1, 1, '2025-04-08', '2025-05-07'),
+(29, 1, 3, 9, '2025-04-08', '2025-09-07'),
+(30, 1, 3, 1, '2025-04-08', '2025-04-23');
 
 -- --------------------------------------------------------
 
@@ -312,6 +315,13 @@ CREATE TABLE `reviews` (
   `rating` int(1) NOT NULL,
   `review_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `reviews`
+--
+
+INSERT INTO `reviews` (`review_id`, `user_id`, `book_id`, `rating`, `review_date`) VALUES
+(1, 8, 11, 3, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -342,7 +352,8 @@ INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `regis
 (1, 'Jernei', 'Ákos', '', '2024-12-02 00:00:00', '203251765', 'Makó', '6900', 'Kígyó utca 11.', 'jernei.akos-2020@keri.mako.hu', '1234Aa', 1),
 (2, 'Kovács', 'Sándor', 'András', '2025-02-28 12:19:23', '306289476', 'Makó', '6900', 'Liget utca 23.', 'kovacs.gabor@gmail.com', '1234Aa', 1),
 (5, 'Schneider', 'Kinga', '', '2025-03-18 11:28:12', '', '', '', '', 'schneider.kinga@gmail.com', '1234Aa', 1),
-(7, 'Selmeczi', 'Csaba', '', '2025-04-04 11:55:53', '', '', '', '', 'selmeczi.csaba-2020@keri.mako.hu', '1234Aa', 1);
+(7, 'Selmeczi', 'Csaba', '', '2025-04-04 11:55:53', '', '', '', '', 'selmeczi.csaba-2020@keri.mako.hu', '1234Aa', 1),
+(8, 'Jónás', 'Krisztián', '', '2025-04-08 10:35:57', '', '', '', '', 'jonas.krisztian@gmail.net', '1234Aa', 1);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -458,13 +469,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT a táblához `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `event_items`
 --
 ALTER TABLE `event_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT a táblához `faq`
@@ -476,19 +487,19 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT a táblához `myrents`
 --
 ALTER TABLE `myrents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT a táblához `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

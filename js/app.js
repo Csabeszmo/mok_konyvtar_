@@ -33,8 +33,7 @@
 			.state('home', {
 				url: '/',
         parent: 'root',
-				templateUrl: './html/home.html',
-				controller: 'homeController'
+				templateUrl: './html/home.html'
 			})
       .state('books', {
 				url: '/books',
@@ -113,6 +112,8 @@
     '$state',
     'util',
     function($rootScope, $state, util) {
+
+        // Loading previously saved user data
         let savedUser = util.localStorage('get', 'mok_user');
         if (savedUser) {
             $rootScope.user = JSON.parse(savedUser); 
@@ -120,16 +121,19 @@
             $rootScope.user = { user_id: null };
         }
 
+        // Displays the content of the information button
         document.addEventListener("DOMContentLoaded", function() {
             let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
         });
 
+        // Displays the content of the information button
         $rootScope.$on('$viewContentLoaded', function() {
             let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
         });
 
+        // logout
         $rootScope.logout = () => {
             if (confirm('Kijelentkezik?')) {
                 $rootScope.user = null;
@@ -141,19 +145,13 @@
     }
   ])
 
-  //Home Controller
-  .controller('homeController', [
-    '$scope',
-    function($scope) {
-      console.log('Home controller...');
-    }
-  ])
-
   //Books Controller
   .controller('booksController', [
     '$scope',
     'http',
     function($scope, http) {
+
+      // retrieve the data of the books to be displayed
       http.request('./php/books.php')
       .then(data => {
         $scope.books = data;
@@ -172,12 +170,14 @@
     'http',
     function ($scope, $rootScope, $stateParams, $state, http) {
 
+      // checks if the book id exists
       if (!$stateParams.book_id) {
         console.error('Nem létező könyv azonosító!');
         $state.go('home');
         return;
       }
 
+      // retrieve the data of the book to be displayed
       http.request({
         url: './php/book.php',
         data: { book_id: $stateParams.book_id }
@@ -188,6 +188,7 @@
       })
       .catch(error => console.error(error));
 
+      // book rental
       $scope.addBook = function() {
         http.request({
           url: './php/addBook.php',
@@ -204,6 +205,7 @@
         .catch(error => console.error(error));
       };
 
+      // submit review
       $scope.submitReview = function() {
         http.request({
           url:'./php/addreview.php',
@@ -221,6 +223,7 @@
         .catch(error => alert(error));
       }
 
+      // modal will only appear in the modal if the user is logged in
       $scope.showBookModal = function() {
         $scope.$applyAsync();
         let modalId = $rootScope.user?.user_id ? 'bookModalLoggedIn' : 'eventModalNotLoggedIn';
@@ -232,6 +235,7 @@
         }
       };
 
+      // modal will only appear in the modal if the user is logged in
       $scope.showReviewModal = function() {
         $scope.$applyAsync();
         let modalId = $rootScope.user?.user_id ? 'reviewModalLoggedIn' : 'eventModalNotLoggedIn';
@@ -260,8 +264,12 @@
     '$rootScope', 
     'http',
     function($scope, $rootScope, http) {
+
+        // $scope.isLoggedIn variable is set to true if the user is logged in
         $scope.isLoggedIn = !!$rootScope.user?.user_id;
 
+        /*Gets the events and saves them in $scope.events. 
+          If there is an error, it prints it to the console.*/
         http.request('./php/events.php')
             .then(data => {
                 $scope.events = data;
@@ -269,11 +277,14 @@
             })
             .catch(error => console.log(error));
 
+        // Sets the active slides in the carousel based on the specified index.
         $scope.setActiveSlide = function(index) {
             let carousel = bootstrap.Carousel.getOrCreateInstance(document.getElementById('carouselExample'));
             carousel.to(index);
         };
 
+        /*Selects the event and opens the appropriate modal, 
+          depending on whether the user is logged in.*/
         $scope.showEventModal = function(event) {
             $scope.selectedEvent = event;
             $scope.$applyAsync();
@@ -287,6 +298,8 @@
             }
         };
 
+        /*Registers the user for the event and displays
+          a message if registration is successful.*/
         $scope.registerForEvent = function(event) {
             if (!event) return;
 
