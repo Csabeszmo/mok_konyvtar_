@@ -3,4 +3,4 @@ declare(strict_types=1);
 
 $_POST['data'] = '{"user_id":1}';
 
-require_once('./myrents.php');
+require_once('./myevents.php');
