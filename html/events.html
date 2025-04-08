@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <!-- Irányítás balra és jobbra -->
+            <!-- controls -->
             <div ng-init="carouselBtns=['prev','next']">
                 <button ng-repeat="x in carouselBtns"
                         class="carousel-control-{{x}}" 
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <!-- Események listája -->
+    <!-- list of the events -->
     <div class="row mt-4">
         <div class="col-12 mb-3" 
              ng-repeat="(index, x) in events track by $index">
@@ -80,7 +80,7 @@
     </div>
 </div>
 
-<!-- Modal ha nincs bejelentkezve, regisztrálva -->
+<!-- login warning modal -->
 <div class="modal fade" 
      id="eventModalNotLoggedIn" 
      tabindex="-1" 
@@ -112,7 +112,7 @@
     </div>
 </div>
 
-<!-- Modal ha be van jelentkezve -->
+<!-- event registration modal -->
 <div class="modal fade" 
      id="eventModalLoggedIn" 
      tabindex="-1" 
