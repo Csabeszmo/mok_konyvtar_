@@ -61,15 +61,6 @@
                 </li>
             </ul>
 
-            <!-- Kosár -->
-            <button class="btn btn-outline-light me-3"
-                    ng-if="$root.user.user_id">
-                <a class="nav-link custom-nav-link text-white fw-semibold"
-                   ui-sref="cart">
-                   <i class="fa-solid fa-basket-shopping"></i>
-                </a>
-            </button>
-
             <!-- Nyelvváltó -->
             <button class="btn btn-outline-light me-3">
                 <img ng-src="{{ currentLanguage === 'hu' ? '../../common/media/image/countries/hun.png' : '../../common/media/image/countries/gbr.png' }}" 
@@ -102,6 +93,22 @@
                                ui-sref-active="active" 
                                ng-if="$root.user.user_id">
                                 Profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" 
+                               ui-sref="cart" 
+                               ui-sref-active="active" 
+                               ng-if="$root.user.user_id">
+                                Kölcsönzéseim
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" 
+                               ui-sref="myevents" 
+                               ui-sref-active="active" 
+                               ng-if="$root.user.user_id">
+                                Eseményeim
                             </a>
                         </li>
                         <li>

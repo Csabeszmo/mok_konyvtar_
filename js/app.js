@@ -483,38 +483,6 @@
       })
       .catch(error => console.log(error));
 
-      $scope.deleteCart = () => {
-
-          if (confirm('Biztosan törölni szeretné a kosarát? Ez a művelet nem visszavonható!')) {
-            http.request({
-              url: './php/deleteCart.php',
-              data: {user_id: $rootScope.user.user_id}
-            })
-            .then(response => {
-              if (response.success) {
-                alert('A sikeresen törölte a kosár tartalmát!');
-                $state.go('home');
-              } else {
-                alert('Hiba történt a kosár kiürítésénél. Kérem próbálja újra!');
-              }
-            })
-            .catch(error => alert(error));
-          }
-      }
-
-      $scope.rentBook = function(){
-        http.request({
-          url: './php/rentBook.php',
-          data: $rootScope.user.user_id})
-        .then(response => {
-          $scope.data = response;
-          alert('Kölcsönzés adatai:'+'')
-          $scope.$applyAsync(); 
-          $state.go('allinfo');
-        })
-        .catch(error => alert(error));
-      }
-
       //Visszalépés a főoldalra
       $scope.cancel = function() {
         $state.go('home');
@@ -552,6 +520,7 @@
     }
   ])
 
+  //allInfoController...
   .controller('allinfoController', [
     '$scope',
     'http',
