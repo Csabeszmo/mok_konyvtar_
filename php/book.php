@@ -1,10 +1,15 @@
 <?php
-declare(strict_types=1);
 
+// Include environment
 require_once("../../common/php/environment.php");
 
+// Get arguments
 $args = Util::getArgs();
 
+// Connect to MySQL server
+$db = new Database();
+
+// Set SQL command
 $query = "SELECT `books`.`title`, 
                  `authors`.`first_name`,
                  `authors`.`last_name`,
@@ -31,14 +36,16 @@ $query = "SELECT `books`.`title`,
            WHERE `books`.`book_id` = :book_id
            LIMIT 1;";
 
-$db = new Database();
-
+// Execute SQL command
 $result = $db->execute($query, $args);
 
+// Set SQL command
 $db = null;
 
+// Check result
 if (!is_null($result)) {
     $result = $result[0];
 }
 
+// Set response
 Util::setResponse($result);

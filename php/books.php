@@ -1,8 +1,12 @@
 <?php
-declare(strict_types=1);
 
+// Include environment
 require_once("../../common/php/environment.php");
 
+// Connect to MySQL server
+$db = new Database();
+
+// Set SQL command
 $query= "SELECT `books`.`book_id`,
                 `books`.`title`, 
                 `authors`.`first_name`,
@@ -12,10 +16,11 @@ $query= "SELECT `books`.`book_id`,
      INNER JOIN `authors` 
              ON `books`.`author_id` = `authors`.`author_id`";
 
-$db = new Database();
-
+// Execute SQL command
 $result = $db->execute($query);
 
+// Close connection
 $db = null;
 
+// Set response
 Util::setResponse($result);

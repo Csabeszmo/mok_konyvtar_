@@ -1,11 +1,15 @@
 <?php
 
+// Include environment
 require_once('../../common/php/environment.php');
 
+// Get arguments
 $args = Util::getArgs();
 
+// Connect to MySQL server
 $db = new Database(); 
 
+// Set SQL command
 $query = "UPDATE `users` SET   
                  `last_name`= :last_name,
                  `first_name`= :first_name, 
@@ -17,8 +21,11 @@ $query = "UPDATE `users` SET
            WHERE `user_id` = :user_id
            LIMIT 1";
 
+// Execute SQL command
 $result = $db->execute($query, $args);
 
+// Close connection
 $db = null;
 
+// Set response
 Util::setResponse($result);
