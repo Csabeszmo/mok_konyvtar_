@@ -1,17 +1,24 @@
 <?php
 
+//Include environment
 require_once("../../common/php/environment.php");
 
+// Get arguments
 $args = Util::getArgs();
 
+// Connect to MySQL server
 $db = new Database();
 
-// Lekérjük az összes regisztrált eseményt az event_items táblából
+// Set SQL command
 $query = "SELECT event_id 
           FROM event_items 
           WHERE user_id = :user_id";
 
+// Execute SQL command
 $result = $db->execute($query, $args);
 
-// Az execute visszaadja az adatokat tömbben, tehát nincs szükség külön PDO fetch-re.
+// Close connection
+$db = null;
+
+// Set response
 Util::setResponse($result);
