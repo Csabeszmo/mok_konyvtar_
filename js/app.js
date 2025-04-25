@@ -22,8 +22,7 @@
             templateUrl: './html/root.html'
           },
           'header@root': {
-            templateUrl: './html/header.html',
-            controller: 'headerController'
+            templateUrl: './html/header.html'
           },
           'footer@root': {
             templateUrl: './html/footer.html'
@@ -95,12 +94,6 @@
 				templateUrl: './html/faq.html',
 				controller: 'faqController'
 			})
-      .state('allinfo', {
-				url: '/allinfo',
-        parent: 'root',
-				templateUrl: './html/allinfo.html',
-				controller: 'allinfoController'
-			});
       
       $urlRouterProvider.otherwise('/');
     }
@@ -133,7 +126,7 @@
             tooltipTriggerList.forEach(tooltip => new bootstrap.Tooltip(tooltip, { fallbackPlacements: [] }));
         });
 
-        // logout
+        // Logout
         $rootScope.logout = () => {
             if (confirm('Kijelentkezik?')) {
                 $rootScope.user = null;
@@ -145,13 +138,13 @@
     }
   ])
 
-  //Books Controller
+  // Books Controller
   .controller('booksController', [
     '$scope',
     'http',
     function($scope, http) {
 
-      // retrieve the data
+      // Retrieve data from database
       http.request('./php/books.php')
       .then(data => {
         $scope.books = data;
@@ -161,7 +154,7 @@
     }
   ])
 
-  //book Controller
+  // Book Controller
   .controller('bookController', [
     '$scope', 
     '$rootScope',
@@ -170,14 +163,14 @@
     'http',
     function ($scope, $rootScope, $stateParams, $state, http) {
 
-      // checks if the book id exists
+      // Checks if book_id exists
       if (!$stateParams.book_id) {
         console.error('Nem létező könyv azonosító!');
         $state.go('home');
         return;
       }
 
-      // retrieve the data
+      // Retrieve data from database
       http.request({
         url: './php/book.php',
         data: { book_id: $stateParams.book_id }
@@ -188,7 +181,7 @@
       })
       .catch(error => console.error(error));
 
-      // book rental
+      // Book rental
       $scope.addBook = function() {
         http.request({
           url: './php/addBook.php',
@@ -205,7 +198,7 @@
         .catch(error => console.error(error));
       };
 
-      // submit review
+      // Submit review
       $scope.submitReview = function() {
         http.request({
           url:'./php/addreview.php',
@@ -223,7 +216,7 @@
         .catch(error => alert(error));
       }
 
-      // modal will only appear in the modal if the user is logged in
+      // Modal will only appear in the modal if the user is logged in
       $scope.showBookModal = function() {
         $scope.$applyAsync();
         let modalId = $rootScope.user?.user_id ? 'bookModalLoggedIn' : 'eventModalNotLoggedIn';
@@ -235,7 +228,7 @@
         }
       };
 
-      // modal will only appear in the modal if the user is logged in
+      // Modal will only appear in the modal if the user is logged in
       $scope.showReviewModal = function() {
         $scope.$applyAsync();
         let modalId = $rootScope.user?.user_id ? 'reviewModalLoggedIn' : 'eventModalNotLoggedIn';
@@ -258,7 +251,7 @@
     }
   ])
 
-  //Events Controller
+  // Events Controller
   .controller('eventsController', [
     '$scope',
     '$rootScope',
@@ -267,7 +260,7 @@
       $scope.isLoggedIn = !!$rootScope.user?.user_id;
       $scope.registeredEventIds = [];
   
-      // Események lekérése
+      // Get events from database
       http.request('./php/events.php')
         .then(data => {
           $scope.events = data;
@@ -275,7 +268,7 @@
         })
         .catch(error => console.log(error));
   
-      // Regisztrált események lekérése (csak ha be van jelentkezve)
+      // Get registrated events (only if you are logged in)
       if ($scope.isLoggedIn) {
         http.request({
           url: './php/getRegisteredEvents.php',
@@ -288,11 +281,13 @@
           .catch(error => console.log(error));
       }
   
+      // Slide
       $scope.setActiveSlide = function (index) {
         let carousel = bootstrap.Carousel.getOrCreateInstance(document.getElementById('carouselExample'));
         carousel.to(index);
       };
   
+      // Show modal
       $scope.showEventModal = function (event) {
         $scope.selectedEvent = event;
         $scope.$applyAsync();
@@ -306,6 +301,7 @@
         }
       };
   
+      // Register for event
       $scope.registerForEvent = function (event) {
         if (!event) return;
   
@@ -326,13 +322,13 @@
     }
   ])  
 
-  //Blogmenu Controller
+  // Blogmenu Controller
   .controller('blogmenuController', [
     '$scope',
     'http',
     function($scope, http) {
 
-      // retrieve blog menu data
+      // Retrieve blogmenu data from database
       http.request('./php/blogmenu.php')
       .then(data => {
         $scope.blog = data.blog;
@@ -355,7 +351,7 @@
     }
   ])
 
-  //Login Controller
+  // Login Controller
   .controller('loginController', [
     '$rootScope', 
     '$scope', 
@@ -371,14 +367,14 @@
 
         $scope.login = function() {
           
-          // login
+          // Login
           http.request({
             url: './php/login.php',
             data: util.objFilterByKeys($scope.model, 'showPassword', false)
           })
           .then(data => {
 
-            // Sets the logged in user
+            // Sets up the logged in user
             $rootScope.user = data;
             util.localStorage('set', 'mok_user', JSON.stringify($rootScope.user));
             $rootScope.user.email = $scope.model.email;
@@ -399,7 +395,7 @@
     }
   ])
 
-  //registerController
+  //Register Controller
   .controller('registerController', [
     '$rootScope',
     '$scope', 
@@ -410,7 +406,7 @@
 
         $scope.register = function() {
         
-          // sending and retrieving registration data
+          // Sending and retrieving registration data
           http.request({
             url: './php/register.php',
             data: util.objFilterByKeys($scope.model, [ 
@@ -421,7 +417,7 @@
           })
           .then(data => {
 
-            // records the data
+            // Records data
             $rootScope.user = data;
             $rootScope.user.email = $scope.model.email;
             util.localStorage('set', 'mok_user_email', $rootScope.user.email);
@@ -514,7 +510,7 @@
     }
   ])
 
-  //myrentsController
+  //My rents Controller
   .controller('myrentsController', [
     '$rootScope',
     '$scope',
@@ -540,7 +536,7 @@
     }
   ])
 
-  //myeventsController
+  //My events Controller
   .controller('myeventsController', [
     '$rootScope',
     '$scope',
@@ -548,7 +544,7 @@
     '$state',
     function($rootScope, $scope, http, $state){
 
-      // retrieve my events data
+      // Retrieve my events from database
       http.request({
         url: './php/myevents.php',
         data: {user_id: $rootScope.user.user_id}
@@ -566,22 +562,13 @@
     }
   ])
 
-  // Header controller
-  .controller('headerController', [
-    '$state',
-    '$scope',
-    function($state, $scope) {
-
-    }
-  ])
-
   //FAQ Controller
   .controller('faqController', [
     '$scope',
     'http',
     function($scope, http) {
 
-      // query frequently asked questions
+      // Retrieve frequently asked questions from database
       http.request('./php/faq.php')
       .then(data => {
         $scope.books = data;
