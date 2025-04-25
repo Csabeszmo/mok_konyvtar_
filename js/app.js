@@ -260,60 +260,71 @@
 
   //Events Controller
   .controller('eventsController', [
-    '$scope', 
-    '$rootScope', 
+    '$scope',
+    '$rootScope',
     'http',
-    function($scope, $rootScope, http) {
-
-        // logged in user, $scope.isLoggedIn is true
-        $scope.isLoggedIn = !!$rootScope.user?.user_id;
-
-        //retrieve event data
-        http.request('./php/events.php')
-            .then(data => {
-                $scope.events = data;
-                $scope.$applyAsync();
-            })
-            .catch(error => console.log(error));
-
-        // Sets the active slides based on the index.
-        $scope.setActiveSlide = function(index) {
-            let carousel = bootstrap.Carousel.getOrCreateInstance(document.getElementById('carouselExample'));
-            carousel.to(index);
-        };
-
-        //displays the appropriate model, only logged in user
-        $scope.showEventModal = function(event) {
-            $scope.selectedEvent = event;
+    function ($scope, $rootScope, http) {
+      $scope.isLoggedIn = !!$rootScope.user?.user_id;
+      $scope.registeredEventIds = [];
+  
+      // Események lekérése
+      http.request('./php/events.php')
+        .then(data => {
+          $scope.events = data;
+          $scope.$applyAsync();
+        })
+        .catch(error => console.log(error));
+  
+      // Regisztrált események lekérése (csak ha be van jelentkezve)
+      if ($scope.isLoggedIn) {
+        http.request({
+          url: './php/getRegisteredEvents.php',
+          data: { user_id: $rootScope.user.user_id }
+        })
+          .then(data => {
+            $scope.registeredEventIds = data.map(e => e.event_id);
             $scope.$applyAsync();
-
-            let modalId = $scope.isLoggedIn ? 'eventModalLoggedIn' : 'eventModalNotLoggedIn';
-            let modalElement = document.getElementById(modalId);
-
-            if (modalElement) {
-                let modal = bootstrap.Modal.getOrCreateInstance(modalElement);
-                modal.show();
-            }
-        };
-
-        //registration for the event
-        $scope.registerForEvent = function(event) {
-            if (!event) return;
-
-            http.request({
-                url: './php/registerEvent.php',
-                data: {
-                    user_id: $rootScope.user.user_id,
-                    event_id: event.id
-                }
-            })
-            .then(() => {
-                alert("Sikeresen jelentkeztél a(z) " + event.name + " eseményre!");
-            })
-            .catch(error => console.log(error));
-        };
+          })
+          .catch(error => console.log(error));
+      }
+  
+      $scope.setActiveSlide = function (index) {
+        let carousel = bootstrap.Carousel.getOrCreateInstance(document.getElementById('carouselExample'));
+        carousel.to(index);
+      };
+  
+      $scope.showEventModal = function (event) {
+        $scope.selectedEvent = event;
+        $scope.$applyAsync();
+  
+        let modalId = $scope.isLoggedIn ? 'eventModalLoggedIn' : 'eventModalNotLoggedIn';
+        let modalElement = document.getElementById(modalId);
+  
+        if (modalElement) {
+          let modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+          modal.show();
+        }
+      };
+  
+      $scope.registerForEvent = function (event) {
+        if (!event) return;
+  
+        http.request({
+          url: './php/registerEvent.php',
+          data: {
+            user_id: $rootScope.user.user_id,
+            event_id: event.id
+          }
+        })
+          .then(() => {
+            alert("Sikeresen jelentkeztél a(z) " + event.name + " eseményre!");
+            $scope.registeredEventIds.push(event.id);
+            $scope.$applyAsync();
+          })
+          .catch(error => console.log(error));
+      };
     }
-  ])
+  ])  
 
   //Blogmenu Controller
   .controller('blogmenuController', [
