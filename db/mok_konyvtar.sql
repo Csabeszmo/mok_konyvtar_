@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Ápr 08. 12:55
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.1.17
+-- Létrehozás ideje: 2025. Ápr 29. 19:00
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -222,9 +222,9 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `name`, `date`, `description`, `img`) VALUES
-(3, 'Dedikálás és beszélgetés Varró Dániellel', '2025-06-06', 'Találkozz Varró Dániellel egy dedikálással egybekötött beszélgetésen! Vers, humor és könnyed irodalmi élmény vár.', 'varro_daniel.png'),
-(4, 'Informatikai alapoktatás nyugdíjasoknak - Egyszerűen és érthetően!', '2025-06-04', 'Ismerje meg az informatika alapjait könnyen és érthetően! Nyugdíjasoknak szóló gyakorlati oktatás türelemmel és támogatással.', 'infalapokt.png'),
-(5, 'Szeged-menti Történetek', '2025-05-16', 'Tarts velünk, és fedezd fel a Szeged-menti titkokat könyveken keresztül!', 'szegedmentitortenetek.png');
+(3, 'Dedikálás és beszélgetés Varró Dániellel', '2025-06-13', 'Találkozz Varró Dániellel egy dedikálással egybekötött beszélgetésen! Vers, humor és könnyed irodalmi élmény vár.', 'varro_daniel.png'),
+(4, 'Informatikai alapoktatás nyugdíjasoknak - Egyszerűen és érthetően!', '2025-06-18', 'Ismerje meg az informatika alapjait könnyen és érthetően! Nyugdíjasoknak szóló gyakorlati oktatás türelemmel és támogatással.', 'infalapokt.png'),
+(5, 'Szeged-menti Történetek', '2025-05-23', 'Tarts velünk, és fedezd fel a Szeged-menti titkokat könyveken keresztül!', 'szegedmentitortenetek.png');
 
 -- --------------------------------------------------------
 
@@ -245,7 +245,12 @@ CREATE TABLE `event_items` (
 INSERT INTO `event_items` (`id`, `user_id`, `event_id`) VALUES
 (6, 1, 3),
 (7, 1, 4),
-(8, 1, 3);
+(8, 1, 3),
+(9, 1, 3),
+(10, 1, 4),
+(12, 8, 3),
+(13, 8, 4),
+(14, 8, 5);
 
 -- --------------------------------------------------------
 
@@ -300,7 +305,8 @@ INSERT INTO `myrents` (`id`, `user_id`, `book_id`, `db`, `start_date`, `return_d
 (27, 1, 8, 1, '2025-04-08', '2025-08-07'),
 (28, 1, 1, 1, '2025-04-08', '2025-05-07'),
 (29, 1, 3, 9, '2025-04-08', '2025-09-07'),
-(30, 1, 3, 1, '2025-04-08', '2025-04-23');
+(30, 1, 3, 1, '2025-04-08', '2025-04-23'),
+(31, 1, 1, 3, '2025-04-25', '2025-05-24');
 
 -- --------------------------------------------------------
 
@@ -312,16 +318,16 @@ CREATE TABLE `reviews` (
   `review_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `book_id` int(11) NOT NULL,
-  `rating` int(1) NOT NULL,
-  `review_date` date NOT NULL
+  `rating` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `reviews`
 --
 
-INSERT INTO `reviews` (`review_id`, `user_id`, `book_id`, `rating`, `review_date`) VALUES
-(1, 8, 11, 3, '0000-00-00');
+INSERT INTO `reviews` (`review_id`, `user_id`, `book_id`, `rating`) VALUES
+(1, 8, 11, 3),
+(2, 8, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -475,7 +481,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT a táblához `event_items`
 --
 ALTER TABLE `event_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT a táblához `faq`
@@ -487,13 +493,13 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT a táblához `myrents`
 --
 ALTER TABLE `myrents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT a táblához `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT a táblához `users`
